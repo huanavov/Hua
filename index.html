@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>釜山·冬日遊</title>
-    <!-- Google Fonts: Zen Kaku Gothic New (文青極簡字體，徹底告別標楷體) -->
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Noto Sans TC (更清晰、字距舒適的中文無襯線字體) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #FFFCF6;
@@ -28,14 +28,15 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Zen Kaku Gothic New', "PingFang TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
+            font-family: 'Noto Sans TC', "PingFang TC", "Microsoft JhengHei", "微軟正黑體", sans-serif;
             -webkit-tap-highlight-color: transparent;
+            letter-spacing: 0.3px;
         }
 
         body {
             background-color: var(--bg-color);
             color: var(--ink-color);
-            line-height: 1.6;
+            line-height: 1.65;
             padding-bottom: 90px;
         }
 
@@ -127,7 +128,7 @@
             background: #F2F5F8;
             border-radius: var(--radius-md);
             padding: 15px 10px 5px 10px;
-            margin: 12px 0;
+            margin: 12px 0 4px 0;
             overflow: hidden;
             border: 1px solid #E5E9EE;
         }
@@ -167,25 +168,6 @@
             display: flex;
             align-items: center;
             gap: 4px;
-        }
-
-        .countdown-strip {
-            background: #FFF8F6;
-            border: 1px solid #FAD6CE;
-            border-radius: var(--radius-md);
-            padding: 10px 14px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.85rem;
-            color: #8C827A;
-            margin-top: 12px;
-        }
-
-        .countdown-days {
-            color: var(--primary-coral);
-            font-weight: 700;
-            font-size: 1.1rem;
         }
 
         /* 登機證 (Boarding Pass) 樣式 */
@@ -239,18 +221,23 @@
             height: 1px;
             background: #CBD5E1;
             position: relative;
-            margin: 8px 0;
+            margin: 14px 0;
         }
 
-        .flight-line::after {
-            content: '✈';
+        .flight-time-badge {
             position: absolute;
-            top: -10px;
-            left: 45%;
-            font-size: 0.8rem;
-            color: var(--primary-coral);
+            top: -11px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #475569;
             background: #FAF8F5;
-            padding: 0 4px;
+            padding: 0 6px;
+            white-space: nowrap;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 3px;
         }
 
         .ticket-footer {
@@ -296,7 +283,7 @@
             font-weight: 700;
         }
 
-        /* 參考圖三：無框簡約貫穿線軸 */
+        /* 貫穿線軸 */
         .minimal-timeline {
             position: relative;
             padding-left: 28px;
@@ -354,10 +341,10 @@
             font-size: 0.8rem;
             color: #6E655F;
             margin-top: 3px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* 地鐵路線橢圓底框 (參照圖四) */
+        /* 地鐵路線橢圓底框 */
         .metro-badge-oval {
             display: inline-flex;
             align-items: center;
@@ -369,7 +356,7 @@
             margin-top: 4px;
         }
 
-        /* 記帳區塊 (完全還原圖一 + 色彩標籤) */
+        /* 記帳區塊 (完整適配手機排版) */
         .expense-card-item {
             background: #FAF6F0;
             border-radius: 14px;
@@ -385,14 +372,17 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
         }
 
-        /* 天數標籤 (帶有動態色彩) */
         .day-chip {
             font-size: 0.72rem;
             padding: 2px 8px;
             border-radius: 8px;
             font-weight: 700;
+            flex-shrink: 0;
         }
 
         .day-chip-D1 { background: #FFEBE8; color: #D94E36; }
@@ -406,14 +396,17 @@
             font-size: 0.88rem;
             font-weight: 700;
             color: var(--ink-color);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .expense-right {
             text-align: right;
-            padding-right: 18px; /* 留出 X 按鈕空間 */
+            padding-right: 18px;
+            flex-shrink: 0;
         }
 
-        /* 付款人標籤 (帶有動態色彩) */
         .payer-tag {
             display: inline-block;
             font-size: 0.68rem;
@@ -490,35 +483,28 @@
                 </div>
             </div>
 
-            <!-- 天空膠囊列車 SVG 插圖 -->
             <div class="train-viewport">
                 <div class="capsule-svg-box">
                     <svg width="100%" height="100%" viewBox="0 0 340 110">
-                        <!-- 海浪與山景背景 -->
                         <path d="M0 80 Q 85 72, 170 80 T 340 80 L 340 110 L 0 110 Z" fill="#DCE9F5"/>
                         <polygon points="15,80 20,70 25,80" fill="#CBD5E1"/>
                         <polygon points="310,80 317,68 324,80" fill="#CBD5E1"/>
 
-                        <!-- 尾浦 Mipo / 青沙浦 Cheongsapo / 松亭 Songjeong 軌道 (加大站點間距) -->
                         <line x1="45" y1="58" x2="295" y2="58" stroke="#8C827A" stroke-width="2" stroke-dasharray="3 3"/>
                         
-                        <!-- 尾浦 -->
                         <line x1="45" y1="58" x2="45" y2="80" stroke="#8C827A" stroke-width="2"/>
                         <circle cx="45" cy="58" r="4" fill="#E88274"/>
                         <text x="45" y="44" font-size="10" fill="#7E756F" text-anchor="middle">尾浦 Mipo</text>
 
-                        <!-- 青沙浦 -->
                         <line x1="170" y1="58" x2="170" y2="80" stroke="#8C827A" stroke-width="2"/>
                         <circle cx="170" cy="58" r="4" fill="#E88274"/>
                         <text x="170" y="44" font-size="10" fill="#7E756F" text-anchor="middle">青沙浦 Cheongsapo</text>
 
-                        <!-- 松亭 -->
                         <line x1="295" y1="58" x2="295" y2="80" stroke="#8C827A" stroke-width="2"/>
                         <circle cx="295" cy="58" r="4" fill="#E88274"/>
                         <text x="295" y="44" font-size="10" fill="#7E756F" text-anchor="middle">松亭 Songjeong</text>
                     </svg>
 
-                    <!-- 滑動車廂組 -->
                     <div class="train-cars-group" id="trainCars">
                         <svg width="28" height="24" viewBox="0 0 28 24">
                             <rect x="2" y="2" width="24" height="20" rx="6" fill="#FFC72C" stroke="#2C2A29" stroke-width="2"/>
@@ -538,16 +524,14 @@
                     <button class="btn-station" onclick="moveTrain(1)">下一站 ➡️</button>
                 </div>
             </div>
-
-            <div class="countdown-strip">
-                <span>⌛ 距離出發還有：</span>
-                <span class="countdown-days" id="countdownDays">-- 天</span>
-            </div>
         </section>
 
-        <!-- 航班資訊 (圖一 BOARDING PASS 機票) -->
+        <!-- 航班資訊 -->
         <section id="flights" class="card-wrapper">
-            <h2 class="section-title">✈️ 航班資訊</h2>
+            <h2 class="section-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary-coral);"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3.5c-.5-.5-2.5 0-4 1.5L13.5 8.5 5.3 6.7c-.8-.2-1.6.1-2.1.8l-.6.8c-.3.4-.2.9.2 1.2l5.6 4.1-3.2 3.2-2.3-.6c-.4-.1-.8.1-1.1.4l-.4.4c-.3.3-.3.8 0 1.1l2.8 2.8c.3.3.8.3 1.1 0l.4-.4c.3-.3.5-.7.4-1.1l-.6-2.3 3.2-3.2 4.1 5.6c.3.4.8.5 1.2.2l.8-.6c.7-.5 1-1.3.8-2.1z"/></svg>
+                航班資訊
+            </h2>
 
             <!-- 去程 -->
             <div class="boarding-pass">
@@ -562,8 +546,10 @@
                     </div>
                     <div class="flight-path">
                         <div style="font-size:0.75rem; font-weight:700; color:#E88274;">JX310</div>
-                        <div class="flight-line" style="margin: 12px 0 6px 0;">
-                            <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.68rem; color:#8C827A; background:#FAF8F5; padding:0 6px; white-space:nowrap; font-weight:500;">08:00 - 12:00</span>
+                        <div class="flight-line">
+                            <div class="flight-time-badge">
+                                08:00 ✈ 12:00
+                            </div>
                         </div>
                     </div>
                     <div style="text-align:right;">
@@ -591,8 +577,10 @@
                     </div>
                     <div class="flight-path">
                         <div style="font-size:0.75rem; font-weight:700; color:#475569;">JX310</div>
-                        <div class="flight-line" style="margin: 12px 0 6px 0;">
-                            <span style="position:absolute; top:-9px; left:50%; transform:translateX(-50%); font-size:0.68rem; color:#8C827A; background:#FAF8F5; padding:0 6px; white-space:nowrap; font-weight:500;">12:15 - 14:00</span>
+                        <div class="flight-line">
+                            <div class="flight-time-badge" style="color:#475569;">
+                                12:15 ✈ 14:00
+                            </div>
                         </div>
                     </div>
                     <div style="text-align:right;">
@@ -608,7 +596,7 @@
             </div>
         </section>
 
-        <!-- 每日行程 (簡約低彩度透明 Icon + 貫穿線) -->
+        <!-- 每日行程 -->
         <section id="itinerary" class="card-wrapper">
             <h2 class="section-title">🗺️ 每日行程</h2>
 
@@ -631,39 +619,43 @@
             <h2 class="section-title">🏨 住宿資訊</h2>
 
             <div style="background:#FAF8F5; border:1px solid var(--border-color); border-radius:14px; padding:14px; margin-bottom:12px;">
-                <div style="font-weight:700; font-size:0.95rem;">L7 海雲臺 (L7 Haeundae)</div>
+                <div style="font-weight:700; font-size:0.95rem;">
+                    <a href="https://naver.me/xUZ2MLSG" target="_blank" style="color:var(--primary-coral); text-decoration:none;">L7 海雲臺 (L7 Haeundae) 🔗</a>
+                </div>
                 <div style="font-size:0.78rem; color:#8C827A;">2027/01/13 ~ 01/15 (2晚)</div>
                 <div style="font-size:0.82rem; background:#FFF; padding:8px; border-radius:8px; margin:6px 0; border:1px solid #EFEAE4;" id="addr1">
-                    부산 해운대구 우동 627-1
+                    부산 해운대구 해운대로570번길 55
                 </div>
                 <button class="btn-copy-addr" onclick="copyText('addr1')">📋 複製韓文地址</button>
             </div>
 
             <div style="background:#FAF8F5; border:1px solid var(--border-color); border-radius:14px; padding:14px;">
-                <div style="font-weight:700; font-size:0.95rem;">Urban Groove Hotel</div>
+                <div style="font-weight:700; font-size:0.95rem;">
+                    <a href="https://naver.me/xwoh8zFn" target="_blank" style="color:var(--primary-coral); text-decoration:none;">Urban Groove Hotel 🔗</a>
+                </div>
                 <div style="font-size:0.78rem; color:#8C827A;">2027/01/15 ~ 01/18 (3晚)</div>
                 <div style="font-size:0.82rem; background:#FFF; padding:8px; border-radius:8px; margin:6px 0; border:1px solid #EFEAE4;" id="addr2">
-                    부산 부산진구 범천동 862-1
+                    부산 부산진구 황령대로17번길 18 어반그루브호텔
                 </div>
                 <button class="btn-copy-addr" onclick="copyText('addr2')">📋 複製韓文地址</button>
             </div>
         </section>
 
-        <!-- 記帳與匯率換算 (圖一排版 + 天數與付款人繽紛色彩標籤) -->
+        <!-- 記帳與匯率換算 -->
         <section id="accounting" class="card-wrapper">
             <h2 class="section-title">💰 記帳與匯率換算</h2>
 
             <div style="background:#FAF6F0; padding:12px; border-radius:12px; margin-bottom:14px; border:1px solid var(--border-color);">
                 <div style="font-size:0.8rem; font-weight:700; margin-bottom:6px;">💱 即時試算 (參考匯率 0.0235)</div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                    <input type="number" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="padding:8px; border:1px solid var(--border-color); border-radius:8px;">
-                    <input type="number" id="calcTwd" placeholder="台幣 TWD" oninput="quickCalc('twd')" style="padding:8px; border:1px solid var(--border-color); border-radius:8px;">
+                    <input type="number" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
+                    <input type="number" id="calcTwd" placeholder="台幣 TWD" oninput="quickCalc('twd')" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
                 </div>
             </div>
 
             <!-- 新增記帳欄位 -->
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
-                <select id="accDay" style="padding:8px; border:1px solid var(--border-color); border-radius:8px; background:#FFF;">
+                <select id="accDay" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px; background:#FFF;">
                     <option value="D1">D1 · 01/13</option>
                     <option value="D2">D2 · 01/14</option>
                     <option value="D3">D3 · 01/15</option>
@@ -671,15 +663,15 @@
                     <option value="D5">D5 · 01/17</option>
                     <option value="D6">D6 · 01/18</option>
                 </select>
-                <select id="accPayer" style="padding:8px; border:1px solid var(--border-color); border-radius:8px; background:#FFF;">
+                <select id="accPayer" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px; background:#FFF;">
                     <option value="媽媽">媽媽</option>
                     <option value="姐姐">姐姐</option>
                     <option value="妹妹">妹妹</option>
                 </select>
             </div>
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
-                <input type="text" id="accItem" placeholder="項目 (例: 豬肉湯飯)" style="padding:8px; border:1px solid var(--border-color); border-radius:8px;">
-                <input type="number" id="accKrwVal" placeholder="金額 (韓元 KRW)" style="padding:8px; border:1px solid var(--border-color); border-radius:8px;">
+                <input type="text" id="accItem" placeholder="項目 (例: 豬肉湯飯)" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
+                <input type="number" id="accKrwVal" placeholder="金額 (韓元)" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
             </div>
             <button onclick="addExpense()" style="width:100%; background:var(--primary-coral); color:#FFF; border:none; padding:10px; border-radius:10px; font-weight:700; cursor:pointer;">+ 新增開銷</button>
 
@@ -702,7 +694,6 @@
     </div>
 
     <script>
-        // 低彩度簡約風格 SVG 圖示
         const SVG_ICONS = {
             plane: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C827A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3.5c-.5-.5-2.5 0-4 1.5L13.5 8.5 5.3 6.7c-.8-.2-1.6.1-2.1.8l-.6.8c-.3.4-.2.9.2 1.2l5.6 4.1-3.2 3.2-2.3-.6c-.4-.1-.8.1-1.1.4l-.4.4c-.3.3-.3.8 0 1.1l2.8 2.8c.3.3.8.3 1.1 0l.4-.4c.3-.3.5-.7.4-1.1l-.6-2.3 3.2-3.2 4.1 5.6c.3.4.8.5 1.2.2l.8-.6c.7-.5 1-1.3.8-2.1z"/></svg>`,
             train: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C827A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="16" rx="2"/><path d="M4 11h16M12 3v8M8 19l-2 3M16 19l2 3"/><circle cx="8" cy="15" r="1"/><circle cx="16" cy="15" r="1"/></svg>`,
@@ -712,7 +703,6 @@
             shop: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C827A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>`
         };
 
-        // 1. 膠囊列車動態 (配合間距拉長更新座標)
         let currentStationIndex = 0;
         const stationPositions = [20, 145, 270];
         
@@ -723,23 +713,12 @@
             document.getElementById('trainCars').style.left = stationPositions[currentStationIndex] + 'px';
         }
 
-        // 2. 倒數計時
-        function updateCountdown() {
-            const target = new Date('2027-01-13T00:00:00');
-            const now = new Date();
-            const diff = target - now;
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            document.getElementById('countdownDays').innerText = (days > 0 ? days : 0) + ' 天';
-        }
-        updateCountdown();
-
-        // 3. 每日行程資料 (精準修正細項與地鐵圓框)
         const itineraryData = {
             1: [
                 { time: '05:30', icon: SVG_ICONS.train, title: '家 ➔ 台中機場', desc: '機場接送' },
-                { time: '08:00', icon: SVG_ICONS.plane, title: '08:00 RMQ 起飛 ➔ 12:00 抵達 PUS', desc: '' },
+                { time: '08:00', icon: SVG_ICONS.plane, title: '台中 (RMQ) 起飛 ➔ 12:00 抵達 釜山 (PUS)', desc: '' },
                 { time: '', icon: SVG_ICONS.pin, title: '辦理 SES 快速通關', desc: '2F 出境大廳 Check-in D區右方' },
-                { time: '', icon: SVG_ICONS.train, title: '前往海雲臺', desc: '🚌機場巴士 3號月台 ❘ 金海機場 → 海雲臺海水浴場，票價：₩9,500/人，於 Gate 4 附近自動售票機購票' },
+                { time: '', icon: SVG_ICONS.train, title: '前往海雲臺', desc: '機場巴士 3號月台 ❘ 金海機場 → 海雲臺海水浴場，票價：₩9,500/人，於 Gate 4 附近自動售票機購票' },
                 { time: '', icon: SVG_ICONS.food, title: '廣安木烤肉', desc: '' },
                 { time: '', icon: SVG_ICONS.shop, title: 'E-MART 海雲臺店', desc: '', metro: '海雲台 → 中洞 7號出口', metroName: '釜山2號線', metroColor: 'var(--metro-line-2)' },
                 { time: '', icon: SVG_ICONS.shop, title: '海雲台市場', desc: '海鮮蔥餅、名品糖餅（蜂蜜起司口味）' },
@@ -788,7 +767,7 @@
             ],
             6: [
                 { time: '', icon: SVG_ICONS.train, title: '前往金海機場', desc: '' },
-                { time: '12:15', icon: SVG_ICONS.plane, title: '星宇航空 JX310 返家', desc: '12:15 金海機場 (PUS) ➔ 14:00 台中機場 (RMQ)' }
+                { time: '12:15', icon: SVG_ICONS.plane, title: '12:15 釜山 (PUS) 起飛 ➔ 14:00 抵達 台中 (RMQ)', desc: '' }
             ]
         };
 
@@ -807,7 +786,7 @@
                     <div class="timeline-row">
                         <div class="timeline-node-icon">${item.icon}</div>
                         <div class="row-header">
-                            ${item.time ? `<span class="row-time" style="font-size:0.95rem;">${item.time}</span>` : ''}
+                            ${item.time ? `<span class="row-time" style="font-size:0.82rem;">${item.time}</span>` : ''}
                             <span class="row-title">${item.title}</span>
                         </div>
                         ${item.metro ? `<div style="margin-top:4px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.78rem; color:#6E655F;">${item.metro}</span></div>` : ''}
@@ -821,7 +800,6 @@
         }
         switchDay(1);
 
-        // 4. 記帳與試算 (完全複製圖一排版)
         const RATE = 0.0235;
         let expenses = JSON.parse(localStorage.getItem('busan_v4_expenses')) || [
             { day: 'D1', payer: '姐姐', item: '測試一', krw: 10000, twd: 235 }
