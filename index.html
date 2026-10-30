@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>釜山·冬日遊 부산 · BUSAN</title>
+    <!-- 網頁 Icon / Apple Touch Icon (解決 iPhone 加入主畫面圖示問題) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23FAF6EF'/><path d='M20 70 Q 50 60, 80 70 L 80 85 L 20 85 Z' fill='%23D6E4ED'/><rect x='35' y='45' width='30' height='22' rx='8' fill='%23D97A6C'/><rect x='42' y='50' width='16' height='8' rx='3' fill='%23FFFFFF'/></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23FAF6EF'/><path d='M20 70 Q 50 60, 80 70 L 80 85 L 20 85 Z' fill='%23D6E4ED'/><rect x='35' y='45' width='30' height='22' rx='8' fill='%23D97A6C'/><rect x='42' y='50' width='16' height='8' rx='3' fill='%23FFFFFF'/></svg>">
+    
     <!-- Google Fonts: Noto Serif TC & Noto Sans TC -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -772,7 +776,7 @@
                 <div style="background:#FAF6F0; padding:12px 14px; border-radius:12px; margin-bottom:16px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
                         <span style="font-size:0.75rem; color:var(--ink-muted); font-weight:700;">即時試算</span>
-                        <span style="background:#FFFFFF; border:1px solid #E5E0D5; padding:2px 10px; border-radius:20px; font-size:0.7rem; color:var(--ink-muted);">即時匯率 0.0243</span>
+                        <span id="rateBadge" style="background:#FFFFFF; border:1px solid #E5E0D5; padding:2px 10px; border-radius:20px; font-size:0.7rem; color:var(--ink-muted);">即時匯率 0.0243</span>
                     </div>
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
                         <input type="number" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; outline:none; background:#FFF; font-size:0.85rem;">
@@ -806,7 +810,7 @@
                         <span style="font-weight:600; font-size:0.88rem;">消費明細</span>
                         <span style="font-weight:700; color:var(--primary-coral); font-size:0.92rem;" id="totalKrwDisplay">總計：₩ 0</span>
                     </div>
-                    <div id="expenseList"></div>
+                    <div id="expenseList">載入中...</div>
                 </div>
             </div>
         </main>
@@ -963,8 +967,39 @@
         }
         switchDay(1);
 
-        const RATE = 0.0235;
-        let expenses = JSON.parse(localStorage.getItem('busan_v7_expenses')) || [];
+        // 1. 串接即時匯率 API 與 2. Google 雲端同步記帳
+        let RATE = 0.0243;
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwzsPq52fMhvT9CPiDXuYkuKNgXd131QU6kLDL9MV61WUD3iUSFp2wJFCDKgXdE6vl-/exec";
+        let expenses = [];
+
+        // 自動抓取最新匯率
+        async function fetchLiveRate() {
+            try {
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/KRW');
+                const data = await response.json();
+                if (data && data.rates && data.rates.TWD) {
+                    RATE = data.rates.TWD;
+                    document.getElementById('rateBadge').innerText = `即時匯率 ${RATE.toFixed(4)}`;
+                }
+            } catch (err) {
+                console.log('使用預設匯率');
+            }
+            fetchCloudExpenses();
+        }
+
+        // 從 Google Sheets 讀取記帳資料
+        async function fetchCloudExpenses() {
+            try {
+                const res = await fetch(GAS_URL);
+                const data = await res.json();
+                if (Array.isArray(data)) {
+                    expenses = data;
+                }
+            } catch (e) {
+                expenses = JSON.parse(localStorage.getItem('busan_v7_expenses')) || [];
+            }
+            renderExpenses();
+        }
 
         function quickCalc(type) {
             const krwIn = document.getElementById('calcKrw');
@@ -978,7 +1013,7 @@
             }
         }
 
-        function addExpense() {
+        async function addExpense() {
             const day = document.getElementById('accDay').value;
             const payer = document.getElementById('accPayer').value;
             const item = document.getElementById('accItem').value.trim();
@@ -989,19 +1024,45 @@
                 return;
             }
 
-            expenses.push({ day, payer, item, krw, twd: Math.round(krw * RATE) });
-            localStorage.setItem('busan_v7_expenses', JSON.stringify(expenses));
+            const newExp = { day, payer, item, krw, twd: Math.round(krw * RATE) };
+            expenses.push(newExp);
+            renderExpenses();
 
             document.getElementById('accItem').value = '';
             document.getElementById('accKrwVal').value = '';
-            renderExpenses();
-            showToast('已新增紀錄');
+            showToast('同步至雲端中...');
+
+            try {
+                await fetch(GAS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newExp)
+                });
+                showToast('雲端同步成功！');
+            } catch (e) {
+                showToast('已儲存至本地');
+            }
+            fetchCloudExpenses();
         }
 
-        function deleteExpense(index) {
+        async function deleteExpense(index) {
             expenses.splice(index, 1);
-            localStorage.setItem('busan_v7_expenses', JSON.stringify(expenses));
             renderExpenses();
+            showToast('刪除同步中...');
+            
+            try {
+                await fetch(GAS_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'delete', index: index })
+                });
+                showToast('已從雲端刪除');
+            } catch (e) {
+                showToast('刪除完成');
+            }
+            fetchCloudExpenses();
         }
 
         function renderExpenses() {
@@ -1010,14 +1071,14 @@
             listEl.innerHTML = '';
             let totalKrw = 0;
 
-            if (expenses.length === 0) {
+            if (!expenses || expenses.length === 0) {
                 listEl.innerHTML = '<div style="text-align:center; padding:20px; color:var(--ink-muted); font-size:0.8rem;">尚無記帳紀錄</div>';
                 totalEl.innerText = '總計：₩ 0';
                 return;
             }
 
             expenses.forEach((exp, idx) => {
-                totalKrw += exp.krw;
+                totalKrw += (parseFloat(exp.krw) || 0);
                 const div = document.createElement('div');
                 div.className = 'expense-card-item';
                 div.innerHTML = `
@@ -1027,8 +1088,8 @@
                     </div>
                     <div class="expense-right">
                         <div class="payer-tag payer-tag-${exp.payer}">${exp.payer}</div>
-                        <div class="expense-krw">₩ ${exp.krw.toLocaleString()}</div>
-                        <div class="expense-twd">約 NT$ ${exp.twd.toLocaleString()}</div>
+                        <div class="expense-krw">₩ ${Number(exp.krw).toLocaleString()}</div>
+                        <div class="expense-twd">約 NT$ ${Number(exp.twd).toLocaleString()}</div>
                     </div>
                     <button class="btn-del-x" onclick="deleteExpense(${idx})">✕</button>
                 `;
@@ -1037,7 +1098,9 @@
 
             totalEl.innerText = `總計：₩ ${totalKrw.toLocaleString()}`;
         }
-        renderExpenses();
+
+        // 頁面載入時執行即時匯率抓取與雲端資料讀取
+        fetchLiveRate();
 
         // 美食打卡清單 (無分類標籤)
         const checkinSpots = [
