@@ -548,7 +548,7 @@
                         <div style="font-size:0.75rem; font-weight:700; color:#E88274;">JX310</div>
                         <div class="flight-line">
                             <div class="flight-time-badge">
-                                08:00 ✈ 12:00
+                                08:00 ✈ 11:15
                             </div>
                         </div>
                     </div>
@@ -648,8 +648,8 @@
             <div style="background:#FAF6F0; padding:12px; border-radius:12px; margin-bottom:14px; border:1px solid var(--border-color);">
                 <div style="font-size:0.8rem; font-weight:700; margin-bottom:6px;">💱 即時試算 (參考匯率 0.0235)</div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                    <input type="number" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
-                    <input type="number" id="calcTwd" placeholder="台幣 TWD" oninput="quickCalc('twd')" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
+                    <input type="number" id="calcKrw" placeholder="韓元 KRW" inputmode="numeric" pattern="[0-9]*" oninput="quickCalc('krw')" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
+                    <input type="number" id="calcTwd" placeholder="台幣 TWD" inputmode="numeric" pattern="[0-9]*" oninput="quickCalc('twd')" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
                 </div>
             </div>
 
@@ -671,7 +671,7 @@
             </div>
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:8px;">
                 <input type="text" id="accItem" placeholder="項目 (例: 豬肉湯飯)" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
-                <input type="number" id="accKrwVal" placeholder="金額 (韓元)" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
+                <input type="number" id="accKrwVal" placeholder="金額 (韓元)" inputmode="numeric" pattern="[0-9]*" style="width:100%; min-width:0; padding:8px; border:1px solid var(--border-color); border-radius:8px;">
             </div>
             <button onclick="addExpense()" style="width:100%; background:var(--primary-coral); color:#FFF; border:none; padding:10px; border-radius:10px; font-weight:700; cursor:pointer;">+ 新增開銷</button>
 
@@ -716,7 +716,7 @@
         const itineraryData = {
             1: [
                 { time: '05:30', icon: SVG_ICONS.train, title: '家 ➔ 台中機場', desc: '機場接送' },
-                { time: '08:00', icon: SVG_ICONS.plane, title: '台中 (RMQ) 起飛 ➔ 12:00 抵達 釜山 (PUS)', desc: '' },
+                { time: '08:00', icon: SVG_ICONS.plane, title: '台中 起飛 ➔ 11:15 抵達 釜山', desc: '' },
                 { time: '', icon: SVG_ICONS.pin, title: '辦理 SES 快速通關', desc: '2F 出境大廳 Check-in D區右方' },
                 { time: '', icon: SVG_ICONS.train, title: '前往海雲臺', desc: '機場巴士 3號月台 ❘ 金海機場 → 海雲臺海水浴場，票價：₩9,500/人，於 Gate 4 附近自動售票機購票' },
                 { time: '', icon: SVG_ICONS.food, title: '廣安木烤肉', desc: '' },
@@ -767,7 +767,7 @@
             ],
             6: [
                 { time: '', icon: SVG_ICONS.train, title: '前往金海機場', desc: '' },
-                { time: '12:15', icon: SVG_ICONS.plane, title: '12:15 釜山 (PUS) 起飛 ➔ 14:00 抵達 台中 (RMQ)', desc: '' }
+                { time: '12:15', icon: SVG_ICONS.plane, title: '釜山 起飛 ➔ 14:00 抵達 台中', desc: '' }
             ]
         };
 
