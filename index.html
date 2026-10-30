@@ -779,8 +779,8 @@
                         <span id="rateBadge" style="background:#FFFFFF; border:1px solid #E5E0D5; padding:2px 10px; border-radius:20px; font-size:0.7rem; color:var(--ink-muted);">即時匯率 0.0243</span>
                     </div>
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                        <input type="number" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; outline:none; background:#FFF; font-size:0.85rem;">
-                        <input type="number" id="calcTwd" placeholder="台幣 TWD" oninput="quickCalc('twd')" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; outline:none; background:#FFF; font-size:0.85rem;">
+                        <input type="number" inputmode="numeric" pattern="[0-9]*" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; outline:none; background:#FFF; font-size:0.85rem;">
+                        <input type="number" inputmode="numeric" pattern="[0-9]*" id="calcTwd" placeholder="台幣 TWD" oninput="quickCalc('twd')" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; outline:none; background:#FFF; font-size:0.85rem;">
                     </div>
                 </div>
 
@@ -801,7 +801,7 @@
                 </div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:12px;">
                     <input type="text" id="accItem" placeholder="項目 (例: 豬肉湯飯)" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; font-size:0.82rem; background:#FFF;">
-                    <input type="number" id="accKrwVal" placeholder="金額 (韓元)" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; font-size:0.82rem; background:#FFF;">
+                    <input type="number" inputmode="numeric" pattern="[0-9]*" id="accKrwVal" placeholder="金額 (韓元)" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; font-size:0.82rem; background:#FFF;">
                 </div>
                 <button onclick="addExpense()" style="width:100%; background:var(--accent-warm); color:#FFF; border:none; padding:10px; border-radius:10px; font-weight:600; font-size:0.85rem; cursor:pointer;">+ 新增開銷紀錄</button>
 
@@ -994,9 +994,10 @@
                 const data = await res.json();
                 if (Array.isArray(data)) {
                     expenses = data;
+                    localStorage.setItem('busan_v7_expenses_backup', JSON.stringify(data));
                 }
             } catch (e) {
-                expenses = JSON.parse(localStorage.getItem('busan_v7_expenses')) || [];
+                expenses = JSON.parse(localStorage.getItem('busan_v7_expenses_backup')) || [];
             }
             renderExpenses();
         }
@@ -1025,6 +1026,8 @@
             }
 
             const newExp = { day, payer, item, krw, twd: Math.round(krw * RATE) };
+            
+            // 立即顯示於畫面上（樂觀更新）
             expenses.push(newExp);
             renderExpenses();
 
@@ -1040,10 +1043,13 @@
                     body: JSON.stringify(newExp)
                 });
                 showToast('雲端同步成功！');
+                // 延遲 1.2 秒等 Google 試算表寫入完成後再安全重新抓取最新資料
+                setTimeout(() => {
+                    fetchCloudExpenses();
+                }, 1200);
             } catch (e) {
                 showToast('已儲存至本地');
             }
-            fetchCloudExpenses();
         }
 
         async function deleteExpense(index) {
@@ -1059,10 +1065,12 @@
                     body: JSON.stringify({ action: 'delete', index: index })
                 });
                 showToast('已從雲端刪除');
+                setTimeout(() => {
+                    fetchCloudExpenses();
+                }, 1200);
             } catch (e) {
                 showToast('刪除完成');
             }
-            fetchCloudExpenses();
         }
 
         function renderExpenses() {
