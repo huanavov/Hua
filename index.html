@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>釜山·冬日遊</title>
-    <!-- Apple Touch Icon (款式 A：加入鮮明藍色大海、廣安大橋、釜山塔與海鷗的釜山版) -->
-    <link id="appleTouchIcon" rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><path d='M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z' fill='%236B9AC4' opacity='0.4'/><path d='M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z' fill='%233B719F'/><path d='M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z' fill='%2328537A'/><path d='M 10 66 L 10 46 L 36 66 Z' fill='none' stroke='%238C8278' stroke-width='2.5'/><line x1='10' y1='54' x2='36' y2='66' stroke='%238C8278' stroke-width='1.5'/><path d='M 80 66 L 80 50 L 86 50 L 86 54 L 83 54 L 83 66' fill='%238C8278'/><circle cx='83' cy='46' r='3' fill='%23D96B53'/><line x1='0' y1='66' x2='100' y2='66' stroke='%237D736A' stroke-width='2.5'/><rect x='28' y='58' width='18' height='10' rx='4' fill='%23D96B53'/><rect x='50' y='58' width='18' height='10' rx='4' fill='%23E6B84D'/><rect x='32' y='61' width='10' height='4' rx='1' fill='%23FFFFFF'/><rect x='54' y='61' width='10' height='4' rx='1' fill='%23FFFFFF'/><circle cx='33' cy='68' r='1.5' fill='%23333'/><circle cx='41' cy='68' r='1.5' fill='%23333'/><circle cx='55' cy='68' r='1.5' fill='%23333'/><circle cx='63' cy='68' r='1.5' fill='%23333'/><path d='M 62 26 Q 66 22 70 26 Q 74 22 78 26' stroke='%238C8278' stroke-width='1.8' fill='none'/><circle cx='20' cy='28' r='6' fill='%23F2CBCB' opacity='0.75'/></svg>">
+    <!-- Apple Touch Icon (升級版：參考真實天空膠囊列車、高架軌道與藍色大海) -->
+    <link id="appleTouchIcon" rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><path d='M0 58 Q 25 54 50 58 T 100 58 L 100 100 L 0 100 Z' fill='%234A7B9D'/><path d='M0 68 Q 25 64 50 68 T 100 68 L 100 100 L 0 100 Z' fill='%2328537A'/><rect x='15' y='60' width='30' height='3' fill='%23E5DFC9'/><rect x='55' y='60' width='30' height='3' fill='%23E5DFC9'/><rect x='28' y='63' width='4' height='15' fill='%23E5DFC9'/><rect x='68' y='63' width='4' height='15' fill='%23E5DFC9'/><rect x='32' y='46' width='16' height='17' rx='4' fill='%23D97A6C' stroke='%23383431' stroke-width='1.5'/><rect x='34' y='49' width='7' height='8' rx='1' fill='%23FFF'/><rect x='52' y='46' width='16' height='17' rx='4' fill='%23F4C46C' stroke='%23383431' stroke-width='1.5'/><rect x='54' y='49' width='7' height='8' rx='1' fill='%23FFF'/><circle cx='20' cy='30' r='5' fill='%23F2CBCB' opacity='0.8'/><path d='M 65 28 Q 70 24 75 28 Q 80 24 85 28' stroke='%238C8278' stroke-width='1.6' fill='none'/></svg>">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -65,7 +65,7 @@
             box-sizing: border-box;
         }
 
-        /* 頁首標題區 - 四行嚴格統一靠左基準線對齊 */
+        /* 頁首標題區 - 嚴格靠左切齊，第四行日期與上方精準對齊 */
         .hero-banner {
             padding: 24px 4px 16px 4px;
             display: flex;
@@ -130,6 +130,8 @@
             margin: 0;
             padding: 0;
             line-height: 1.4;
+            align-self: flex-start;
+            text-align: left;
         }
 
         /* 頁籤內容控制 */
@@ -216,109 +218,38 @@
             color: var(--primary-coral);
         }
 
-        /* 航班資訊卡 */
-        .boarding-pass {
-            background: #FAF8F4;
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 14px;
-            border: 1px solid #EFEAE2;
-        }
-
-        .ticket-header {
-            background: #E5DFC9;
-            color: #5C544C;
-            padding: 8px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        .ticket-body {
-            padding: 18px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .airport-code {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--ink-color);
-            line-height: 1.1;
-            font-family: 'Noto Serif TC', serif;
-        }
-
-        .airport-name {
-            font-size: 0.75rem;
-            color: var(--ink-muted);
-            margin-top: 2px;
-        }
-
-        .flight-path {
-            text-align: center;
-            flex: 1;
-            padding: 0 12px;
-        }
-
-        .flight-line {
-            height: 1px;
-            background: #D8D0C5;
-            position: relative;
-            margin: 14px 0;
-        }
-
-        .flight-time-badge {
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7rem;
-            color: #6E6358;
-            background: #FAF8F4;
-            padding: 0 8px;
-            white-space: nowrap;
-            font-weight: 500;
-        }
-
-        .ticket-footer {
-            border-top: 1px dashed #E8E2D8;
-            padding: 10px 16px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            font-size: 0.75rem;
-            background: #FFF;
-        }
-
-        .field-label { color: var(--ink-light); font-size: 0.65rem; display: block; letter-spacing: 0.5px; }
-        .field-val { font-weight: 600; color: var(--ink-color); margin-top: 1px; }
-
-        /* 日期選擇 Tabs */
+        /* 日期選擇 Tabs 優化：支援手機預覽提示後面還有天數 */
         .day-tabs-row {
             display: flex;
             gap: 8px;
             overflow-x: auto;
-            padding-bottom: 8px;
+            padding-bottom: 10px;
             margin-bottom: 18px;
-            scrollbar-width: none;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-warm) #EFEAE2;
         }
-        .day-tabs-row::-webkit-scrollbar { display: none; }
+        .day-tabs-row::-webkit-scrollbar {
+            height: 4px;
+        }
+        .day-tabs-row::-webkit-scrollbar-thumb {
+            background-color: var(--accent-warm);
+            border-radius: 4px;
+        }
 
         .day-tab-btn {
             flex: 0 0 auto;
             background: #FAF6F0;
             border: none;
-            padding: 8px 16px;
+            padding: 8px 14px;
             border-radius: 12px;
             font-size: 0.8rem;
             color: var(--ink-muted);
             cursor: pointer;
             transition: all 0.2s;
             text-align: center;
+            scroll-snap-align: start;
         }
 
         .day-tab-btn.active {
@@ -405,6 +336,87 @@
             font-weight: 600;
             margin-top: 4px;
         }
+
+        /* 航班資訊卡 */
+        .boarding-pass {
+            background: #FAF8F4;
+            border-radius: 14px;
+            overflow: hidden;
+            margin-bottom: 14px;
+            border: 1px solid #EFEAE2;
+        }
+
+        .ticket-header {
+            background: #E5DFC9;
+            color: #5C544C;
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .ticket-body {
+            padding: 18px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .airport-code {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--ink-color);
+            line-height: 1.1;
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .airport-name {
+            font-size: 0.75rem;
+            color: var(--ink-muted);
+            margin-top: 2px;
+        }
+
+        .flight-path {
+            text-align: center;
+            flex: 1;
+            padding: 0 12px;
+        }
+
+        .flight-line {
+            height: 1px;
+            background: #D8D0C5;
+            position: relative;
+            margin: 14px 0;
+        }
+
+        .flight-time-badge {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #6E6358;
+            background: #FAF8F4;
+            padding: 0 8px;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .ticket-footer {
+            border-top: 1px dashed #E8E2D8;
+            padding: 10px 16px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            font-size: 0.75rem;
+            background: #FFF;
+        }
+
+        .field-label { color: var(--ink-light); font-size: 0.65rem; display: block; letter-spacing: 0.5px; }
+        .field-val { font-weight: 600; color: var(--ink-color); margin-top: 1px; }
 
         /* 住宿資訊 */
         .hotel-card {
@@ -656,7 +668,7 @@
 <body>
 
     <div class="container">
-        <!-- Header：四行嚴格靠左對齊 -->
+        <!-- Header：四行嚴格靠左切齊，第四行日期向右微調對齊 -->
         <header class="hero-banner">
             <div class="hero-subhead">부산의 겨울 · 2027</div>
             <div class="title-group">
@@ -897,9 +909,9 @@
     <div id="toast" class="toast-msg">已複製韓文地址！</div>
 
     <script>
-        // 將 SVG Apple Touch Icon 自動轉為 180x180 PNG Data URL，確保 iOS Safari 100% 顯示
+        // 將升級版 SVG Apple Touch Icon 自動轉為 180x180 PNG Data URL，確保 iOS Safari 100% 顯示
         (function setupAppleTouchIcon() {
-            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#F6F2EA"/><path d="M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z" fill="#6B9AC4" opacity="0.4"/><path d="M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z" fill="#3B719F"/><path d="M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z" fill="#28537A"/><path d="M 10 66 L 10 46 L 36 66 Z" fill="none" stroke="#8C8278" stroke-width="2.5"/><line x1="10" y1="54" x2="36" y2="66" stroke="#8C8278" stroke-width="1.5"/><path d="M 80 66 L 80 50 L 86 50 L 86 54 L 83 54 L 83 66" fill="#8C8278"/><circle cx="83" cy="46" r="3" fill="#D96B53"/><line x1="0" y1="66" x2="100" y2="66" stroke="#7D736A" stroke-width="2.5"/><rect x="28" y="58" width="18" height="10" rx="4" fill="#D96B53"/><rect x="50" y="58" width="18" height="10" rx="4" fill="#E6B84D"/><rect x="32" y="61" width="10" height="4" rx="1" fill="#FFFFFF"/><rect x="54" y="61" width="10" height="4" rx="1" fill="#FFFFFF"/><circle cx="33" cy="68" r="1.5" fill="#333"/><circle cx="41" cy="68" r="1.5" fill="#333"/><circle cx="55" cy="68" r="1.5" fill="#333"/><circle cx="63" cy="68" r="1.5" fill="#333"/><path d="M 62 26 Q 66 22 70 26 Q 74 22 78 26" stroke="#8C8278" stroke-width="1.8" fill="none"/><circle cx="20" cy="28" r="6" fill="#F2CBCB" opacity="0.75"/></svg>`;
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#F6F2EA"/><path d="M0 58 Q 25 54 50 58 T 100 58 L 100 100 L 0 100 Z" fill="#4A7B9D"/><path d="M0 68 Q 25 64 50 68 T 100 68 L 100 100 L 0 100 Z" fill="#28537A"/><rect x="15" y="60" width="30" height="3" fill="#E5DFC9"/><rect x="55" y="60" width="30" height="3" fill="#E5DFC9"/><rect x="28" y="63" width="4" height="15" fill="#E5DFC9"/><rect x="68" y="63" width="4" height="15" fill="#E5DFC9"/><rect x="32" y="46" width="16" height="17" rx="4" fill="#D97A6C" stroke="#383431" stroke-width="1.5"/><rect x="34" y="49" width="7" height="8" rx="1" fill="#FFF"/><rect x="52" y="46" width="16" height="17" rx="4" fill="#F4C46C" stroke="#383431" stroke-width="1.5"/><rect x="54" y="49" width="7" height="8" rx="1" fill="#FFF"/><circle cx="20" cy="30" r="5" fill="#F2CBCB" opacity="0.8"/><path d="M 65 28 Q 70 24 75 28 Q 80 24 85 28" stroke="#8C8278" stroke-width="1.6" fill="none"/></svg>`;
             const img = new Image();
             const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
             const url = URL.createObjectURL(svgBlob);
@@ -1038,7 +1050,7 @@
         }
         switchDay(1);
 
-        // 即時匯率 API 與 多人雙向雲端記帳同步機制
+        // 即時匯率 API 與 多人雙向雲端記帳同步機制（修復同步與寫入問題）
         let RATE = 0.0243;
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBHHj0ZD4xK0ZdIWZ2LMeiG_FKV8z3LNT-jWgTseRVoleSri2itZBBRJBs-Ag7eDE74g/exec";
         const LOCAL_STORAGE_KEY = 'busan_v2_expenses_backup';
