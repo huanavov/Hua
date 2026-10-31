@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>釜山·冬日遊</title>
-    <!-- Apple Touch Icon (高架拉高版：支柱延長、軌道上移，列車行駛於高空) -->
+    <!-- Apple Touch Icon (經典風格：支柱拉高、軌道上移的高架列車) -->
     <link id="appleTouchIcon" rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><path d='M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z' fill='%236B9AC4' opacity='0.4'/><path d='M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z' fill='%233B719F'/><path d='M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z' fill='%2328537A'/><path d='M 18 56 L 18 85' stroke='%237D736A' stroke-width='2'/><path d='M 50 56 L 50 85' stroke='%237D736A' stroke-width='2'/><path d='M 82 56 L 82 85' stroke='%237D736A' stroke-width='2'/><path d='M 10 56 L 90 56' stroke='%23555' stroke-width='3'/><path d='M 10 58 L 90 58' stroke='%23BBB' stroke-width='1'/><path d='M 10 56 L 10 36 L 36 56 Z' fill='none' stroke='%238C8278' stroke-width='2.5'/><line x1='10' y1='44' x2='36' y2='56' stroke='%238C8278' stroke-width='1.5'/><path d='M 80 56 L 80 40 L 86 40 L 86 44 L 83 44 L 83 56' fill='%238C8278'/><circle cx='83' cy='36' r='3' fill='%23D96B53'/><rect x='28' y='45' width='18' height='11' rx='3' fill='%23D96B53'/><rect x='50' y='45' width='18' height='11' rx='3' fill='%23E6B84D'/><rect x='32' y='48' width='10' height='4' rx='1' fill='%23FFFFFF'/><rect x='54' y='48' width='10' height='4' rx='1' fill='%23FFFFFF'/><circle cx='33' cy='58' r='1.5' fill='%23333'/><circle cx='41' cy='58' r='1.5' fill='%23333'/><circle cx='55' cy='58' r='1.5' fill='%23333'/><circle cx='63' cy='58' r='1.5' fill='%23333'/><path d='M 62 20 Q 66 16 70 20 Q 74 16 78 20' stroke='%238C8278' stroke-width='1.8' fill='none'/><circle cx='20' cy='22' r='6' fill='%23F2CBCB' opacity='0.75'/></svg>">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
@@ -65,7 +65,7 @@
             box-sizing: border-box;
         }
 
-        /* 頁首標題區：四行嚴格靠左切齊，第四行微調向右對齊基準線 */
+        /* 頁首標題區：嚴格靠左對齊 */
         .hero-banner {
             padding: 24px 4px 16px 4px;
             display: flex;
@@ -218,7 +218,7 @@
             color: var(--primary-coral);
         }
 
-        /* 日期選擇 Tabs 優化：加入右側漸層視覺提示還有後續天數 */
+        /* 日期選擇 Tabs 導覽列：帶右側漸層提示 */
         .day-tabs-wrapper {
             position: relative;
             margin-bottom: 18px;
@@ -672,7 +672,7 @@
 <body>
 
     <div class="container">
-        <!-- 標題區：日期與膠囊標籤順序對調 -->
+        <!-- 標題區：四行靠左切齊，日期與膠囊標籤順序 -->
         <header class="hero-banner">
             <div class="hero-subhead">부산의 겨울 · 2027</div>
             <div class="title-group">
@@ -865,7 +865,7 @@
                 </div>
                 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:12px;">
                     <input type="text" id="accItem" placeholder="項目 (例: 豬肉湯飯)" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; font-size:0.82rem; background:#FFF;">
-                    <input type="number" inputmode="numeric" pattern="[0-9]*" id="accKrwVal" placeholder="金額 (韓元)" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; font-size:0.82rem; background:#FFF;">
+                    <input type="number" inputmode="numeric" pattern="[0-9]*" id="calcKrwVal" placeholder="金額 (韓元)" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; font-size:0.82rem; background:#FFF;" id="accKrwVal">
                 </div>
                 <button onclick="addExpense()" style="width:100%; background:var(--accent-warm); color:#FFF; border:none; padding:10px; border-radius:10px; font-weight:600; font-size:0.85rem; cursor:pointer;">+ 新增開銷紀錄</button>
 
@@ -915,7 +915,7 @@
     <div id="toast" class="toast-msg">已複製韓文地址！</div>
 
     <script>
-        // 將高架 Apple Touch Icon 自動轉為 180x180 PNG Data URL
+        // Apple Touch Icon 自動轉換
         (function setupAppleTouchIcon() {
             const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#F6F2EA"/><path d="M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z" fill="#6B9AC4" opacity="0.4"/><path d="M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z" fill="#3B719F"/><path d="M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z" fill="#28537A"/><path d="M 18 56 L 18 85" stroke="#7D736A" stroke-width="2"/><path d="M 50 56 L 50 85" stroke="#7D736A" stroke-width="2"/><path d="M 82 56 L 82 85" stroke="#7D736A" stroke-width="2"/><path d="M 10 56 L 90 56" stroke="#555" stroke-width="3"/><path d="M 10 58 L 90 58" stroke="#BBB" stroke-width="1"/><path d="M 10 56 L 10 36 L 36 56 Z" fill="none" stroke="#8C8278" stroke-width="2.5"/><line x1="10" y1="44" x2="36" y2="56" stroke="#8C8278" stroke-width="1.5"/><path d="M 80 56 L 80 40 L 86 40 L 86 44 L 83 44 L 83 56" fill="#8C8278"/><circle cx="83" cy="36" r="3" fill="#D96B53"/><rect x="28" y="45" width="18" height="11" rx="3" fill="#D96B53"/><rect x="50" y="45" width="18" height="11" rx="3" fill="#E6B84D"/><rect x="32" y="48" width="10" height="4" rx="1" fill="#FFFFFF"/><rect x="54" y="48" width="10" height="4" rx="1" fill="#FFFFFF"/><circle cx="33" cy="58" r="1.5" fill="#333"/><circle cx="41" cy="58" r="1.5" fill="#333"/><circle cx="55" cy="58" r="1.5" fill="#333"/><circle cx="63" cy="58" r="1.5" fill="#333"/><path d="M 62 20 Q 66 16 70 20 Q 74 16 78 20" stroke="#8C8278" stroke-width="1.8" fill="none"/><circle cx="20" cy="22" r="6" fill="#F2CBCB" opacity="0.75"/></svg>`;
             const img = new Image();
@@ -1056,7 +1056,7 @@
         }
         switchDay(1);
 
-        // 即時匯率 API 與 多人雙向雲端記帳同步機制（完整雙向同步修復）
+        // Google 雲端雙向同步記帳機制 (JSON格式 + 防快取)
         let RATE = 0.0243;
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBHHj0ZD4xK0ZdIWZ2LMeiG_FKV8z3LNT-jWgTseRVoleSri2itZBBRJBs-Ag7eDE74g/exec";
         const LOCAL_STORAGE_KEY = 'busan_v2_expenses_backup';
@@ -1084,9 +1084,7 @@
                     RATE = data.rates.TWD;
                     document.getElementById('rateBadge').innerText = `即時匯率 ${RATE.toFixed(4)}`;
                 }
-            } catch (err) {
-                console.log('使用預設匯率');
-            }
+            } catch (err) {}
             renderExpenses();
             fetchCloudExpenses();
         }
@@ -1109,7 +1107,6 @@
                     renderExpenses();
                 }
             } catch (e) {
-                console.log('載入遠端失敗，保留本地紀錄');
                 renderExpenses();
             }
         }
@@ -1130,7 +1127,7 @@
             const day = document.getElementById('accDay').value;
             const payer = document.getElementById('accPayer').value;
             const item = document.getElementById('accItem').value.trim();
-            const krw = parseFloat(document.getElementById('accKrwVal').value);
+            const krw = parseFloat(document.getElementById('calcKrwVal').value);
 
             if (!item || isNaN(krw) || krw <= 0) {
                 showToast('請完整填寫項目與金額！');
@@ -1145,27 +1142,15 @@
             renderExpenses();
 
             document.getElementById('accItem').value = '';
-            document.getElementById('accKrwVal').value = '';
+            document.getElementById('calcKrwVal').value = '';
             showToast('雲端同步中...');
 
             try {
-                const formData = new URLSearchParams();
-                formData.append('action', 'add');
-                formData.append('day', newExp.day);
-                formData.append('date', newExp.day);
-                formData.append('payer', newExp.payer);
-                formData.append('who', newExp.payer);
-                formData.append('item', newExp.item);
-                formData.append('desc', newExp.item);
-                formData.append('krw', newExp.krw);
-                formData.append('amount', newExp.krw);
-                formData.append('twd', newExp.twd);
-
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'add', ...newExp })
                 });
                 showToast('雲端同步成功！');
             } catch (e) {
@@ -1174,11 +1159,11 @@
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 3500);
+                }, 3000);
             }
         }
 
-        function deleteExpense(index) {
+        async function deleteExpense(index) {
             const target = expenses[index];
             if (!target) return;
 
@@ -1189,27 +1174,17 @@
             showToast('已移除紀錄');
             
             try {
-                const formData = new URLSearchParams();
-                formData.append('action', 'delete');
-                formData.append('index', index);
-                formData.append('day', target.day);
-                formData.append('payer', target.payer);
-                formData.append('item', target.item);
-                formData.append('desc', target.item);
-                formData.append('krw', target.krw);
-                formData.append('amount', target.krw);
-
-                fetch(GOOGLE_SCRIPT_URL, {
+                await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'delete', index, ...target })
                 });
             } catch (e) {} finally {
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 3500);
+                }, 3000);
             }
         }
 
