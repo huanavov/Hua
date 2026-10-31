@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>釜山·冬日遊</title>
-    <!-- Apple Touch Icon (高架拉高版：支柱延長、軌道上移，列車行駛於高空) -->
-    <link id="appleTouchIcon" rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><path d='M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z' fill='%236B9AC4' opacity='0.4'/><path d='M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z' fill='%233B719F'/><path d='M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z' fill='%2328537A'/><path d='M 18 56 L 18 85' stroke='%237D736A' stroke-width='2'/><path d='M 50 56 L 50 85' stroke='%237D736A' stroke-width='2'/><path d='M 82 56 L 82 85' stroke='%237D736A' stroke-width='2'/><path d='M 10 56 L 90 56' stroke='%23555' stroke-width='3'/><path d='M 10 58 L 90 58' stroke='%23BBB' stroke-width='1'/><path d='M 10 56 L 10 36 L 36 56 Z' fill='none' stroke='%238C8278' stroke-width='2.5'/><line x1='10' y1='44' x2='36' y2='56' stroke='%238C8278' stroke-width='1.5'/><path d='M 80 56 L 80 40 L 86 40 L 86 44 L 83 44 L 83 56' fill='%238C8278'/><circle cx='83' cy='36' r='3' fill='%23D96B53'/><rect x='28' y='45' width='18' height='11' rx='3' fill='%23D96B53'/><rect x='50' y='45' width='18' height='11' rx='3' fill='%23E6B84D'/><rect x='32' y='48' width='10' height='4' rx='1' fill='%23FFFFFF'/><rect x='54' y='48' width='10' height='4' rx='1' fill='%23FFFFFF'/><circle cx='33' cy='58' r='1.5' fill='%23333'/><circle cx='41' cy='58' r='1.5' fill='%23333'/><circle cx='55' cy='58' r='1.5' fill='%23333'/><circle cx='63' cy='58' r='1.5' fill='%23333'/><path d='M 62 20 Q 66 16 70 20 Q 74 16 78 20' stroke='%238C8278' stroke-width='1.8' fill='none'/><circle cx='20' cy='22' r='6' fill='%23F2CBCB' opacity='0.75'/></svg>">
+    <!-- Apple Touch Icon (經典風格：支柱拉高、軌道上移的高架列車) -->
+    <link id="appleTouchIcon" rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><circle cx='22' cy='26' r='7' fill='%23F2CBCB' opacity='0.75'/><path d='M 62 24 Q 67 20 72 24 Q 77 20 82 24' stroke='%238C8278' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M0 64 Q 25 60 50 64 T 100 64 L 100 100 L 0 100 Z' fill='%236B9AC4' opacity='0.35'/><path d='M0 70 Q 25 66 50 70 T 100 70 L 100 100 L 0 100 Z' fill='%233B719F'/><path d='M0 78 Q 25 74 50 78 T 100 78 L 100 100 L 0 100 Z' fill='%2328537A'/><line x1='21' y1='58' x2='21' y2='80' stroke='%237D736A' stroke-width='2.6'/><line x1='51' y1='58' x2='51' y2='80' stroke='%237D736A' stroke-width='2.6'/><line x1='81' y1='58' x2='81' y2='80' stroke='%237D736A' stroke-width='2.6'/><path d='M 14 58 L 14 38 L 36 58 Z' fill='none' stroke='%238C8278' stroke-width='2.5'/><line x1='14' y1='46' x2='36' y2='58' stroke='%238C8278' stroke-width='1.5'/><path d='M 80 58 L 80 42 L 85 42 L 85 46 L 82.5 46 L 82.5 58' fill='%238C8278'/><circle cx='82.5' cy='37' r='3.2' fill='%23D96B53'/><line x1='12' y1='58' x2='89' y2='58' stroke='%235C544C' stroke-width='3'/><line x1='12' y1='60' x2='89' y2='60' stroke='%23B5A89E' stroke-width='1.2'/><rect x='31' y='47' width='18' height='10' rx='4' fill='%23D96B53'/><rect x='52' y='47' width='18' height='10' rx='4' fill='%23E6B84D'/><rect x='35' y='50' width='10' height='4' rx='1' fill='%23FFFFFF'/><rect x='56' y='50' width='10' height='4' rx='1' fill='%23FFFFFF'/><circle cx='36' cy='57.5' r='1.5' fill='%23222'/><circle cx='44' cy='57.5' r='1.5' fill='%23222'/><circle cx='57' cy='57.5' r='1.5' fill='%23222'/><circle cx='65' cy='57.5' r='1.5' fill='%23222'/></svg>">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
+    <!-- GSAP & TextPlugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
     <style>
         :root {
             --bg-color: #F8F5EF;
@@ -65,7 +68,7 @@
             box-sizing: border-box;
         }
 
-        /* 頁首標題區：四行嚴格靠左切齊 */
+        /* 頁首標題區：嚴格靠左對齊 */
         .hero-banner {
             padding: 24px 4px 16px 4px;
             display: flex;
@@ -101,6 +104,15 @@
             margin: 0;
             padding: 0;
             line-height: 1.25;
+            display: inline-flex;
+        }
+
+        /* 大標題逐字彈跳（Letter Bounce）效果 */
+        .bounce-char {
+            display: inline-block;
+            font-family: 'Noto Serif TC', serif;
+            will-change: transform;
+            transform-origin: bottom center;
         }
 
         .hero-title-sub {
@@ -111,8 +123,20 @@
             font-family: 'Noto Sans TC', sans-serif;
         }
 
+        .hero-date {
+            font-size: 0.84rem;
+            color: var(--ink-muted);
+            letter-spacing: 0.8px;
+            margin: 8px 0 8px 0;
+            padding: 0 0 0 1px;
+            line-height: 1.4;
+            align-self: flex-start;
+            text-align: left;
+        }
+
         .hero-badge-tag {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             background: #EFEAE2;
             color: #6E655F;
             font-size: 0.76rem;
@@ -120,18 +144,21 @@
             padding: 4px 12px;
             border-radius: 20px;
             letter-spacing: 2.2px;
-            margin: 10px 0 8px 0;
+            margin: 2px 0 4px 0;
+            min-height: 28px;
         }
 
-        .hero-date {
-            font-size: 0.84rem;
-            color: var(--ink-muted);
-            letter-spacing: 0.8px;
-            margin: 6px 0 0 1px;
-            padding: 0;
-            line-height: 1.4;
-            align-self: flex-start;
-            text-align: left;
+        .typing-cursor {
+            display: inline-block;
+            margin-left: 2px;
+            color: var(--primary-coral);
+            font-weight: 700;
+            animation: blinkCursor 0.75s infinite;
+        }
+
+        @keyframes blinkCursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         /* 頁籤內容控制 */
@@ -218,48 +245,72 @@
             color: var(--primary-coral);
         }
 
-        /* 日期選擇 Tabs 優化 */
+        /* 日期選擇 Tabs 導覽列：簡約方框版本 + 底線滑入掃光動態 */
         .day-tabs-wrapper {
             position: relative;
             margin-bottom: 18px;
         }
-        .day-tabs-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 35px;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,0.95));
-            pointer-events: none;
-            border-radius: 0 12px 12px 0;
-        }
         .day-tabs-row {
-            display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            scrollbar-width: none;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 6px;
+            padding-bottom: 4px;
         }
-        .day-tabs-row::-webkit-scrollbar { display: none; }
 
         .day-tab-btn {
-            flex: 0 0 auto;
-            background: #FAF6F0;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            color: var(--ink-muted);
+            background: #FAF8F4;
+            border: 1px solid #E5DFC9;
+            padding: 9px 2px;
+            border-radius: 10px;
+            color: var(--ink-color);
             cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
+            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .day-tab-title {
+            position: relative;
+            display: inline-block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            line-height: 1.2;
+            padding-bottom: 3px;
+            color: inherit;
+            letter-spacing: 0.4px;
+        }
+
+        /* 連結底線滑入（Underline Slide Link）動態效果 */
+        .day-tab-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1.5px;
+            background-color: var(--primary-coral);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.45s cubic-bezier(.7, 0, .2, 1), background-color 0.25s ease;
+        }
+
+        .day-tab-btn:hover .day-tab-title::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .day-tab-btn.active {
             background: var(--accent-warm);
+            border-color: var(--accent-warm);
             color: #FFF;
-            font-weight: 600;
+        }
+
+        .day-tab-btn.active .day-tab-title::after {
+            background-color: #FFF;
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         /* 每日行程時間軸 */
@@ -369,10 +420,16 @@
             align-items: center;
         }
 
-        .ticket-body > div:first-child,
-        .ticket-body > div:last-child {
-            width: 75px;
-            flex-shrink: 0;
+        .airport-col-left {
+            width: 78px;
+            flex: 0 0 78px;
+            text-align: left;
+        }
+
+        .airport-col-right {
+            width: 78px;
+            flex: 0 0 78px;
+            text-align: right;
         }
 
         .airport-code {
@@ -392,7 +449,7 @@
         .flight-path {
             text-align: center;
             flex: 1;
-            padding: 0 12px;
+            padding: 0 10px;
         }
 
         .flight-line {
@@ -559,19 +616,38 @@
             cursor: pointer;
         }
 
-        /* 美食打卡清單 */
-        .checkin-item {
-            display: flex;
-            align-items: center;
-            padding: 12px 14px;
+        /* 美食打卡清單（可折疊備註卡片 + 新增欄位） */
+        .checkin-card {
             background: #FAF8F4;
-            border-radius: 12px;
+            border: 1px solid #EFEAE2;
+            border-radius: 14px;
             margin-bottom: 10px;
-            cursor: pointer;
-            transition: background 0.2s;
+            overflow: hidden;
+            transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.2s ease;
         }
 
-        .checkin-item:hover { background: #F2EFE9; }
+        .checkin-card.expanded {
+            background: #FFFFFF;
+            border-color: #DFD7C8;
+            box-shadow: 0 4px 14px rgba(56, 52, 49, 0.05);
+        }
+
+        .checkin-header {
+            display: flex;
+            align-items: center;
+            padding: 13px 14px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s ease;
+        }
+
+        .checkin-header:hover {
+            background: #F4F0E8;
+        }
+
+        .checkin-card.expanded .checkin-header {
+            background: #FAF8F4;
+        }
 
         .checkin-checkbox {
             width: 20px;
@@ -584,14 +660,16 @@
             justify-content: center;
             flex-shrink: 0;
             background: #FFF;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        .checkin-item.checked .checkin-checkbox {
+        .checkin-card.checked .checkin-checkbox {
             background: var(--accent-warm);
             border-color: var(--accent-warm);
         }
 
-        .checkin-item.checked .checkin-checkbox::after {
+        .checkin-card.checked .checkin-checkbox::after {
             content: '✓';
             color: #FFF;
             font-size: 12px;
@@ -599,53 +677,196 @@
         }
 
         .checkin-text {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: var(--ink-color);
             flex: 1;
-            font-weight: 500;
+            font-weight: 600;
+            transition: color 0.2s ease;
         }
 
-        .checkin-item.checked .checkin-text {
+        .checkin-card.checked .checkin-text {
             text-decoration: line-through;
             color: var(--ink-light);
         }
 
-        /* 底部導覽列 */
+        .checkin-arrow {
+            font-size: 0.72rem;
+            color: var(--ink-light);
+            margin-left: 8px;
+            transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1), color 0.2s ease;
+        }
+
+        .checkin-card.expanded .checkin-arrow {
+            transform: rotate(90deg);
+            color: var(--accent-warm);
+        }
+
+        .checkin-body {
+            display: none;
+            padding: 12px 14px 14px 14px;
+            border-top: 1px dashed #E5DFC9;
+            background: #FFFFFF;
+        }
+
+        .checkin-card.expanded .checkin-body {
+            display: block;
+            animation: slideDown 0.22s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .checkin-note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .checkin-note-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-warm);
+            letter-spacing: 0.5px;
+        }
+
+        .checkin-del-btn {
+            background: none;
+            border: none;
+            color: var(--ink-light);
+            font-size: 0.72rem;
+            cursor: pointer;
+            padding: 2px 6px;
+            border-radius: 6px;
+        }
+
+        .checkin-del-btn:hover {
+            color: var(--primary-coral);
+            background: #FAF6F0;
+        }
+
+        .checkin-note-input {
+            width: 100%;
+            min-height: 64px;
+            padding: 9px 11px;
+            border: 1px solid #EFEAE2;
+            border-radius: 10px;
+            background: #FAF8F4;
+            color: var(--ink-color);
+            font-size: 0.82rem;
+            line-height: 1.55;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .checkin-note-input:focus {
+            border-color: var(--accent-warm);
+            background: #FFF;
+        }
+
+        .checkin-add-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+            padding-top: 12px;
+            border-top: 1px dashed #EFEAE2;
+        }
+
+        .checkin-add-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #E5E0D5;
+            border-radius: 12px;
+            background: #FAF8F4;
+            color: var(--ink-color);
+            font-size: 0.85rem;
+            outline: none;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .checkin-add-input:focus {
+            border-color: var(--accent-warm);
+            background: #FFF;
+        }
+
+        .checkin-add-btn {
+            background: var(--accent-warm);
+            color: #FFF;
+            border: none;
+            padding: 0 18px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .checkin-add-btn:active {
+            opacity: 0.85;
+        }
+
+        /* 底部導覽列：膠囊指示器（Tab Bar Indicator）動態效果 */
         .bottom-nav {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(253, 251, 247, 0.96);
-            backdrop-filter: blur(12px);
-            border-top: 1px solid #EFEAE2;
+            bottom: 12px;
+            left: 14px;
+            right: 14px;
+            background: rgba(253, 251, 247, 0.94);
+            backdrop-filter: blur(14px);
+            border: 1px solid #E5DFC9;
+            border-radius: 999px;
+            box-shadow: 0 8px 26px rgba(56, 52, 49, 0.08);
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding: 10px 0 16px 0;
+            padding: 6px 6px;
             z-index: 1000;
-            max-width: 480px;
+            max-width: 452px;
             margin: 0 auto;
         }
 
+        .nav-indicator {
+            position: absolute;
+            top: 5px;
+            bottom: 5px;
+            left: 0;
+            width: 64px;
+            background: #EFEAE2;
+            border: 1px solid rgba(197, 155, 125, 0.35);
+            border-radius: 999px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
         .nav-item {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             text-decoration: none;
             color: #7D756D;
-            font-size: 0.78rem;
+            font-size: 0.74rem;
             font-family: 'Noto Sans TC', sans-serif;
             font-weight: 400;
-            gap: 4px;
+            gap: 3px;
             cursor: pointer;
             width: 20%;
+            padding: 5px 0;
+            border-radius: 999px;
+            transition: color 0.25s ease;
         }
 
         .nav-item svg {
             stroke: #7D756D;
             stroke-width: 1.6;
             fill: none;
+            will-change: transform;
         }
 
         .nav-item.active {
@@ -654,7 +875,7 @@
         }
 
         .nav-item.active svg {
-            stroke: #C59B7D;
+            stroke: var(--primary-coral);
         }
 
         .toast-msg {
@@ -678,15 +899,19 @@
 <body>
 
     <div class="container">
-        <!-- 標題區 -->
+        <!-- 標題區：四行靠左切齊，日期與膠囊標籤順序 -->
         <header class="hero-banner">
             <div class="hero-subhead">부산의 겨울 · 2027</div>
             <div class="title-group">
-                <h1 class="hero-title">釜山·冬日遊</h1>
+                <h1 class="hero-title" id="floatTitle">
+                    <span class="bounce-char">釜</span><span class="bounce-char">山</span><span class="bounce-char">·</span><span class="bounce-char">冬</span><span class="bounce-char">日</span><span class="bounce-char">遊</span>
+                </h1>
                 <span class="hero-title-sub">부산 · BUSAN</span>
             </div>
             <div class="hero-date">2027.01.13 (三) - 01.18 (一)</div>
-            <div class="hero-badge-tag">6天5夜·Bu想San班，就去釜山</div>
+            <div class="hero-badge-tag">
+                <span id="typingText"></span><span class="typing-cursor" id="typingCursor">|</span>
+            </div>
         </header>
 
         <!-- PAGE 1: 行程 -->
@@ -737,12 +962,24 @@
             <div class="card-wrapper">
                 <div class="day-tabs-wrapper">
                     <div class="day-tabs-row">
-                        <button class="day-tab-btn active" onclick="switchDay(1)">D1 · 01/13</button>
-                        <button class="day-tab-btn" onclick="switchDay(2)">D2 · 01/14</button>
-                        <button class="day-tab-btn" onclick="switchDay(3)">D3 · 01/15</button>
-                        <button class="day-tab-btn" onclick="switchDay(4)">D4 · 01/16</button>
-                        <button class="day-tab-btn" onclick="switchDay(5)">D5 · 01/17</button>
-                        <button class="day-tab-btn" onclick="switchDay(6)">D6 · 01/18</button>
+                        <button class="day-tab-btn active" onclick="switchDay(1)">
+                            <span class="day-tab-title">Day1</span>
+                        </button>
+                        <button class="day-tab-btn" onclick="switchDay(2)">
+                            <span class="day-tab-title">Day2</span>
+                        </button>
+                        <button class="day-tab-btn" onclick="switchDay(3)">
+                            <span class="day-tab-title">Day3</span>
+                        </button>
+                        <button class="day-tab-btn" onclick="switchDay(4)">
+                            <span class="day-tab-title">Day4</span>
+                        </button>
+                        <button class="day-tab-btn" onclick="switchDay(5)">
+                            <span class="day-tab-title">Day5</span>
+                        </button>
+                        <button class="day-tab-btn" onclick="switchDay(6)">
+                            <span class="day-tab-title">Day6</span>
+                        </button>
                     </div>
                 </div>
 
@@ -761,17 +998,17 @@
                         <span>RMQ ➔ PUS</span>
                     </div>
                     <div class="ticket-body">
-                        <div>
+                        <div class="airport-col-left">
                             <div class="airport-code">RMQ</div>
                             <div class="airport-name">台中</div>
                         </div>
                         <div class="flight-path">
                             <div style="font-size:0.75rem; font-weight:700; color:var(--primary-coral);">JX310</div>
                             <div class="flight-line">
-                                <div class="flight-time-badge">08:00 ➔ 11:15</div>
+                                <div class="flight-time-badge">08:00 ➔ 12:00</div>
                             </div>
                         </div>
-                        <div style="text-align:right;">
+                        <div class="airport-col-right">
                             <div class="airport-code">PUS</div>
                             <div class="airport-name">金海</div>
                         </div>
@@ -789,7 +1026,7 @@
                         <span>PUS ➔ RMQ</span>
                     </div>
                     <div class="ticket-body">
-                        <div>
+                        <div class="airport-col-left">
                             <div class="airport-code">PUS</div>
                             <div class="airport-name">金海</div>
                         </div>
@@ -799,7 +1036,7 @@
                                 <div class="flight-time-badge" style="color:#475569;">12:15 ➔ 14:00</div>
                             </div>
                         </div>
-                        <div style="text-align:right;">
+                        <div class="airport-col-right">
                             <div class="airport-code">RMQ</div>
                             <div class="airport-name">台中</div>
                         </div>
@@ -888,14 +1125,26 @@
         <!-- PAGE 5: 打卡清單 -->
         <main id="page-checkin" class="tab-page">
             <div class="card-wrapper">
-                <h2 class="section-title serif-font">美食打卡清單</h2>
-                <div id="checkinList"></div>
+                <h2 class="section-title serif-font">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+                        <path d="M7 2v20"/>
+                        <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+                    </svg>
+                    美食打卡清單
+                </h2>
+                <div id="checkinList">載入中...</div>
+                <div class="checkin-add-row">
+                    <input type="text" id="newCheckinInput" class="checkin-add-input" placeholder="新增項目..." onkeydown="if(event.key==='Enter') addCheckinItem()">
+                    <button class="checkin-add-btn" onclick="addCheckinItem()">加入</button>
+                </div>
             </div>
         </main>
     </div>
 
     <!-- 底部固定導覽列 -->
-    <nav class="bottom-nav">
+    <nav class="bottom-nav" id="bottomNav">
+        <div class="nav-indicator" id="navIndicator"></div>
         <div class="nav-item active" onclick="switchTab('itinerary', this)">
             <svg width="20" height="20" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
             <span>行程</span>
@@ -921,9 +1170,71 @@
     <div id="toast" class="toast-msg">已複製韓文地址！</div>
 
     <script>
-        // 高架 Apple Touch Icon 轉換
+        // 初始化 GSAP 動畫：逐字彈跳（Letter Bounce）、打字換句（單次打出並停止）、底部導覽列指示器
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.gsap && window.TextPlugin) {
+                gsap.registerPlugin(TextPlugin);
+            }
+
+            // 1. 大標題「釜山·冬日遊」逐字彈跳（Letter Bounce）效果（約10秒一輪，每次只彈一個字）
+            const bounceChars = document.querySelectorAll('.bounce-char');
+            if (window.gsap && bounceChars.length > 0) {
+                bounceChars.forEach((charEl, idx) => {
+                    gsap.to(charEl, {
+                        keyframes: [
+                            { scaleX: 1, scaleY: 1, y: 0, duration: 0 },
+                            { scaleX: 1.15, scaleY: 0.82, y: 4, duration: 0.15, ease: "power1.in" }, // 壓扁
+                            { scaleX: 0.88, scaleY: 1.22, y: -18, duration: 0.35, ease: "power2.out" }, // 彈起
+                            { scaleX: 1.05, scaleY: 0.94, y: 0, duration: 0.25, ease: "bounce.out" }, // 落地回彈
+                            { scaleX: 1, scaleY: 1, y: 0, duration: 0.2 }
+                        ],
+                        repeat: -1,
+                        repeatDelay: (bounceChars.length - 1) * 1.25,
+                        delay: idx * 1.25,
+                        ease: "none"
+                    });
+                });
+            }
+
+            // 2. 「6天5夜·Bu想San班，就去釜山」打字機效果（打完後游標閃爍停止）
+            const typingEl = document.getElementById('typingText');
+            const cursorEl = document.getElementById('typingCursor');
+            const targetPhrase = "6天5夜·Bu想San班，就去釜山";
+            if (window.gsap && typingEl) {
+                gsap.to(typingEl, {
+                    duration: targetPhrase.length * 0.08,
+                    text: { value: targetPhrase, delimiter: "" },
+                    ease: "none",
+                    onComplete: () => {
+                        // 停止游標閃爍並隱藏
+                        if (cursorEl) {
+                            cursorEl.style.animation = 'none';
+                            cursorEl.style.opacity = '0';
+                        }
+                    }
+                });
+            }
+
+            // 3. 初始化底部導覽列膠囊指示器
+            initNavIndicator();
+            window.addEventListener('resize', initNavIndicator);
+        });
+
+        let navIndicatorTl = null;
+        function initNavIndicator() {
+            const activeItem = document.querySelector('.bottom-nav .nav-item.active');
+            const indicator = document.getElementById('navIndicator');
+            if (activeItem && indicator && window.gsap) {
+                gsap.set(indicator, {
+                    x: activeItem.offsetLeft,
+                    width: activeItem.offsetWidth
+                });
+            }
+        }
+
+        // Apple Touch Icon 自動轉換
         (function setupAppleTouchIcon() {
-            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#F6F2EA"/><path d="M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z" fill="#6B9AC4" opacity="0.4"/><path d="M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z" fill="#3B719F"/><path d="M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z" fill="#28537A"/><path d="M 18 56 L 18 85" stroke="#7D736A" stroke-width="2"/><path d="M 50 56 L 50 85" stroke="#7D736A" stroke-width="2"/><path d="M 82 56 L 82 85" stroke="#7D736A" stroke-width="2"/><path d="M 10 56 L 90 56" stroke="#555" stroke-width="3"/><path d="M 10 58 L 90 58" stroke="#BBB" stroke-width="1"/><path d="M 10 56 L 10 36 L 36 56 Z" fill="none" stroke="#8C8278" stroke-width="2.5"/><line x1="10" y1="44" x2="36" y2="56" stroke="#8C8278" stroke-width="1.5"/><path d="M 80 56 L 80 40 L 86 40 L 86 44 L 83 44 L 83 56" fill="#8C8278"/><circle cx="83" cy="36" r="3" fill="#D96B53"/><rect x="28" y="45" width="18" height="11" rx="3" fill="#D96B53"/><rect x="50" y="45" width="18" height="11" rx="3" fill="#E6B84D"/><rect x="32" y="48" width="10" height="4" rx="1" fill="#FFFFFF"/><rect x="54" y="48" width="10" height="4" rx="1" fill="#FFFFFF"/><circle cx="33" cy="58" r="1.5" fill="#333"/><circle cx="41" cy="58" r="1.5" fill="#333"/><circle cx="55" cy="58" r="1.5" fill="#333"/><circle cx="63" cy="58" r="1.5" fill="#333"/><path d="M 62 20 Q 66 16 70 20 Q 74 16 78 20" stroke="#8C8278" stroke-width="1.8" fill="none"/><circle cx="20" cy="22" r="6" fill="#F2CBCB" opacity="0.75"/></svg>`;
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#F6F2EA"/><circle cx="22" cy="26" r="7" fill="#F2CBCB" opacity="0.75"/><path d="M 62 24 Q 67 20 72 24 Q 77 20 82 24" stroke="#8C8278" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M0 64 Q 25 60 50 64 T 100 64 L 100 100 L 0 100 Z" fill="#6B9AC4" opacity="0.35"/><path d="M0 70 Q 25 66 50 70 T 100 70 L 100 100 L 0 100 Z" fill="#3B719F"/><path d="M0 78 Q 25 74 50 78 T 100 78 L 100 100 L 0 100 Z" fill="#28537A"/><line x1="21" y1="58" x2="21" y2="80" stroke="#7D736A" stroke-width="2.6"/><line x1="51" y1="58" x2="51" y2="80" stroke="#7D736A" stroke-width="2.6"/><line x1="81" y1="58" x2="81" y2="80" stroke="#7D736A" stroke-width="2.6"/><path d="M 14 58 L 14 38 L 36 58 Z" fill="none" stroke="#8C8278" stroke-width="2.5"/><line x1="14" y1="46" x2="36" y2="58" stroke="#8C8278" stroke-width="1.5"/><path d="M 80 58 L 80 42 L 85 42 L 85 46 L 82.5 46 L 82.5 58" fill="#8C8278"/><circle cx="82.5" cy="37" r="3.2" fill="#D96B53"/><line x1="12" y1="58" x2="89" y2="58" stroke="#5C544C" stroke-width="3"/><line x1="12" y1="60" x2="89" y2="60" stroke="#B5A89E" stroke-width="1.2"/><rect x="31" y="47" width="18" height="10" rx="4" fill="#D96B53"/><rect x="52" y="47" width="18" height="10" rx="4" fill="#E6B84D"/><rect x="35" y="50" width="10" height="4" rx="1" fill="#FFFFFF"/><rect x="56" y="50" width="10" height="4" rx="1" fill="#FFFFFF"/><circle cx="36" cy="57.5" r="1.5" fill="#222"/><circle cx="44" cy="57.5" r="1.5" fill="#222"/><circle cx="57" cy="57.5" r="1.5" fill="#222"/><circle cx="65" cy="57.5" r="1.5" fill="#222"/></svg>`;
             const img = new Image();
             const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
             const url = URL.createObjectURL(svgBlob);
@@ -944,6 +1255,43 @@
         })();
 
         function switchTab(tabId, el) {
+            const prevActive = document.querySelector('.bottom-nav .nav-item.active');
+            const indicator = document.getElementById('navIndicator');
+
+            if (window.gsap && indicator && prevActive && prevActive !== el) {
+                const oldLeft = prevActive.offsetLeft;
+                const oldWidth = prevActive.offsetWidth;
+                const newLeft = el.offsetLeft;
+                const newWidth = el.offsetWidth;
+
+                const stretchLeft = Math.min(oldLeft, newLeft);
+                const stretchWidth = Math.max(oldLeft + oldWidth, newLeft + newWidth) - stretchLeft;
+
+                if (navIndicatorTl) navIndicatorTl.kill();
+                navIndicatorTl = gsap.timeline();
+                navIndicatorTl
+                    .to(indicator, {
+                        x: stretchLeft,
+                        width: stretchWidth,
+                        duration: 0.18,
+                        ease: "power2.in"
+                    })
+                    .to(indicator, {
+                        x: newLeft,
+                        width: newWidth,
+                        duration: 0.34,
+                        ease: "power3.out"
+                    });
+
+                const iconSvg = el.querySelector('svg');
+                if (iconSvg) {
+                    gsap.fromTo(iconSvg,
+                        { scale: 0.7 },
+                        { scale: 1, duration: 0.45, ease: "back.out(3)" }
+                    );
+                }
+            }
+
             document.querySelectorAll('.tab-page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById('page-' + tabId).classList.add('active');
@@ -951,6 +1299,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
             if (tabId === 'accounting') {
                 fetchCloudExpenses();
+            }
+            if (tabId === 'checkin') {
+                fetchCloudCheckin();
             }
         }
 
@@ -1062,25 +1413,37 @@
         }
         switchDay(1);
 
-        // 即時匯率 API 與 多人雙向雲端記帳同步機制
+        // Google 雲端雙向同步記帳機制
         let RATE = 0.0243;
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBHHj0ZD4xK0ZdIWZ2LMeiG_FKV8z3LNT-jWgTseRVoleSri2itZBBRJBs-Ag7eDE74g/exec";
-        const LOCAL_STORAGE_KEY = 'busan_v2_expenses_backup';
+        const LOCAL_STORAGE_KEY = 'busan_v2_expenses_clean';
         let expenses = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
         let isWritingLock = false;
 
         function normalizeItem(raw) {
-            if (!raw || typeof raw !== 'object') return null;
-            const id = raw.id || String(Date.now() + Math.random());
-            const day = String(raw.day || raw.date || raw['日期'] || 'D1').trim();
+            if (!raw) return null;
+            if (Array.isArray(raw)) {
+                const day = String(raw[0] || 'D1').trim();
+                let payer = String(raw[1] || '媽媽').trim();
+                const item = String(raw[2] || '').trim();
+                const krw = parseFloat(String(raw[3] || '0').replace(/,/g, '')) || 0;
+                const twd = parseFloat(String(raw[4] || '0').replace(/,/g, '')) || Math.round(krw * RATE);
+                if (payer === '我') payer = '媽媽';
+                if (!item || item === '測試一' || item === '項目' || item === 'item' || krw <= 0) return null;
+                return { day, payer, item, krw, twd };
+            }
+            if (typeof raw !== 'object') return null;
+            const day = String(raw.day || raw.date || raw['日期'] || raw['天數'] || 'D1').trim();
             let payer = String(raw.payer || raw.who || raw['分帳人'] || raw['付款人'] || '媽媽').trim();
             if (payer === '我' || payer === '測試一') payer = '媽媽';
-            const item = String(raw.item || raw.desc || raw['項目'] || '').trim();
-            if (item === '測試一') return null;
-            const krw = parseFloat(raw.krw !== undefined ? raw.krw : (raw.amount !== undefined ? raw.amount : raw['金額'])) || 0;
-            const twd = parseFloat(raw.twd !== undefined ? raw.twd : raw['台幣']) || Math.round(krw * RATE);
+            const item = String(raw.item || raw.desc || raw.name || raw['項目'] || '').trim();
+            if (item === '測試一' || item === '項目' || item === 'item') return null;
+            const krwRaw = raw.krw !== undefined ? raw.krw : (raw.amount !== undefined ? raw.amount : raw['金額']);
+            const krw = parseFloat(String(krwRaw).replace(/,/g, '')) || 0;
+            const twdRaw = raw.twd !== undefined ? raw.twd : raw['台幣'];
+            const twd = parseFloat(String(twdRaw).replace(/,/g, '')) || Math.round(krw * RATE);
             if (!item || krw <= 0) return null;
-            return { id, day, payer, item, krw, twd };
+            return { day, payer, item, krw, twd };
         }
 
         async function fetchLiveRate() {
@@ -1091,9 +1454,7 @@
                     RATE = data.rates.TWD;
                     document.getElementById('rateBadge').innerText = `即時匯率 ${RATE.toFixed(4)}`;
                 }
-            } catch (err) {
-                console.log('使用預設匯率');
-            }
+            } catch (err) {}
             renderExpenses();
             fetchCloudExpenses();
         }
@@ -1101,13 +1462,16 @@
         async function fetchCloudExpenses() {
             if (isWritingLock) return;
             try {
-                const res = await fetch(`${GOOGLE_SCRIPT_URL}?t=${Date.now()}`, {
+                const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=get&t=${Date.now()}`, {
                     method: 'GET',
-                    redirect: 'follow'
+                    redirect: 'follow',
+                    cache: 'no-store'
                 });
                 const text = await res.text();
                 const parsed = JSON.parse(text);
-                const rawList = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.data) ? parsed.data : null);
+                const rawList = Array.isArray(parsed)
+                    ? parsed
+                    : (Array.isArray(parsed.data) ? parsed.data : (Array.isArray(parsed.records) ? parsed.records : (Array.isArray(parsed.expenses) ? parsed.expenses : null)));
 
                 if (rawList) {
                     const normalized = rawList.map(normalizeItem).filter(Boolean);
@@ -1116,36 +1480,7 @@
                     renderExpenses();
                 }
             } catch (e) {
-                console.log('載入遠端失敗，保留本地紀錄');
                 renderExpenses();
-            }
-        }
-
-        async function sendToGas(payload) {
-            try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (e) {
-                const formData = new URLSearchParams();
-                for (const key in payload) {
-                    if (typeof payload[key] === 'object') {
-                        for (const subKey in payload[key]) {
-                            formData.append(subKey, payload[key][subKey]);
-                        }
-                    } else {
-                        formData.append(key, payload[key]);
-                    }
-                }
-                fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formData
-                }).catch(() => {});
             }
         }
 
@@ -1161,21 +1496,47 @@
             }
         }
 
+        async function syncToCloud(payloadObj) {
+            const params = new URLSearchParams();
+            Object.keys(payloadObj).forEach(k => {
+                if (typeof payloadObj[k] !== 'object') {
+                    params.append(k, payloadObj[k]);
+                }
+            });
+            params.append('t', Date.now());
+            const targetUrl = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
+            const jsonBody = JSON.stringify({ ...payloadObj, expenses, checkinItems });
+
+            try {
+                await fetch(targetUrl, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: jsonBody
+                });
+            } catch (err) {
+                await fetch(targetUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: jsonBody
+                });
+            }
+        }
+
         async function addExpense() {
             const day = document.getElementById('accDay').value;
             const payer = document.getElementById('accPayer').value;
             const item = document.getElementById('accItem').value.trim();
-            const krw = parseFloat(document.getElementById('accKrwVal').value);
+            const krwInput = document.getElementById('accKrwVal');
+            const krw = parseFloat(krwInput.value);
 
             if (!item || isNaN(krw) || krw <= 0) {
                 showToast('請完整填寫項目與金額！');
                 return;
             }
 
-            const newExp = { 
-                id: 'exp_' + Date.now() + '_' + Math.floor(Math.random()*1000),
-                day, payer, item, krw, twd: Math.round(krw * RATE) 
-            };
+            const newExp = { day, payer, item, krw, twd: Math.round(krw * RATE) };
             
             isWritingLock = true;
             expenses.push(newExp);
@@ -1183,29 +1544,31 @@
             renderExpenses();
 
             document.getElementById('accItem').value = '';
-            document.getElementById('accKrwVal').value = '';
+            krwInput.value = '';
             showToast('雲端同步中...');
 
-            await sendToGas({
-                action: 'add',
-                record: newExp,
-                id: newExp.id,
-                day: newExp.day,
-                date: newExp.day,
-                payer: newExp.payer,
-                who: newExp.payer,
-                item: newExp.item,
-                desc: newExp.item,
-                krw: newExp.krw,
-                amount: newExp.krw,
-                twd: newExp.twd
-            });
-            showToast('雲端同步成功！');
-
-            setTimeout(() => {
-                isWritingLock = false;
-                fetchCloudExpenses();
-            }, 3500);
+            try {
+                await syncToCloud({
+                    action: 'add',
+                    day: newExp.day,
+                    date: newExp.day,
+                    payer: newExp.payer,
+                    who: newExp.payer,
+                    item: newExp.item,
+                    desc: newExp.item,
+                    krw: newExp.krw,
+                    amount: newExp.krw,
+                    twd: newExp.twd
+                });
+                showToast('雲端同步成功！');
+            } catch (e) {
+                showToast('已儲存至本地');
+            } finally {
+                setTimeout(() => {
+                    isWritingLock = false;
+                    fetchCloudExpenses();
+                }, 2500);
+            }
         }
 
         async function deleteExpense(index) {
@@ -1218,22 +1581,27 @@
             renderExpenses();
             showToast('已移除紀錄');
             
-            await sendToGas({
-                action: 'delete',
-                index: index,
-                id: target.id || '',
-                day: target.day,
-                payer: target.payer,
-                item: target.item,
-                desc: target.item,
-                krw: target.krw,
-                amount: target.krw
-            });
-
-            setTimeout(() => {
-                isWritingLock = false;
-                fetchCloudExpenses();
-            }, 3500);
+            try {
+                await syncToCloud({
+                    action: 'delete',
+                    index: index,
+                    row: index + 2,
+                    day: target.day,
+                    date: target.day,
+                    payer: target.payer,
+                    who: target.payer,
+                    item: target.item,
+                    desc: target.item,
+                    krw: target.krw,
+                    amount: target.krw,
+                    twd: target.twd
+                });
+            } catch (e) {} finally {
+                setTimeout(() => {
+                    isWritingLock = false;
+                    fetchCloudExpenses();
+                }, 2500);
+            }
         }
 
         function renderExpenses() {
@@ -1272,49 +1640,189 @@
             totalEl.innerText = `總計：₩ ${totalKrw.toLocaleString()}`;
         }
 
-        fetchLiveRate();
-        setInterval(() => {
-            fetchCloudExpenses();
-        }, 12000);
-
-        // 美食打卡清單
-        const checkinSpots = [
-            '東大門獵奇辣炒年糕',
-            'Puraduk 炸雞',
-            'What the burger',
-            'All Sunday',
-            'OOZY Coffee',
-            '李在模披薩',
-            '83 獬豸',
-            'Working Holiday',
-            'Yoajung'
+        // 美食打卡清單（跨裝置雲端同步機制）
+        const DEFAULT_CHECKIN_DATA = [
+            { name: '東大門獵奇辣炒年糕', checked: false, note: '必點：玫瑰奶油辣炒年糕 + 寬粉 + 起司' },
+            { name: 'Puraduk 炸雞', checked: false, note: '必點：烤玉米起司口味、青陽辣椒美乃滋' },
+            { name: 'What the burger', checked: false, note: '備註：手工漢堡人氣店' },
+            { name: 'All Sunday', checked: false, note: '備註：西面店早上買口味較齊全，買完可先回飯店放' },
+            { name: 'OOZY Coffee', checked: false, note: '必點：石榴冰茶、草莓牛奶' },
+            { name: '李在模披薩', checked: false, note: '必點：Crust 雙重起司餅皮' },
+            { name: '83 獬豸', checked: false, note: '備註：可用 CatchTable 現場預約' },
+            { name: 'Working Holiday', checked: false, note: '必點：Galette、濃湯、法式吐司' },
+            { name: 'Yoajung', checked: false, note: '必點：優格冰淇淋 + 蜂巢蜜配料' }
         ];
 
-        let checkedState = JSON.parse(localStorage.getItem('busan_v7_checkin')) || {};
+        const CHECKIN_STORAGE_KEY = 'busan_v2_checkin_items_cloud';
+        let checkinItems = JSON.parse(localStorage.getItem(CHECKIN_STORAGE_KEY) || JSON.stringify(DEFAULT_CHECKIN_DATA));
+        let expandedCheckinMap = {};
+
+        async function fetchCloudCheckin() {
+            try {
+                const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=get_checkin&t=${Date.now()}`, {
+                    method: 'GET',
+                    redirect: 'follow',
+                    cache: 'no-store'
+                });
+                const text = await res.text();
+                const parsed = JSON.parse(text);
+                const cloudList = Array.isArray(parsed.checkin) ? parsed.checkin : (Array.isArray(parsed.checkinItems) ? parsed.checkinItems : null);
+                if (cloudList && cloudList.length > 0) {
+                    checkinItems = cloudList;
+                    localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkinItems));
+                    renderCheckin();
+                }
+            } catch (e) {
+                renderCheckin();
+            }
+        }
+
+        async function syncCheckinToCloud() {
+            try {
+                const params = new URLSearchParams({ action: 'sync_checkin', t: Date.now() });
+                await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'sync_checkin', checkinItems })
+                });
+            } catch (err) {
+                try {
+                    await fetch(`${GOOGLE_SCRIPT_URL}?action=sync_checkin&t=${Date.now()}`, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'sync_checkin', checkinItems })
+                    });
+                } catch (e) {}
+            }
+        }
+
+        function saveCheckinData() {
+            localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkinItems));
+            syncCheckinToCloud();
+        }
 
         function renderCheckin() {
             const container = document.getElementById('checkinList');
+            if (!container) return;
             container.innerHTML = '';
 
-            checkinSpots.forEach((spot, idx) => {
-                const isChecked = !!checkedState[idx];
-                const div = document.createElement('div');
-                div.className = `checkin-item ${isChecked ? 'checked' : ''}`;
-                div.onclick = () => toggleCheckin(idx);
-                div.innerHTML = `
-                    <div class="checkin-checkbox"></div>
-                    <div class="checkin-text">${spot}</div>
-                `;
-                container.appendChild(div);
+            checkinItems.forEach((item, idx) => {
+                const isExpanded = !!expandedCheckinMap[idx];
+                const card = document.createElement('div');
+                card.className = `checkin-card ${item.checked ? 'checked' : ''} ${isExpanded ? 'expanded' : ''}`;
+
+                const header = document.createElement('div');
+                header.className = 'checkin-header';
+                header.onclick = () => toggleExpandCheckin(idx);
+
+                const checkbox = document.createElement('div');
+                checkbox.className = 'checkin-checkbox';
+                checkbox.onclick = (e) => {
+                    e.stopPropagation();
+                    toggleCheckin(idx);
+                };
+
+                const title = document.createElement('div');
+                title.className = 'checkin-text';
+                title.textContent = item.name;
+
+                const arrow = document.createElement('div');
+                arrow.className = 'checkin-arrow';
+                arrow.textContent = '▶';
+
+                header.appendChild(checkbox);
+                header.appendChild(title);
+                header.appendChild(arrow);
+
+                const body = document.createElement('div');
+                body.className = 'checkin-body';
+
+                const noteHeader = document.createElement('div');
+                noteHeader.className = 'checkin-note-header';
+
+                const noteLabel = document.createElement('span');
+                noteLabel.className = 'checkin-note-label';
+                noteLabel.textContent = '簡介／備註';
+
+                const delBtn = document.createElement('button');
+                delBtn.className = 'checkin-del-btn';
+                delBtn.textContent = '刪除項目';
+                delBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    deleteCheckinItem(idx);
+                };
+
+                noteHeader.appendChild(noteLabel);
+                noteHeader.appendChild(delBtn);
+
+                const textarea = document.createElement('textarea');
+                textarea.className = 'checkin-note-input';
+                textarea.placeholder = '備註：必點品項、營業時間或分店資訊...';
+                textarea.value = item.note || '';
+                textarea.onclick = (e) => e.stopPropagation();
+                textarea.oninput = (e) => {
+                    checkinItems[idx].note = e.target.value;
+                    saveCheckinData();
+                };
+
+                body.appendChild(noteHeader);
+                body.appendChild(textarea);
+
+                card.appendChild(header);
+                card.appendChild(body);
+                container.appendChild(card);
             });
         }
 
         function toggleCheckin(idx) {
-            checkedState[idx] = !checkedState[idx];
-            localStorage.setItem('busan_v7_checkin', JSON.stringify(checkedState));
+            if (!checkinItems[idx]) return;
+            checkinItems[idx].checked = !checkinItems[idx].checked;
+            saveCheckinData();
             renderCheckin();
         }
+
+        function toggleExpandCheckin(idx) {
+            expandedCheckinMap[idx] = !expandedCheckinMap[idx];
+            renderCheckin();
+        }
+
+        function addCheckinItem() {
+            const input = document.getElementById('newCheckinInput');
+            if (!input) return;
+            const name = input.value.trim();
+            if (!name) {
+                showToast('請輸入要新增的探店名稱！');
+                return;
+            }
+            checkinItems.push({
+                name: name,
+                checked: false,
+                note: '備註：'
+            });
+            const newIdx = checkinItems.length - 1;
+            expandedCheckinMap[newIdx] = true;
+            saveCheckinData();
+            input.value = '';
+            renderCheckin();
+            showToast('已加入打卡清單！');
+        }
+
+        function deleteCheckinItem(idx) {
+            checkinItems.splice(idx, 1);
+            delete expandedCheckinMap[idx];
+            saveCheckinData();
+            renderCheckin();
+            showToast('已刪除該項目');
+        }
+
         renderCheckin();
+        fetchLiveRate();
+        setInterval(() => {
+            fetchCloudExpenses();
+            fetchCloudCheckin();
+        }, 10000);
 
         function copyText(id) {
             const txt = document.getElementById(id).innerText;
