@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>釜山·冬日遊</title>
-    <!-- Apple Touch Icon (A風格：米色天空、膠囊列車、藍色大海與廣安大橋意象，全面相容 iOS 完美顯示) -->
+    <!-- Apple Touch Icon (A風格：米色天空、膠囊列車、藍色大海與廣安大橋意象) -->
     <link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='25' fill='%23f5f2eb'/><path d='M10 65 Q 50 45 90 65 L 90 100 L 10 100 Z' fill='%233a76a8'/><path d='M20 58 Q 50 42 80 58' stroke='%23ffffff' stroke-width='3' fill='none' opacity='0.7'/><line x1='35' y1='62' x2='35' y2='48' stroke='%23ffffff' stroke-width='2'/><line x1='65' y1='62' x2='65' y2='48' stroke='%23ffffff' stroke-width='2'/><rect x='33' y='43' width='34' height='18' rx='9' fill='%23d96b53'/><circle cx='41' cy='63' r='4' fill='%23333'/><circle cx='59' cy='63' r='4' fill='%23333'/></svg>">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
@@ -162,10 +162,13 @@
             </div>
 
             <div id="day-1" class="itinerary-day active">
-                <div class="timeline-item"><div class="timeline-time">08:00</div><div class="timeline-content"><div class="timeline-title">搭乘 JX310 前往金海機場</div><div class="timeline-desc">桃園機場第二航廈出發</div></div></div>
-                <div class="timeline-item"><div class="timeline-time">12:00</div><div class="timeline-content"><div class="timeline-title">抵達金海機場</div><div class="timeline-desc">辦理入境手續與領取網卡</div></div></div>
-                <div class="timeline-item"><div class="timeline-time">14:00</div><div class="timeline-content"><div class="timeline-title">飯店 Check-in</div><div class="timeline-desc">放行李休息片刻</div></div></div>
-                <div class="timeline-item"><div class="timeline-time">16:30</div><div class="timeline-content"><div class="timeline-title">南浦洞商圈散步</div><div class="timeline-desc">吃小吃與逛街購物</div></div></div>
+                <div class="timeline-item"><div class="timeline-time">05:30</div><div class="timeline-content"><div class="timeline-title">家 → 台中機場</div><div class="timeline-desc">機場接送</div></div></div>
+                <div class="timeline-item"><div class="timeline-time">08:00</div><div class="timeline-content"><div class="timeline-title">台中起飛 → 12:00 抵達 釜山</div><div class="timeline-desc">搭乘 JX310</div></div></div>
+                <div class="timeline-item"><div class="timeline-time"></div><div class="timeline-content"><div class="timeline-title">辦理 SES 快速通關</div><div class="timeline-desc">2F 出境大廳 Check-in D區右方</div></div></div>
+                <div class="timeline-item"><div class="timeline-time"></div><div class="timeline-content"><div class="timeline-title">前往海雲臺</div><div class="timeline-desc">機場巴士 3號月台｜票價：₩9,500/人</div></div></div>
+                <div class="timeline-item"><div class="timeline-time"></div><div class="timeline-content"><div class="timeline-title">廣安木烤肉</div></div></div>
+                <div class="timeline-item"><div class="timeline-time"></div><div class="timeline-content"><div class="timeline-title">E-MART 海雲臺店</div><div class="timeline-desc"><span style="background:#0052a4; color:#fff; padding:2px 6px; border-radius:4px; font-size:11px;">釜山2號線</span> 海雲臺 → 中洞 7號出口</div></div></div>
+                <div class="timeline-item"><div class="timeline-time"></div><div class="timeline-content"><div class="timeline-title">海雲臺市場</div></div></div>
             </div>
             <div id="day-2" class="itinerary-day">
                 <div class="timeline-item"><div class="timeline-time">09:30</div><div class="timeline-content"><div class="timeline-title">海雲臺藍線公園</div><div class="timeline-desc">搭乘天空膠囊列車欣賞海岸線</div></div></div>
@@ -284,225 +287,4 @@
                         </select>
                     </div>
                 </div>
-                <div class="input-grid" style="grid-template-columns: 2fr 1fr; margin-bottom: 12px;">
-                    <div class="input-group">
-                        <label>項目</label>
-                        <input type="text" id="expDesc" placeholder="例：豬肉湯飯">
-                    </div>
-                    <div class="input-group">
-                        <label>金額 (韓元)</label>
-                        <input type="text" inputmode="numeric" pattern="[0-9]*" id="expAmount" placeholder="0">
-                    </div>
-                </div>
-                <button class="btn-submit" onclick="addExpense()">+ 新增開銷紀錄</button>
-            </div>
-
-            <div class="expense-card">
-                <div class="expense-title">
-                    <span>消費明細</span>
-                    <span id="expenseTotal">總計：₩ 0</span>
-                </div>
-                <div class="expense-list" id="expenseList">
-                    <div style="text-align: center; color: var(--text-sub); font-size: 13px; padding: 10px;">載入中...</div>
-                </div>
-            </div>
-        </div>
-
-        <div id="view-food" class="view-section">
-            <div class="food-list" id="foodList"></div>
-        </div>
-
-        <nav class="bottom-nav">
-            <button class="nav-item active" onclick="switchView('itinerary', this)">
-                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                <span>行程</span>
-            </button>
-            <button class="nav-item" onclick="switchView('flights', this)">
-                <svg viewBox="0 0 24 24"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.5 1.2c-.2.4 0 .9.4 1.1l5.5 3.3-3 3H3.5c-.3 0-.5.2-.5.5v1c0 .3.2.5.5.5h4.2l3 3c.2.2.7.4 1.1.4l1.2-.5c.4-.2.6-.6.5-1.1z"/></svg>
-                <span>航班</span>
-            </button>
-            <button class="nav-item" onclick="switchView('hotel', this)">
-                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                <span>住宿</span>
-            </button>
-            <button class="nav-item" onclick="switchView('expenses', this)">
-                <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-                <span>記帳</span>
-            </button>
-            <button class="nav-item" onclick="switchView('food', this)">
-                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>打卡</span>
-            </button>
-        </nav>
-    </div>
-
-    <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwzsPq52fMhvT9CPiDXuYkuKNgXd131QU6kLDL9MV61WUD3iUSFp2wJFCDKgXdE6vl-/exec";
-
-        let currentRate = 0.0243;
-        let expenses = [];
-
-        async function fetchExchangeRate() {
-            try {
-                let res = await fetch('https://open.er-api.com/v6/latest/KRW');
-                let data = await res.json();
-                if (data && data.rates && data.rates.TWD) {
-                    currentRate = data.rates.TWD;
-                    document.getElementById('rateDisplay').innerText = `即時匯率 ${currentRate.toFixed(4)}`;
-                }
-            } catch (e) { console.log('使用預設匯率'); }
-        }
-
-        function switchView(viewName, el) {
-            document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
-            document.getElementById('view-' + viewName).classList.add('active');
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        function switchDay(dayNum) {
-            document.querySelectorAll('.date-tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('.itinerary-day').forEach(d => d.classList.remove('active'));
-            document.getElementById('day-' + dayNum).classList.add('active');
-        }
-
-        const stations = ["尾浦 Mipo", "青沙浦 Cheongsapo", "松亭 Songjeong"];
-        let currentStationIdx = 0;
-        function updateTrainPosition() {
-            const container = document.getElementById('trainContainer');
-            if (currentStationIdx === 0) container.style.transform = 'translateX(0%)';
-            if (currentStationIdx === 1) container.style.transform = 'translateX(110px)';
-            if (currentStationIdx === 2) container.style.transform = 'translateX(220px)';
-            document.getElementById('stationName').innerText = stations[currentStationIdx];
-        }
-        function nextStation() {
-            currentStationIdx = (currentStationIdx + 1) % stations.length;
-            updateTrainPosition();
-        }
-        function prevStation() {
-            currentStationIdx = (currentStationIdx - 1 + stations.length) % stations.length;
-            updateTrainPosition();
-        }
-
-        async function loadExpenses() {
-            try {
-                let res = await fetch(GOOGLE_SCRIPT_URL);
-                let data = await res.json();
-                if (Array.isArray(data)) {
-                    expenses = data;
-                    renderExpenses();
-                }
-            } catch(e) { 
-                console.log('讀取雲端失敗');
-                const listEl = document.getElementById('expenseList');
-                if(expenses.length === 0) {
-                    listEl.innerHTML = '<div style="text-align: center; color: var(--text-sub); font-size: 13px; padding: 10px;">尚無記帳紀錄</div>';
-                }
-            }
-        }
-
-        async function addExpense() {
-            const date = document.getElementById('expDate').value;
-            const who = document.getElementById('expWho').value;
-            const desc = document.getElementById('expDesc').value.trim();
-            const amount = parseInt(document.getElementById('expAmount').value);
-
-            if (!desc || isNaN(amount) || amount <= 0) {
-                alert('請完整填寫項目與正確金額！');
-                return;
-            }
-
-            const newRecord = { date, who, desc, amount };
-            
-            expenses.push(newRecord);
-            renderExpenses();
-
-            document.getElementById('expDesc').value = '';
-            document.getElementById('expAmount').value = '';
-
-            try {
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: new URLSearchParams(newRecord)
-                });
-                setTimeout(() => {
-                    loadExpenses();
-                }, 1500);
-            } catch(e) { console.log('同步雲端失敗'); }
-        }
-
-        function deleteExpense(index) {
-            expenses.splice(index, 1);
-            renderExpenses();
-        }
-
-        function renderExpenses() {
-            const listEl = document.getElementById('expenseList');
-            const totalEl = document.getElementById('expenseTotal');
-            if (expenses.length === 0) {
-                listEl.innerHTML = '<div style="text-align: center; color: var(--text-sub); font-size: 13px; padding: 10px;">尚無記帳紀錄</div>';
-                totalEl.innerText = '總計：₩ 0';
-                return;
-            }
-            let total = 0;
-            listEl.innerHTML = '';
-            expenses.forEach((item, index) => {
-                total += Number(item.amount);
-                const twd = Math.round(item.amount * currentRate);
-                listEl.innerHTML += `
-                    <div class="expense-item">
-                        <div class="expense-info-main">
-                            <span class="expense-tag">${item.date} · ${item.who}</span>
-                            <span class="expense-desc">${item.desc}</span>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <div class="expense-amounts">
-                                <div class="expense-krw">₩ ${Number(item.amount).toLocaleString()}</div>
-                                <div class="expense-twd">約 TWD $${twd.toLocaleString()}</div>
-                            </div>
-                            <button class="delete-btn" onclick="deleteExpense(${index})">×</button>
-                        </div>
-                    </div>
-                `;
-            });
-            totalEl.innerText = `總計：₩ ${total.toLocaleString()}`;
-        }
-
-        const foodItems = [
-            "尾浦家生醃醬蟹", "釜山豬肉國飯", "密陽血腸湯飯", "海雲台盲鰻", 
-            "機張雪蟹", "南浦洞堅果餅", "永島大橋烤貝", "元祖釜山豬腳", 
-            "海雲台傳說中的牛肉湯飯", "Cafe Cajon 咖啡", "Cafe Roof Top", "AVENIR 咖啡"
-        ];
-        let foodChecks = JSON.parse(localStorage.getItem('busan_food_checks') || '{}');
-
-        function renderFoodList() {
-            const container = document.getElementById('foodList');
-            container.innerHTML = '';
-            foodItems.forEach((food, idx) => {
-                const isChecked = foodChecks[idx] || false;
-                container.innerHTML += `
-                    <div class="food-item ${isChecked ? 'checked' : ''}" onclick="toggleFood(${idx})">
-                        <div class="food-checkbox"></div>
-                        <div class="food-name">${food}</div>
-                    </div>
-                `;
-            });
-        }
-
-        function toggleFood(idx) {
-            foodChecks[idx] = !foodChecks[idx];
-            localStorage.setItem('busan_food_checks', JSON.stringify(foodChecks));
-            renderFoodList();
-        }
-
-        window.onload = () => {
-            fetchExchangeRate();
-            loadExpenses();
-            renderFoodList();
-        };
-    </script>
-</body>
-</html>
+                <div class
