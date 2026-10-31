@@ -48,7 +48,7 @@
             background-color: var(--bg-color);
             color: var(--ink-color);
             line-height: 1.65;
-            padding-bottom: 85px;
+            padding-bottom: 95px;
             min-height: 100vh;
             width: 100%;
             margin: 0 auto;
@@ -244,7 +244,7 @@
             color: var(--primary-coral);
         }
 
-        /* 日期選擇 Tabs：質感簡約風（淡化未選、選中帶底線） */
+        /* 日期選擇 Tabs：質感簡約風 + 底線滑入動態效果 */
         .day-tabs-wrapper {
             position: relative;
             margin-bottom: 22px;
@@ -261,7 +261,7 @@
         .day-tab-btn {
             background: none;
             border: none;
-            padding: 6px 2px;
+            padding: 6px 2px 10px 2px;
             cursor: pointer;
             display: flex;
             flex-direction: column;
@@ -269,11 +269,27 @@
             justify-content: center;
             position: relative;
             opacity: 0.45;
-            transition: opacity 0.25s ease, transform 0.2s ease;
+            transition: opacity 0.25s ease;
         }
 
-        .day-tab-btn:hover {
-            opacity: 0.8;
+        .day-tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: var(--primary-coral);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.45s cubic-bezier(0.7, 0, 0.2, 1);
+        }
+
+        .day-tab-btn:hover::after,
+        .day-tab-btn.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .day-tab-label {
@@ -283,11 +299,12 @@
             letter-spacing: 0.5px;
             font-weight: 500;
             margin-bottom: 2px;
+            font-family: 'Noto Sans TC', sans-serif;
         }
 
         .day-tab-date {
             font-size: 1.15rem;
-            font-family: 'Noto Serif TC', serif;
+            font-family: 'Noto Sans TC', sans-serif;
             font-weight: 600;
             color: var(--ink-color);
             line-height: 1.2;
@@ -307,19 +324,7 @@
             font-weight: 700;
         }
 
-        .day-tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 18px;
-            height: 2.5px;
-            background-color: var(--primary-coral);
-            border-radius: 2px;
-        }
-
-        /* 每日行程時間軸 (簡約彈性風格) */
+        /* 每日行程時間軸 (採用乾淨俐落的 Noto Sans TC 無襯線字體，告別新細明體感) */
         .minimal-timeline {
             position: relative;
             padding-left: 20px;
@@ -366,7 +371,7 @@
             color: var(--accent-warm);
             min-width: 42px;
             flex-shrink: 0;
-            font-family: 'Noto Serif TC', serif;
+            font-family: 'Noto Sans TC', sans-serif;
         }
 
         .row-time-empty {
@@ -378,7 +383,7 @@
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--ink-color);
-            font-family: 'Noto Serif TC', serif;
+            font-family: 'Noto Sans TC', sans-serif;
         }
 
         .row-subdesc {
@@ -387,6 +392,7 @@
             margin-top: 4px;
             line-height: 1.5;
             padding-left: 54px;
+            font-family: 'Noto Sans TC', sans-serif;
         }
 
         .metro-badge-oval {
@@ -624,7 +630,7 @@
             cursor: pointer;
         }
 
-        /* 美食打卡清單 */
+        /* 美食打卡清單 (本地獨立運作，含可折疊備註與展開，無編輯刪除鍵) */
         .checkin-card {
             background: #FAF8F4;
             border: 1px solid #EFEAE2;
@@ -726,104 +732,29 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .checkin-note-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-
         .checkin-note-label {
             font-size: 0.75rem;
-            font-weight: 700;
             color: var(--accent-warm);
+            font-weight: 600;
+            margin-bottom: 4px;
             letter-spacing: 0.5px;
         }
 
-        .checkin-del-btn {
-            background: none;
-            border: none;
-            color: var(--ink-light);
-            font-size: 0.72rem;
-            cursor: pointer;
-            padding: 2px 6px;
-            border-radius: 6px;
-        }
-
-        .checkin-del-btn:hover {
-            color: var(--primary-coral);
-            background: #FAF6F0;
-        }
-
-        .checkin-note-input {
-            width: 100%;
-            min-height: 64px;
-            padding: 9px 11px;
-            border: 1px solid #EFEAE2;
-            border-radius: 10px;
-            background: #FAF8F4;
-            color: var(--ink-color);
+        .checkin-note-text {
             font-size: 0.82rem;
-            line-height: 1.55;
-            resize: vertical;
-            outline: none;
-            transition: border-color 0.2s ease, background-color 0.2s ease;
+            color: var(--ink-muted);
+            line-height: 1.5;
         }
 
-        .checkin-note-input:focus {
-            border-color: var(--accent-warm);
-            background: #FFF;
-        }
-
-        .checkin-add-row {
-            display: flex;
-            gap: 8px;
-            margin-top: 14px;
-            padding-top: 12px;
-            border-top: 1px dashed #EFEAE2;
-        }
-
-        .checkin-add-input {
-            flex: 1;
-            padding: 10px 14px;
-            border: 1px solid #E5E0D5;
-            border-radius: 12px;
-            background: #FAF8F4;
-            color: var(--ink-color);
-            font-size: 0.85rem;
-            outline: none;
-            transition: border-color 0.2s ease, background-color 0.2s ease;
-        }
-
-        .checkin-add-input:focus {
-            border-color: var(--accent-warm);
-            background: #FFF;
-        }
-
-        .checkin-add-btn {
-            background: var(--accent-warm);
-            color: #FFF;
-            border: none;
-            padding: 0 18px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .checkin-add-btn:active {
-            opacity: 0.85;
-        }
-
-        /* 底部導覽列 */
+        /* 底部導覽列 (完美修復跑版，維持置中懸浮膠囊) */
         .bottom-nav {
             position: fixed;
-            bottom: 12px;
-            left: 14px;
-            right: 14px;
-            background: rgba(253, 251, 247, 0.94);
+            bottom: 14px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 28px);
+            max-width: 452px;
+            background: rgba(253, 251, 247, 0.96);
             backdrop-filter: blur(14px);
             border: 1px solid #E5DFC9;
             border-radius: 999px;
@@ -833,8 +764,6 @@
             align-items: center;
             padding: 6px 6px;
             z-index: 1000;
-            max-width: 452px;
-            margin: 0 auto;
         }
 
         .nav-indicator {
@@ -888,7 +817,7 @@
 
         .toast-msg {
             position: fixed;
-            bottom: 80px;
+            bottom: 85px;
             left: 50%;
             transform: translateX(-50%);
             background: rgba(56, 52, 49, 0.9);
@@ -1004,7 +933,12 @@
         <!-- PAGE 2: 航班 -->
         <main id="page-flights" class="tab-page">
             <div class="card-wrapper">
-                <h2 class="section-title serif-font">航班資訊</h2>
+                <h2 class="section-title serif-font">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3.5c-.5-.5-2.5 0-4 1.5L13.5 8.5 5.3 6.7c-.8-.2-1.6.1-2.1.8l-.6.8c-.3.4-.2.9.2 1.2l5.6 4.1-3.2 3.2-2.3-.6c-.4-.1-.8.1-1.1.4l-.4.4c-.3.3-.3.8 0 1.1l2.8 2.8c.3.3.8.3 1.1 0l.4-.4c.3-.3.5-.7.4-1.1l-.6-2.3 3.2-3.2 4.1 5.6c.3.4.8.5 1.2.2l.8-.6c.7-.5 1-1.3.8-2.1z"/>
+                    </svg>
+                    航班資訊
+                </h2>
 
                 <div class="boarding-pass">
                     <div class="ticket-header">
@@ -1067,7 +1001,13 @@
         <!-- PAGE 3: 住宿 -->
         <main id="page-hotel" class="tab-page">
             <div class="card-wrapper">
-                <h2 class="section-title serif-font">住宿資訊</h2>
+                <h2 class="section-title serif-font">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    住宿資訊
+                </h2>
 
                 <div class="hotel-card">
                     <div class="hotel-name">
@@ -1092,7 +1032,15 @@
         <!-- PAGE 4: 記帳 -->
         <main id="page-accounting" class="tab-page">
             <div class="card-wrapper">
-                <h2 class="section-title serif-font">記帳與匯率換算</h2>
+                <h2 class="section-title serif-font">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="var(--accent-warm)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                        <path d="M6 8h4"/>
+                        <path d="M14 16h4"/>
+                        <path d="M6 12h12"/>
+                    </svg>
+                    記帳與匯率換算
+                </h2>
 
                 <div style="background:#FAF6F0; padding:12px 14px; border-radius:12px; margin-bottom:16px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
@@ -1148,10 +1096,6 @@
                     美食打卡清單
                 </h2>
                 <div id="checkinList">載入中...</div>
-                <div class="checkin-add-row">
-                    <input type="text" id="newCheckinInput" class="checkin-add-input" placeholder="新增項目..." onkeydown="if(event.key==='Enter') addCheckinItem()">
-                    <button class="checkin-add-btn" onclick="addCheckinItem()">加入</button>
-                </div>
             </div>
         </main>
     </div>
@@ -1211,10 +1155,8 @@
                 gsap.registerPlugin(TextPlugin);
             }
 
-            // 1. 頁面載入時執行 1 次「釜山·冬日遊」逐字彈跳
             playOnceBounce();
 
-            // 2. 「6天5夜·Bu想San班，就去釜山」打字機效果（打完後游標停止閃爍）
             const typingEl = document.getElementById('typingText');
             const cursorEl = document.getElementById('typingCursor');
             const targetPhrase = "6天5夜·Bu想San班，就去釜山";
@@ -1232,9 +1174,9 @@
                 });
             }
 
-            // 3. 初始化底部導覽列膠囊指示器
             initNavIndicator();
             window.addEventListener('resize', initNavIndicator);
+            renderCheckin();
         });
 
         let navIndicatorTl = null;
@@ -1315,14 +1257,10 @@
             el.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // 每次切換分頁時重新播放 1 次大標題逐字彈跳
             playOnceBounce();
 
             if (tabId === 'accounting') {
                 fetchCloudExpenses();
-            }
-            if (tabId === 'checkin') {
-                fetchCloudCheckin();
             }
         }
 
@@ -1434,7 +1372,7 @@
         }
         switchDay(1);
 
-        /* ... existing code ... (Google Cloud Expense & Check-in Sync Logic remains intact) */
+        // 即時匯率 API 與 多人雙向雲端記帳同步機制（記帳獨立專用，不與打卡衝突）
         let RATE = 0.0243;
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBHHj0ZD4xK0ZdIWZ2LMeiG_FKV8z3LNT-jWgTseRVoleSri2itZBBRJBs-Ag7eDE74g/exec";
         const LOCAL_STORAGE_KEY = 'busan_v2_expenses_clean';
@@ -1526,7 +1464,7 @@
             });
             params.append('t', Date.now());
             const targetUrl = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
-            const jsonBody = JSON.stringify({ ...payloadObj, expenses, checkinItems });
+            const jsonBody = JSON.stringify({ ...payloadObj, expenses });
 
             try {
                 await fetch(targetUrl, {
@@ -1661,188 +1599,63 @@
             totalEl.innerText = `總計：₩ ${totalKrw.toLocaleString()}`;
         }
 
-        const DEFAULT_CHECKIN_DATA = [
-            { name: '東大門獵奇辣炒年糕', checked: false, note: '必點：玫瑰奶油辣炒年糕 + 寬粉 + 起司' },
-            { name: 'Puraduk 炸雞', checked: false, note: '必點：烤玉米起司口味、青陽辣椒美乃滋' },
-            { name: 'What the burger', checked: false, note: '備註：手工漢堡人氣店' },
-            { name: 'All Sunday', checked: false, note: '備註：西面店早上買口味較齊全，買完可先回飯店放' },
-            { name: 'OOZY Coffee', checked: false, note: '必點：石榴冰茶、草莓牛奶' },
-            { name: '李在模披薩', checked: false, note: '必點：Crust 雙重起司餅皮' },
-            { name: '83 獬豸', checked: false, note: '備註：可用 CatchTable 現場預約' },
-            { name: 'Working Holiday', checked: false, note: '必點：Galette、濃湯、法式吐司' },
-            { name: 'Yoajung', checked: false, note: '必點：優格冰淇淋 + 蜂巢蜜配料' }
+        // 美食打卡清單 (本地獨立運作，含可折疊備註與展開，無編輯刪除鍵)
+        const checkinData = [
+            { name: '東大門獵奇辣炒年糕', note: '推薦 玫瑰奶油辣炒年糕 + 寬粉 + 起司，醬汁濃郁香辣過癮。' },
+            { name: 'Puraduk 炸雞', note: '推薦 烤玉米起司口味、青陽辣椒美乃滋口味，質感黑色精品外盒。' },
+            { name: 'What the burger', note: '人氣手作漢堡，肉排多汁扎實，薯條酥脆。' },
+            { name: 'All Sunday', note: '西面人氣烘焙坊，早晨品項最齊全，建議買完先回飯店放。' },
+            { name: 'OOZY Coffee', note: '推薦石榴冰茶、草莓牛奶，拍照好看又解膩。' },
+            { name: '李在模披薩', note: '推薦 Crust 雙重起司起司餅皮，濃郁牽絲必吃！' },
+            { name: '83 獬豸', note: '優質烤肉店，建議事先透過 CatchTable 線上或現場預約。' },
+            { name: 'Working Holiday', note: '質感早午餐，推薦 Galette、濃湯、法式吐司。' },
+            { name: 'Yoajung', note: '人氣優格冰淇淋，可自由搭配蜂巢與新鮮水果。' }
         ];
 
-        const CHECKIN_STORAGE_KEY = 'busan_v2_checkin_items_cloud';
-        let checkinItems = JSON.parse(localStorage.getItem(CHECKIN_STORAGE_KEY) || JSON.stringify(DEFAULT_CHECKIN_DATA));
-        let expandedCheckinMap = {};
-
-        async function fetchCloudCheckin() {
-            try {
-                const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=get_checkin&t=${Date.now()}`, {
-                    method: 'GET',
-                    redirect: 'follow',
-                    cache: 'no-store'
-                });
-                const text = await res.text();
-                const parsed = JSON.parse(text);
-                const cloudList = Array.isArray(parsed.checkin) ? parsed.checkin : (Array.isArray(parsed.checkinItems) ? parsed.checkinItems : null);
-                if (cloudList && cloudList.length > 0) {
-                    checkinItems = cloudList;
-                    localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkinItems));
-                    renderCheckin();
-                }
-            } catch (e) {
-                renderCheckin();
-            }
-        }
-
-        async function syncCheckinToCloud() {
-            try {
-                const params = new URLSearchParams({ action: 'sync_checkin', t: Date.now() });
-                await fetch(`${GOOGLE_SCRIPT_URL}?${params.toString()}`, {
-                    method: 'POST',
-                    redirect: 'follow',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'sync_checkin', checkinItems })
-                });
-            } catch (err) {
-                try {
-                    await fetch(`${GOOGLE_SCRIPT_URL}?action=sync_checkin&t=${Date.now()}`, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify({ action: 'sync_checkin', checkinItems })
-                    });
-                } catch (e) {}
-            }
-        }
-
-        function saveCheckinData() {
-            localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkinItems));
-            syncCheckinToCloud();
-        }
+        let checkedState = JSON.parse(localStorage.getItem('busan_v7_checkin_local')) || {};
+        let expandedState = JSON.parse(localStorage.getItem('busan_v7_checkin_expanded')) || {};
 
         function renderCheckin() {
             const container = document.getElementById('checkinList');
             if (!container) return;
             container.innerHTML = '';
 
-            checkinItems.forEach((item, idx) => {
-                const isExpanded = !!expandedCheckinMap[idx];
+            checkinData.forEach((spot, idx) => {
+                const isChecked = !!checkedState[idx];
+                const isExpanded = !!expandedState[idx];
                 const card = document.createElement('div');
-                card.className = `checkin-card ${item.checked ? 'checked' : ''} ${isExpanded ? 'expanded' : ''}`;
-
-                const header = document.createElement('div');
-                header.className = 'checkin-header';
-                header.onclick = () => toggleExpandCheckin(idx);
-
-                const checkbox = document.createElement('div');
-                checkbox.className = 'checkin-checkbox';
-                checkbox.onclick = (e) => {
-                    e.stopPropagation();
-                    toggleCheckin(idx);
-                };
-
-                const title = document.createElement('div');
-                title.className = 'checkin-text';
-                title.textContent = item.name;
-
-                const arrow = document.createElement('div');
-                arrow.className = 'checkin-arrow';
-                arrow.textContent = '▶';
-
-                header.appendChild(checkbox);
-                header.appendChild(title);
-                header.appendChild(arrow);
-
-                const body = document.createElement('div');
-                body.className = 'checkin-body';
-
-                const noteHeader = document.createElement('div');
-                noteHeader.className = 'checkin-note-header';
-
-                const noteLabel = document.createElement('span');
-                noteLabel.className = 'checkin-note-label';
-                noteLabel.textContent = '簡介／備註';
-
-                const delBtn = document.createElement('button');
-                delBtn.className = 'checkin-del-btn';
-                delBtn.textContent = '刪除項目';
-                delBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    deleteCheckinItem(idx);
-                };
-
-                noteHeader.appendChild(noteLabel);
-                noteHeader.appendChild(delBtn);
-
-                const textarea = document.createElement('textarea');
-                textarea.className = 'checkin-note-input';
-                textarea.placeholder = '備註：必點品項、營業時間或分店資訊...';
-                textarea.value = item.note || '';
-                textarea.onclick = (e) => e.stopPropagation();
-                textarea.oninput = (e) => {
-                    checkinItems[idx].note = e.target.value;
-                    saveCheckinData();
-                };
-
-                body.appendChild(noteHeader);
-                body.appendChild(textarea);
-
-                card.appendChild(header);
-                card.appendChild(body);
+                card.className = `checkin-card ${isChecked ? 'checked' : ''} ${isExpanded ? 'expanded' : ''}`;
+                card.innerHTML = `
+                    <div class="checkin-header" onclick="toggleExpand(${idx})">
+                        <div class="checkin-checkbox" onclick="event.stopPropagation(); toggleCheckin(${idx})"></div>
+                        <div class="checkin-text">${spot.name}</div>
+                        <div class="checkin-arrow">▶</div>
+                    </div>
+                    <div class="checkin-body">
+                        <div class="checkin-note-label">簡介／備註</div>
+                        <div class="checkin-note-text">${spot.note}</div>
+                    </div>
+                `;
                 container.appendChild(card);
             });
         }
 
         function toggleCheckin(idx) {
-            if (!checkinItems[idx]) return;
-            checkinItems[idx].checked = !checkinItems[idx].checked;
-            saveCheckinData();
+            checkedState[idx] = !checkedState[idx];
+            localStorage.setItem('busan_v7_checkin_local', JSON.stringify(checkedState));
             renderCheckin();
         }
 
-        function toggleExpandCheckin(idx) {
-            expandedCheckinMap[idx] = !expandedCheckinMap[idx];
+        function toggleExpand(idx) {
+            expandedState[idx] = !expandedState[idx];
+            localStorage.setItem('busan_v7_checkin_expanded', JSON.stringify(expandedState));
             renderCheckin();
         }
 
-        function addCheckinItem() {
-            const input = document.getElementById('newCheckinInput');
-            if (!input) return;
-            const name = input.value.trim();
-            if (!name) {
-                showToast('請輸入要新增的探店名稱！');
-                return;
-            }
-            checkinItems.push({
-                name: name,
-                checked: false,
-                note: '備註：'
-            });
-            const newIdx = checkinItems.length - 1;
-            expandedCheckinMap[newIdx] = true;
-            saveCheckinData();
-            input.value = '';
-            renderCheckin();
-            showToast('已加入打卡清單！');
-        }
-
-        function deleteCheckinItem(idx) {
-            checkinItems.splice(idx, 1);
-            delete expandedCheckinMap[idx];
-            saveCheckinData();
-            renderCheckin();
-            showToast('已刪除該項目');
-        }
-
-        renderCheckin();
         fetchLiveRate();
         setInterval(() => {
             fetchCloudExpenses();
-            fetchCloudCheckin();
-        }, 10000);
+        }, 12000);
 
         function copyText(id) {
             const txt = document.getElementById(id).innerText;
