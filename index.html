@@ -1036,38 +1036,49 @@
             showToast('同步至雲端中...');
 
             try {
+                // 改用 URLSearchParams 以表單格式發送，確保 Apps Script 能正確解析 POST 參數
+                const formData = new URLSearchParams();
+                formData.append('day', newExp.day);
+                formData.append('payer', newExp.payer);
+                formData.append('item', newExp.item);
+                formData.append('krw', newExp.krw);
+                formData.append('twd', newExp.twd);
+
                 await fetch(GAS_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(newExp)
+                    body: formData
                 });
                 showToast('雲端同步成功！');
-                // 延遲 1.2 秒等 Google 試算表寫入完成後再安全重新抓取最新資料
                 setTimeout(() => {
                     fetchCloudExpenses();
-                }, 1200);
+                }, 1500);
             } catch (e) {
                 showToast('已儲存至本地');
             }
         }
 
         async function deleteExpense(index) {
+            const target = expenses[index];
             expenses.splice(index, 1);
             renderExpenses();
             showToast('刪除同步中...');
             
             try {
+                const formData = new URLSearchParams();
+                formData.append('action', 'delete');
+                formData.append('item', target.item);
+                formData.append('krw', target.krw);
+
                 await fetch(GAS_URL, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ action: 'delete', index: index })
+                    body: formData
                 });
                 showToast('已從雲端刪除');
                 setTimeout(() => {
                     fetchCloudExpenses();
-                }, 1200);
+                }, 1500);
             } catch (e) {
                 showToast('刪除完成');
             }
