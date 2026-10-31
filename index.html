@@ -127,7 +127,7 @@
             font-size: 0.84rem;
             color: var(--ink-muted);
             letter-spacing: 0.8px;
-            margin: 0 0 0 1px;
+            margin: 6px 0 0 1px;
             padding: 0;
             line-height: 1.4;
             align-self: flex-start;
@@ -367,6 +367,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .ticket-body > div:first-child,
+        .ticket-body > div:last-child {
+            width: 75px;
+            flex-shrink: 0;
         }
 
         .airport-code {
@@ -762,7 +768,7 @@
                         <div class="flight-path">
                             <div style="font-size:0.75rem; font-weight:700; color:var(--primary-coral);">JX310</div>
                             <div class="flight-line">
-                                <div class="flight-time-badge">08:00 ➔ 12:00</div>
+                                <div class="flight-time-badge">08:00 ➔ 11:15</div>
                             </div>
                         </div>
                         <div style="text-align:right;">
