@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>釜山·冬日遊</title>
-    <!-- Apple Touch Icon (經典風格：支柱拉高、軌道上移的高架列車) -->
+    <!-- Apple Touch Icon -->
     <link id="appleTouchIcon" rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><circle cx='22' cy='26' r='7' fill='%23F2CBCB' opacity='0.75'/><path d='M 62 24 Q 67 20 72 24 Q 77 20 82 24' stroke='%238C8278' stroke-width='2' stroke-linecap='round' fill='none'/><path d='M0 64 Q 25 60 50 64 T 100 64 L 100 100 L 0 100 Z' fill='%236B9AC4' opacity='0.35'/><path d='M0 70 Q 25 66 50 70 T 100 70 L 100 100 L 0 100 Z' fill='%233B719F'/><path d='M0 78 Q 25 74 50 78 T 100 78 L 100 100 L 0 100 Z' fill='%2328537A'/><line x1='21' y1='58' x2='21' y2='80' stroke='%237D736A' stroke-width='2.6'/><line x1='51' y1='58' x2='51' y2='80' stroke='%237D736A' stroke-width='2.6'/><line x1='81' y1='58' x2='81' y2='80' stroke='%237D736A' stroke-width='2.6'/><path d='M 14 58 L 14 38 L 36 58 Z' fill='none' stroke='%238C8278' stroke-width='2.5'/><line x1='14' y1='46' x2='36' y2='58' stroke='%238C8278' stroke-width='1.5'/><path d='M 80 58 L 80 42 L 85 42 L 85 46 L 82.5 46 L 82.5 58' fill='%238C8278'/><circle cx='82.5' cy='37' r='3.2' fill='%23D96B53'/><line x1='12' y1='58' x2='89' y2='58' stroke='%235C544C' stroke-width='3'/><line x1='12' y1='60' x2='89' y2='60' stroke='%23B5A89E' stroke-width='1.2'/><rect x='31' y='47' width='18' height='10' rx='4' fill='%23D96B53'/><rect x='52' y='47' width='18' height='10' rx='4' fill='%23E6B84D'/><rect x='35' y='50' width='10' height='4' rx='1' fill='%23FFFFFF'/><rect x='56' y='50' width='10' height='4' rx='1' fill='%23FFFFFF'/><circle cx='36' cy='57.5' r='1.5' fill='%23222'/><circle cx='44' cy='57.5' r='1.5' fill='%23222'/><circle cx='57' cy='57.5' r='1.5' fill='%23222'/><circle cx='65' cy='57.5' r='1.5' fill='%23222'/></svg>">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
@@ -68,7 +68,7 @@
             box-sizing: border-box;
         }
 
-        /* 頁首標題區：嚴格靠左對齊 */
+        /* 頁首標題區 */
         .hero-banner {
             padding: 24px 4px 16px 4px;
             display: flex;
@@ -107,7 +107,6 @@
             display: inline-flex;
         }
 
-        /* 大標題逐字彈跳（Letter Bounce）效果 */
         .bounce-char {
             display: inline-block;
             font-family: 'Noto Serif TC', serif;
@@ -245,102 +244,109 @@
             color: var(--primary-coral);
         }
 
-        /* 日期選擇 Tabs 導覽列：簡約方框版本 + 底線滑入掃光動態 */
+        /* 日期選擇 Tabs：質感簡約風（淡化未選、選中帶底線） */
         .day-tabs-wrapper {
             position: relative;
-            margin-bottom: 18px;
+            margin-bottom: 22px;
+            border-bottom: 1px solid #EFEAE2;
+            padding-bottom: 10px;
         }
         .day-tabs-row {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 6px;
-            padding-bottom: 4px;
+            gap: 4px;
+            text-align: center;
         }
 
         .day-tab-btn {
-            background: #FAF8F4;
-            border: 1px solid #E5DFC9;
-            padding: 9px 2px;
-            border-radius: 10px;
-            color: var(--ink-color);
+            background: none;
+            border: none;
+            padding: 6px 2px;
             cursor: pointer;
-            transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
+            opacity: 0.45;
+            transition: opacity 0.25s ease, transform 0.2s ease;
         }
 
-        .day-tab-title {
-            position: relative;
-            display: inline-block;
-            font-size: 0.8rem;
+        .day-tab-btn:hover {
+            opacity: 0.8;
+        }
+
+        .day-tab-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            letter-spacing: 0.5px;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .day-tab-date {
+            font-size: 1.15rem;
+            font-family: 'Noto Serif TC', serif;
             font-weight: 600;
+            color: var(--ink-color);
             line-height: 1.2;
-            padding-bottom: 3px;
-            color: inherit;
-            letter-spacing: 0.4px;
-        }
-
-        /* 連結底線滑入（Underline Slide Link）動態效果 */
-        .day-tab-title::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 1.5px;
-            background-color: var(--primary-coral);
-            transform: scaleX(0);
-            transform-origin: right;
-            transition: transform 0.45s cubic-bezier(.7, 0, .2, 1), background-color 0.25s ease;
-        }
-
-        .day-tab-btn:hover .day-tab-title::after {
-            transform: scaleX(1);
-            transform-origin: left;
         }
 
         .day-tab-btn.active {
-            background: var(--accent-warm);
-            border-color: var(--accent-warm);
-            color: #FFF;
+            opacity: 1;
         }
 
-        .day-tab-btn.active .day-tab-title::after {
-            background-color: #FFF;
-            transform: scaleX(1);
-            transform-origin: left;
+        .day-tab-btn.active .day-tab-label {
+            color: var(--accent-warm);
+            font-weight: 700;
         }
 
-        /* 每日行程時間軸 */
+        .day-tab-btn.active .day-tab-date {
+            color: var(--primary-coral);
+            font-weight: 700;
+        }
+
+        .day-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 2.5px;
+            background-color: var(--primary-coral);
+            border-radius: 2px;
+        }
+
+        /* 每日行程時間軸 (簡約彈性風格) */
         .minimal-timeline {
             position: relative;
-            padding-left: 24px;
+            padding-left: 20px;
             margin-left: 4px;
         }
 
         .minimal-timeline::before {
             content: '';
             position: absolute;
-            left: 8px;
-            top: 10px;
-            bottom: 10px;
-            width: 1.5px;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
             background: #E5DFC9;
         }
 
         .timeline-row {
             position: relative;
-            margin-bottom: 22px;
+            margin-bottom: 24px;
         }
 
         .timeline-node-icon {
             position: absolute;
-            left: -24px;
+            left: -22px;
             top: 2px;
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             background: var(--paper-card);
             display: flex;
             align-items: center;
@@ -355,30 +361,32 @@
         }
 
         .row-time {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             font-weight: 600;
             color: var(--accent-warm);
-            min-width: 40px;
+            min-width: 42px;
             flex-shrink: 0;
+            font-family: 'Noto Serif TC', serif;
         }
 
         .row-time-empty {
-            min-width: 40px;
+            min-width: 42px;
             flex-shrink: 0;
         }
 
         .row-title {
-            font-size: 0.92rem;
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--ink-color);
+            font-family: 'Noto Serif TC', serif;
         }
 
         .row-subdesc {
             font-size: 0.78rem;
             color: var(--ink-muted);
-            margin-top: 3px;
+            margin-top: 4px;
             line-height: 1.5;
-            padding-left: 52px;
+            padding-left: 54px;
         }
 
         .metro-badge-oval {
@@ -616,7 +624,7 @@
             cursor: pointer;
         }
 
-        /* 美食打卡清單（可折疊備註卡片 + 新增欄位） */
+        /* 美食打卡清單 */
         .checkin-card {
             background: #FAF8F4;
             border: 1px solid #EFEAE2;
@@ -809,7 +817,7 @@
             opacity: 0.85;
         }
 
-        /* 底部導覽列：膠囊指示器（Tab Bar Indicator）動態效果 */
+        /* 底部導覽列 */
         .bottom-nav {
             position: fixed;
             bottom: 12px;
@@ -899,7 +907,7 @@
 <body>
 
     <div class="container">
-        <!-- 標題區：四行靠左切齊，日期與膠囊標籤順序 -->
+        <!-- 標題區 -->
         <header class="hero-banner">
             <div class="hero-subhead">부산의 겨울 · 2027</div>
             <div class="title-group">
@@ -963,22 +971,28 @@
                 <div class="day-tabs-wrapper">
                     <div class="day-tabs-row">
                         <button class="day-tab-btn active" onclick="switchDay(1)">
-                            <span class="day-tab-title">Day1</span>
+                            <span class="day-tab-label">Wed</span>
+                            <span class="day-tab-date">13</span>
                         </button>
                         <button class="day-tab-btn" onclick="switchDay(2)">
-                            <span class="day-tab-title">Day2</span>
+                            <span class="day-tab-label">Thu</span>
+                            <span class="day-tab-date">14</span>
                         </button>
                         <button class="day-tab-btn" onclick="switchDay(3)">
-                            <span class="day-tab-title">Day3</span>
+                            <span class="day-tab-label">Fri</span>
+                            <span class="day-tab-date">15</span>
                         </button>
                         <button class="day-tab-btn" onclick="switchDay(4)">
-                            <span class="day-tab-title">Day4</span>
+                            <span class="day-tab-label">Sat</span>
+                            <span class="day-tab-date">16</span>
                         </button>
                         <button class="day-tab-btn" onclick="switchDay(5)">
-                            <span class="day-tab-title">Day5</span>
+                            <span class="day-tab-label">Sun</span>
+                            <span class="day-tab-date">17</span>
                         </button>
                         <button class="day-tab-btn" onclick="switchDay(6)">
-                            <span class="day-tab-title">Day6</span>
+                            <span class="day-tab-label">Mon</span>
+                            <span class="day-tab-date">18</span>
                         </button>
                     </div>
                 </div>
@@ -1170,33 +1184,37 @@
     <div id="toast" class="toast-msg">已複製韓文地址！</div>
 
     <script>
-        // 初始化 GSAP 動畫：逐字彈跳（Letter Bounce）、打字換句（單次打出並停止）、底部導覽列指示器
+        // 執行 1 次逐字彈跳動畫函式
+        function playOnceBounce() {
+            const bounceChars = document.querySelectorAll('.bounce-char');
+            if (window.gsap && bounceChars.length > 0) {
+                bounceChars.forEach((charEl, idx) => {
+                    gsap.fromTo(charEl, 
+                        { scaleX: 1, scaleY: 1, y: 0 },
+                        {
+                            keyframes: [
+                                { scaleX: 1.15, scaleY: 0.82, y: 4, duration: 0.15, ease: "power1.in" },
+                                { scaleX: 0.88, scaleY: 1.22, y: -18, duration: 0.35, ease: "power2.out" },
+                                { scaleX: 1.05, scaleY: 0.94, y: 0, duration: 0.25, ease: "bounce.out" },
+                                { scaleX: 1, scaleY: 1, y: 0, duration: 0.2 }
+                            ],
+                            delay: idx * 0.12,
+                            ease: "none"
+                        }
+                    );
+                });
+            }
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             if (window.gsap && window.TextPlugin) {
                 gsap.registerPlugin(TextPlugin);
             }
 
-            // 1. 大標題「釜山·冬日遊」逐字彈跳（Letter Bounce）效果（約10秒一輪，每次只彈一個字）
-            const bounceChars = document.querySelectorAll('.bounce-char');
-            if (window.gsap && bounceChars.length > 0) {
-                bounceChars.forEach((charEl, idx) => {
-                    gsap.to(charEl, {
-                        keyframes: [
-                            { scaleX: 1, scaleY: 1, y: 0, duration: 0 },
-                            { scaleX: 1.15, scaleY: 0.82, y: 4, duration: 0.15, ease: "power1.in" }, // 壓扁
-                            { scaleX: 0.88, scaleY: 1.22, y: -18, duration: 0.35, ease: "power2.out" }, // 彈起
-                            { scaleX: 1.05, scaleY: 0.94, y: 0, duration: 0.25, ease: "bounce.out" }, // 落地回彈
-                            { scaleX: 1, scaleY: 1, y: 0, duration: 0.2 }
-                        ],
-                        repeat: -1,
-                        repeatDelay: (bounceChars.length - 1) * 1.25,
-                        delay: idx * 1.25,
-                        ease: "none"
-                    });
-                });
-            }
+            // 1. 頁面載入時執行 1 次「釜山·冬日遊」逐字彈跳
+            playOnceBounce();
 
-            // 2. 「6天5夜·Bu想San班，就去釜山」打字機效果（打完後游標閃爍停止）
+            // 2. 「6天5夜·Bu想San班，就去釜山」打字機效果（打完後游標停止閃爍）
             const typingEl = document.getElementById('typingText');
             const cursorEl = document.getElementById('typingCursor');
             const targetPhrase = "6天5夜·Bu想San班，就去釜山";
@@ -1206,7 +1224,6 @@
                     text: { value: targetPhrase, delimiter: "" },
                     ease: "none",
                     onComplete: () => {
-                        // 停止游標閃爍並隱藏
                         if (cursorEl) {
                             cursorEl.style.animation = 'none';
                             cursorEl.style.opacity = '0';
@@ -1297,6 +1314,10 @@
             document.getElementById('page-' + tabId).classList.add('active');
             el.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 每次切換分頁時重新播放 1 次大標題逐字彈跳
+            playOnceBounce();
+
             if (tabId === 'accounting') {
                 fetchCloudExpenses();
             }
@@ -1402,7 +1423,7 @@
                             ${item.time ? `<span class="row-time">${item.time}</span>` : `<span class="row-time-empty"></span>`}
                             <span class="row-title">${item.title}</span>
                         </div>
-                        ${item.metro ? `<div style="padding-left:52px; margin-top:3px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.75rem; color:var(--ink-muted);">${item.metro}</span></div>` : ''}
+                        ${item.metro ? `<div style="padding-left:54px; margin-top:3px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.75rem; color:var(--ink-muted);">${item.metro}</span></div>` : ''}
                         ${item.desc ? `<div class="row-subdesc">${item.desc}</div>` : ''}
                     </div>
                 `;
@@ -1413,7 +1434,7 @@
         }
         switchDay(1);
 
-        // Google 雲端雙向同步記帳機制
+        /* ... existing code ... (Google Cloud Expense & Check-in Sync Logic remains intact) */
         let RATE = 0.0243;
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBHHj0ZD4xK0ZdIWZ2LMeiG_FKV8z3LNT-jWgTseRVoleSri2itZBBRJBs-Ag7eDE74g/exec";
         const LOCAL_STORAGE_KEY = 'busan_v2_expenses_clean';
@@ -1640,7 +1661,6 @@
             totalEl.innerText = `總計：₩ ${totalKrw.toLocaleString()}`;
         }
 
-        // 美食打卡清單（跨裝置雲端同步機制）
         const DEFAULT_CHECKIN_DATA = [
             { name: '東大門獵奇辣炒年糕', checked: false, note: '必點：玫瑰奶油辣炒年糕 + 寬粉 + 起司' },
             { name: 'Puraduk 炸雞', checked: false, note: '必點：烤玉米起司口味、青陽辣椒美乃滋' },
