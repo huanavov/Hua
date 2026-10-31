@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>釜山·冬日遊</title>
     <!-- Apple Touch Icon (款式 A：加入鮮明藍色大海、廣安大橋、釜山塔與海鷗的釜山版) -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><path d='M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z' fill='%236B9AC4' opacity='0.4'/><path d='M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z' fill='%233B719F'/><path d='M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z' fill='%2328537A'/><path d='M 10 66 L 10 46 L 36 66 Z' fill='none' stroke='%238C8278' stroke-width='2.5'/><line x1='10' y1='54' x2='36' y2='66' stroke='%238C8278' stroke-width='1.5'/><path d='M 80 66 L 80 50 L 86 50 L 86 54 L 83 54 L 83 66' fill='%238C8278'/><circle cx='83' cy='46' r='3' fill='%23D96B53'/><line x1='0' y1='66' x2='100' y2='66' stroke='%237D736A' stroke-width='2.5'/><rect x='28' y='58' width='18' height='10' rx='4' fill='%23D96B53'/><rect x='50' y='58' width='18' height='10' rx='4' fill='%23E6B84D'/><rect x='32' y='61' width='10' height='4' rx='1' fill='%23FFFFFF'/><rect x='54' y='61' width='10' height='4' rx='1' fill='%23FFFFFF'/><circle cx='33' cy='68' r='1.5' fill='%23333'/><circle cx='41' cy='68' r='1.5' fill='%23333'/><circle cx='55' cy='68' r='1.5' fill='%23333'/><circle cx='63' cy='68' r='1.5' fill='%23333'/><path d='M 62 26 Q 66 22 70 26 Q 74 22 78 26' stroke='%238C8278' stroke-width='1.8' fill='none'/><circle cx='20' cy='28' r='6' fill='%23F2CBCB' opacity='0.75'/></svg>">
+    <link id="appleTouchIcon" rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23F6F2EA'/><path d='M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z' fill='%236B9AC4' opacity='0.4'/><path d='M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z' fill='%233B719F'/><path d='M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z' fill='%2328537A'/><path d='M 10 66 L 10 46 L 36 66 Z' fill='none' stroke='%238C8278' stroke-width='2.5'/><line x1='10' y1='54' x2='36' y2='66' stroke='%238C8278' stroke-width='1.5'/><path d='M 80 66 L 80 50 L 86 50 L 86 54 L 83 54 L 83 66' fill='%238C8278'/><circle cx='83' cy='46' r='3' fill='%23D96B53'/><line x1='0' y1='66' x2='100' y2='66' stroke='%237D736A' stroke-width='2.5'/><rect x='28' y='58' width='18' height='10' rx='4' fill='%23D96B53'/><rect x='50' y='58' width='18' height='10' rx='4' fill='%23E6B84D'/><rect x='32' y='61' width='10' height='4' rx='1' fill='%23FFFFFF'/><rect x='54' y='61' width='10' height='4' rx='1' fill='%23FFFFFF'/><circle cx='33' cy='68' r='1.5' fill='%23333'/><circle cx='41' cy='68' r='1.5' fill='%23333'/><circle cx='55' cy='68' r='1.5' fill='%23333'/><circle cx='63' cy='68' r='1.5' fill='%23333'/><path d='M 62 26 Q 66 22 70 26 Q 74 22 78 26' stroke='%238C8278' stroke-width='1.8' fill='none'/><circle cx='20' cy='28' r='6' fill='%23F2CBCB' opacity='0.75'/></svg>">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #F8F5EF;
@@ -65,17 +65,23 @@
             box-sizing: border-box;
         }
 
-        /* 頁首標題區 */
+        /* 頁首標題區 - 四行嚴格統一靠左基準線對齊 */
         .hero-banner {
             padding: 24px 4px 16px 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .hero-subhead {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--accent-warm);
-            letter-spacing: 1.5px;
+            letter-spacing: 1.8px;
             font-weight: 500;
-            margin-bottom: 2px;
+            margin: 0 0 4px 0;
+            padding: 0;
+            line-height: 1.4;
         }
 
         .title-group {
@@ -83,18 +89,47 @@
             align-items: baseline;
             gap: 10px;
             flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
         }
 
         .hero-title {
-            font-size: 1.7rem;
+            font-size: 1.75rem;
             font-weight: 700;
             color: var(--ink-color);
+            letter-spacing: 1px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.25;
+        }
+
+        .hero-title-sub {
+            font-size: 0.9rem;
+            color: var(--ink-muted);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .hero-badge-tag {
+            display: inline-block;
+            background: #EFEAE2;
+            color: #6E655F;
+            font-size: 0.76rem;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 2.2px;
+            margin: 10px 0 8px 0;
         }
 
         .hero-date {
-            font-size: 0.82rem;
+            font-size: 0.84rem;
             color: var(--ink-muted);
-            margin-top: 6px;
+            letter-spacing: 0.8px;
+            margin: 0;
+            padding: 0;
+            line-height: 1.4;
         }
 
         /* 頁籤內容控制 */
@@ -476,7 +511,6 @@
             margin-bottom: 2px;
         }
 
-        .payer-tag-我 { background: #E8F0FE; color: #1A73E8; }
         .payer-tag-媽媽 { background: #FCE8E6; color: #C5221F; }
         .payer-tag-姐姐 { background: #FFF5D6; color: #B7791F; }
         .payer-tag-妹妹 { background: #E6F4EA; color: #137333; }
@@ -622,12 +656,14 @@
 <body>
 
     <div class="container">
-        <!-- Header -->
+        <!-- Header：四行嚴格靠左對齊 -->
         <header class="hero-banner">
-            <div class="hero-subhead">BUSAN</div>
+            <div class="hero-subhead">부산의 겨울 · 2027</div>
             <div class="title-group">
                 <h1 class="hero-title">釜山·冬日遊</h1>
+                <span class="hero-title-sub">부산 · BUSAN</span>
             </div>
+            <div class="hero-badge-tag">6天5夜·Bu想San班，就去釜山</div>
             <div class="hero-date">2027.01.13 (三) - 01.18 (一)</div>
         </header>
 
@@ -804,7 +840,6 @@
                         <option value="D6">D6 · 01/18</option>
                     </select>
                     <select id="accPayer" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; background:#FFF; font-size:0.82rem;">
-                        <option value="我">我</option>
                         <option value="媽媽">媽媽</option>
                         <option value="姐姐">姐姐</option>
                         <option value="妹妹">妹妹</option>
@@ -862,12 +897,37 @@
     <div id="toast" class="toast-msg">已複製韓文地址！</div>
 
     <script>
+        // 將 SVG Apple Touch Icon 自動轉為 180x180 PNG Data URL，確保 iOS Safari 100% 顯示
+        (function setupAppleTouchIcon() {
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 100 100"><rect width="100" height="100" rx="22" fill="#F6F2EA"/><path d="M0 60 Q 25 56 50 60 T 100 60 L 100 100 L 0 100 Z" fill="#6B9AC4" opacity="0.4"/><path d="M0 66 Q 25 62 50 66 T 100 66 L 100 100 L 0 100 Z" fill="#3B719F"/><path d="M0 75 Q 25 71 50 75 T 100 75 L 100 100 L 0 100 Z" fill="#28537A"/><path d="M 10 66 L 10 46 L 36 66 Z" fill="none" stroke="#8C8278" stroke-width="2.5"/><line x1="10" y1="54" x2="36" y2="66" stroke="#8C8278" stroke-width="1.5"/><path d="M 80 66 L 80 50 L 86 50 L 86 54 L 83 54 L 83 66" fill="#8C8278"/><circle cx="83" cy="46" r="3" fill="#D96B53"/><line x1="0" y1="66" x2="100" y2="66" stroke="#7D736A" stroke-width="2.5"/><rect x="28" y="58" width="18" height="10" rx="4" fill="#D96B53"/><rect x="50" y="58" width="18" height="10" rx="4" fill="#E6B84D"/><rect x="32" y="61" width="10" height="4" rx="1" fill="#FFFFFF"/><rect x="54" y="61" width="10" height="4" rx="1" fill="#FFFFFF"/><circle cx="33" cy="68" r="1.5" fill="#333"/><circle cx="41" cy="68" r="1.5" fill="#333"/><circle cx="55" cy="68" r="1.5" fill="#333"/><circle cx="63" cy="68" r="1.5" fill="#333"/><path d="M 62 26 Q 66 22 70 26 Q 74 22 78 26" stroke="#8C8278" stroke-width="1.8" fill="none"/><circle cx="20" cy="28" r="6" fill="#F2CBCB" opacity="0.75"/></svg>`;
+            const img = new Image();
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const url = URL.createObjectURL(svgBlob);
+            img.onload = function () {
+                const canvas = document.createElement('canvas');
+                canvas.width = 180;
+                canvas.height = 180;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, 180, 180);
+                URL.revokeObjectURL(url);
+                try {
+                    const pngDataUrl = canvas.toDataURL('image/png');
+                    const iconLink = document.getElementById('appleTouchIcon');
+                    if (iconLink) iconLink.href = pngDataUrl;
+                } catch (e) {}
+            };
+            img.src = url;
+        })();
+
         function switchTab(tabId, el) {
             document.querySelectorAll('.tab-page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.getElementById('page-' + tabId).classList.add('active');
             el.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (tabId === 'accounting') {
+                fetchCloudExpenses();
+            }
         }
 
         const SVG_ICONS = {
@@ -978,10 +1038,24 @@
         }
         switchDay(1);
 
-        // 即時匯率 API 與 雲端記帳
+        // 即時匯率 API 與 多人雙向雲端記帳同步機制
         let RATE = 0.0243;
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwzsPq52fMhvT9CPiDXuYkuKNgXd131QU6kLDL9MV61WUD3iUSFp2wJFCDKgXdE6vl-/exec";
-        let expenses = [];
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzBHHj0ZD4xK0ZdIWZ2LMeiG_FKV8z3LNT-jWgTseRVoleSri2itZBBRJBs-Ag7eDE74g/exec";
+        const LOCAL_STORAGE_KEY = 'busan_v2_expenses_backup';
+        let expenses = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
+        let isWritingLock = false;
+
+        function normalizeItem(raw) {
+            if (!raw || typeof raw !== 'object') return null;
+            const day = String(raw.day || raw.date || raw['日期'] || 'D1').trim();
+            let payer = String(raw.payer || raw.who || raw['分帳人'] || raw['付款人'] || '媽媽').trim();
+            if (payer === '我') payer = '媽媽';
+            const item = String(raw.item || raw.desc || raw['項目'] || '').trim();
+            const krw = parseFloat(raw.krw !== undefined ? raw.krw : (raw.amount !== undefined ? raw.amount : raw['金額'])) || 0;
+            const twd = parseFloat(raw.twd !== undefined ? raw.twd : raw['台幣']) || Math.round(krw * RATE);
+            if (!item || krw <= 0) return null;
+            return { day, payer, item, krw, twd };
+        }
 
         async function fetchLiveRate() {
             try {
@@ -994,20 +1068,33 @@
             } catch (err) {
                 console.log('使用預設匯率');
             }
+            renderExpenses();
             fetchCloudExpenses();
         }
 
         async function fetchCloudExpenses() {
+            if (isWritingLock) return;
             try {
-                const res = await fetch(GOOGLE_SCRIPT_URL);
-                const data = await res.json();
-                if (Array.isArray(data)) {
-                    expenses = data;
+                const res = await fetch(`${GOOGLE_SCRIPT_URL}?t=${Date.now()}`, {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
+                const text = await res.text();
+                const parsed = JSON.parse(text);
+                const rawList = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.data) ? parsed.data : null);
+
+                if (rawList) {
+                    const normalized = rawList.map(normalizeItem).filter(Boolean);
+                    if (normalized.length > 0 || expenses.length === 0) {
+                        expenses = normalized;
+                        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
+                        renderExpenses();
+                    }
                 }
             } catch (e) {
-                console.log('載入遠端失敗，使用本地紀錄');
+                console.log('載入遠端失敗，保留本地紀錄');
+                renderExpenses();
             }
-            renderExpenses();
         }
 
         function quickCalc(type) {
@@ -1028,15 +1115,16 @@
             const item = document.getElementById('accItem').value.trim();
             const krw = parseFloat(document.getElementById('accKrwVal').value);
 
-            if (!item || isNaN(krw)) {
+            if (!item || isNaN(krw) || krw <= 0) {
                 showToast('請完整填寫項目與金額！');
                 return;
             }
 
             const newExp = { day, payer, item, krw, twd: Math.round(krw * RATE) };
             
-            // 立即顯示於畫面上（樂觀更新）
+            isWritingLock = true;
             expenses.push(newExp);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
             renderExpenses();
 
             document.getElementById('accItem').value = '';
@@ -1045,42 +1133,67 @@
 
             try {
                 const formData = new URLSearchParams();
+                formData.append('action', 'add');
                 formData.append('day', newExp.day);
+                formData.append('date', newExp.day);
                 formData.append('payer', newExp.payer);
+                formData.append('who', newExp.payer);
                 formData.append('item', newExp.item);
+                formData.append('desc', newExp.item);
                 formData.append('krw', newExp.krw);
+                formData.append('amount', newExp.krw);
                 formData.append('twd', newExp.twd);
 
-                // 只發送寫入請求，背景執行，絕對不呼叫 loadExpenses() 覆蓋畫面
                 await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: formData
                 });
                 showToast('雲端同步成功！');
             } catch (e) {
                 showToast('已儲存至本地');
+            } finally {
+                setTimeout(() => {
+                    isWritingLock = false;
+                    fetchCloudExpenses();
+                }, 3500);
             }
         }
 
         function deleteExpense(index) {
             const target = expenses[index];
+            if (!target) return;
+
+            isWritingLock = true;
             expenses.splice(index, 1);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
             renderExpenses();
             showToast('已移除紀錄');
             
             try {
                 const formData = new URLSearchParams();
                 formData.append('action', 'delete');
+                formData.append('index', index);
+                formData.append('day', target.day);
+                formData.append('payer', target.payer);
                 formData.append('item', target.item);
+                formData.append('desc', target.item);
                 formData.append('krw', target.krw);
+                formData.append('amount', target.krw);
 
                 fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                     body: formData
                 });
-            } catch (e) {}
+            } catch (e) {} finally {
+                setTimeout(() => {
+                    isWritingLock = false;
+                    fetchCloudExpenses();
+                }, 3500);
+            }
         }
 
         function renderExpenses() {
@@ -1096,7 +1209,9 @@
             }
 
             expenses.forEach((exp, idx) => {
-                totalKrw += (parseFloat(exp.krw) || 0);
+                const krwVal = parseFloat(exp.krw) || 0;
+                const twdVal = parseFloat(exp.twd) || Math.round(krwVal * RATE);
+                totalKrw += krwVal;
                 const div = document.createElement('div');
                 div.className = 'expense-card-item';
                 div.innerHTML = `
@@ -1106,8 +1221,8 @@
                     </div>
                     <div class="expense-right">
                         <div class="payer-tag payer-tag-${exp.payer}">${exp.payer}</div>
-                        <div class="expense-krw">₩ ${Number(exp.krw).toLocaleString()}</div>
-                        <div class="expense-twd">約 NT$ ${Number(exp.twd).toLocaleString()}</div>
+                        <div class="expense-krw">₩ ${Number(krwVal).toLocaleString()}</div>
+                        <div class="expense-twd">約 NT$ ${Number(twdVal).toLocaleString()}</div>
                     </div>
                     <button class="btn-del-x" onclick="deleteExpense(${idx})">✕</button>
                 `;
@@ -1118,6 +1233,9 @@
         }
 
         fetchLiveRate();
+        setInterval(() => {
+            fetchCloudExpenses();
+        }, 12000);
 
         // 美食打卡清單
         const checkinSpots = [
