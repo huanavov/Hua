@@ -1167,10 +1167,6 @@
                     美食打卡清單
                 </h2>
                 <div id="checkinList">載入中...</div>
-                <div class="checkin-add-row">
-                    <input type="text" id="newCheckinInput" class="checkin-add-input" placeholder="新增項目..." onkeydown="if(event.key==='Enter') addCheckinItem()">
-                    <button class="checkin-add-btn" onclick="addCheckinItem()">加入</button>
-                </div>
             </div>
         </main>
     </div>
@@ -1513,7 +1509,18 @@
 
                 if (rawList) {
                     const normalized = rawList.map(normalizeItem).filter(Boolean);
-                    expenses = normalized;
+                    if (normalized.length >= expenses.length || expenses.length === 0) {
+                        expenses = normalized;
+                    } else {
+                        // 防護：若雲端筆數少於本地，保留本地最新資料並略過覆蓋
+                        const localItemsMap = new Set(expenses.map(e => `${e.day}-${e.payer}-${e.item}-${e.krw}`));
+                        normalized.forEach(item => {
+                            const key = `${item.day}-${item.payer}-${item.item}-${item.krw}`;
+                            if (!localItemsMap.has(key)) {
+                                expenses.push(item);
+                            }
+                        });
+                    }
                     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
                     renderExpenses();
                 }
@@ -1607,7 +1614,7 @@
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 2500);
+                }, 15000);
             }
         }
 
@@ -1640,7 +1647,7 @@
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 2500);
+                }, 15000);
             }
         }
 
@@ -1770,27 +1777,6 @@
         function toggleExpandCheckin(idx) {
             expandedCheckinMap[idx] = !expandedCheckinMap[idx];
             renderCheckin();
-        }
-
-        function addCheckinItem() {
-            const input = document.getElementById('newCheckinInput');
-            if (!input) return;
-            const name = input.value.trim();
-            if (!name) {
-                showToast('請輸入要新增的探店名稱！');
-                return;
-            }
-            checkinItems.push({
-                name: name,
-                checked: false,
-                note: '備註：'
-            });
-            const newIdx = checkinItems.length - 1;
-            expandedCheckinMap[newIdx] = true;
-            saveCheckinData();
-            input.value = '';
-            renderCheckin();
-            showToast('已加入打卡清單！');
         }
 
         renderCheckin();
