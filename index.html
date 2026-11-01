@@ -1457,14 +1457,17 @@
         function normalizeItem(raw) {
             if (!raw) return null;
             if (Array.isArray(raw)) {
-                const day = String(raw[0] || 'D1').trim();
-                let payer = String(raw[1] || '媽媽').trim();
-                const item = String(raw[2] || '').trim();
-                const krw = parseFloat(String(raw[3] || '0').replace(/,/g, '')) || 0;
-                const twd = parseFloat(String(raw[4] || '0').replace(/,/g, '')) || Math.round(krw * RATE);
+                // 兼容試算表各欄位順序 (A:ID, B:Day, C:Payer, D:Item, E:KRW, F:TWD)
+                const possibleId = String(raw[0] || '').trim();
+                const day = String(raw[1] || raw[0] || 'D1').trim();
+                let payer = String(raw[2] || raw[1] || '媽媽').trim();
+                const item = String(raw[3] || raw[2] || '').trim();
+                const krw = parseFloat(String(raw[4] || raw[3] || '0').replace(/,/g, '')) || 0;
+                const twd = parseFloat(String(raw[5] || raw[4] || '0').replace(/,/g, '')) || Math.round(krw * RATE);
                 if (payer === '我') payer = '媽媽';
                 if (!item || item === '測試一' || item === '項目' || item === 'item' || krw <= 0) return null;
-                return { day, payer, item, krw, twd };
+                const id = possibleId && possibleId.startsWith('exp_') ? possibleId : ('exp_' + day + '_' + payer + '_' + item + '_' + krw);
+                return { id, day, payer, item, krw, twd };
             }
             if (typeof raw !== 'object') return null;
             const day = String(raw.day || raw.date || raw['日期'] || raw['天數'] || 'D1').trim();
@@ -1477,7 +1480,8 @@
             const twdRaw = raw.twd !== undefined ? raw.twd : raw['台幣'];
             const twd = parseFloat(String(twdRaw).replace(/,/g, '')) || Math.round(krw * RATE);
             if (!item || krw <= 0) return null;
-            return { day, payer, item, krw, twd };
+            const id = raw.id && String(raw.id).startsWith('exp_') ? String(raw.id) : ('exp_' + day + '_' + payer + '_' + item + '_' + krw);
+            return { id, day, payer, item, krw, twd };
         }
 
         async function fetchLiveRate() {
@@ -1509,20 +1513,12 @@
 
                 if (rawList) {
                     const normalized = rawList.map(normalizeItem).filter(Boolean);
-                    if (normalized.length >= expenses.length || expenses.length === 0) {
+                    // 只要雲端有資料，直接以雲端最新資料為準進行跨裝置同步
+                    if (normalized.length > 0) {
                         expenses = normalized;
-                    } else {
-                        // 防護：若雲端筆數少於本地，保留本地最新資料並略過覆蓋
-                        const localItemsMap = new Set(expenses.map(e => `${e.day}-${e.payer}-${e.item}-${e.krw}`));
-                        normalized.forEach(item => {
-                            const key = `${item.day}-${item.payer}-${item.item}-${item.krw}`;
-                            if (!localItemsMap.has(key)) {
-                                expenses.push(item);
-                            }
-                        });
+                        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
+                        renderExpenses();
                     }
-                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
-                    renderExpenses();
                 }
             } catch (e) {
                 renderExpenses();
