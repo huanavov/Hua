@@ -1550,7 +1550,9 @@
             });
             params.append('t', Date.now());
             const targetUrl = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
-            const jsonBody = JSON.stringify({ ...payloadObj, expenses });
+            
+            // 完美對應您 Google Apps Script 的 doPost(e) 與 JSON.parse(e.postData.contents)
+            const jsonBody = JSON.stringify(payloadObj);
 
             try {
                 await fetch(targetUrl, {
@@ -1583,7 +1585,9 @@
                 return;
             }
 
-            const newExp = { day, payer, item, krw, twd: Math.round(krw * RATE) };
+            const uniqueId = 'exp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+            const twd = Math.round(krw * RATE);
+            const newExp = { id: uniqueId, day, payer, item, krw, twd };
             
             isWritingLock = true;
             expenses.push(newExp);
@@ -1595,17 +1599,17 @@
             showToast('雲端同步中...');
 
             try {
+                // 完全對應您的 Google Apps Script 後端邏輯
                 await syncToCloud({
                     action: 'add',
-                    day: newExp.day,
-                    date: newExp.day,
-                    payer: newExp.payer,
-                    who: newExp.payer,
-                    item: newExp.item,
-                    desc: newExp.item,
-                    krw: newExp.krw,
-                    amount: newExp.krw,
-                    twd: newExp.twd
+                    record: {
+                        id: uniqueId,
+                        day: day,
+                        payer: payer,
+                        item: item,
+                        krw: krw,
+                        twd: twd
+                    }
                 });
                 showToast('雲端同步成功！');
             } catch (e) {
@@ -1614,7 +1618,7 @@
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 15000);
+                }, 10000);
             }
         }
 
@@ -1631,23 +1635,15 @@
             try {
                 await syncToCloud({
                     action: 'delete',
+                    id: target.id || '',
                     index: index,
-                    row: index + 2,
-                    day: target.day,
-                    date: target.day,
-                    payer: target.payer,
-                    who: target.payer,
-                    item: target.item,
-                    desc: target.item,
-                    krw: target.krw,
-                    amount: target.krw,
-                    twd: target.twd
+                    row: index + 2
                 });
             } catch (e) {} finally {
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 15000);
+                }, 10000);
             }
         }
 
