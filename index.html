@@ -244,7 +244,7 @@
             color: var(--primary-coral);
         }
 
-        /* 日期選擇 Tabs：質感簡約風（淡化未選、選中帶底線） */
+        /* 日期選擇 Tabs：質感簡約風（淡化未選、選中帶底線 + 連結底線滑入動態效果） */
         .day-tabs-wrapper {
             position: relative;
             margin-bottom: 22px;
@@ -273,7 +273,7 @@
         }
 
         .day-tab-btn:hover {
-            opacity: 0.8;
+            opacity: 0.85;
         }
 
         .day-tab-label {
@@ -307,16 +307,25 @@
             font-weight: 700;
         }
 
-        .day-tab-btn.active::after {
+        /* 連結底線滑入（Underline Slide Link）動態效果 */
+        .day-tab-btn::after {
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 18px;
+            left: 20%;
+            width: 60%;
             height: 2.5px;
             background-color: var(--primary-coral);
             border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.45s cubic-bezier(.7, 0, .2, 1);
+        }
+
+        .day-tab-btn:hover::after,
+        .day-tab-btn.active::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         /* 每日行程時間軸 (簡約彈性風格) */
@@ -773,48 +782,6 @@
         .checkin-note-input:focus {
             border-color: var(--accent-warm);
             background: #FFF;
-        }
-
-        .checkin-add-row {
-            display: flex;
-            gap: 8px;
-            margin-top: 14px;
-            padding-top: 12px;
-            border-top: 1px dashed #EFEAE2;
-        }
-
-        .checkin-add-input {
-            flex: 1;
-            padding: 10px 14px;
-            border: 1px solid #E5E0D5;
-            border-radius: 12px;
-            background: #FAF8F4;
-            color: var(--ink-color);
-            font-size: 0.85rem;
-            outline: none;
-            transition: border-color 0.2s ease, background-color 0.2s ease;
-        }
-
-        .checkin-add-input:focus {
-            border-color: var(--accent-warm);
-            background: #FFF;
-        }
-
-        .checkin-add-btn {
-            background: var(--accent-warm);
-            color: #FFF;
-            border: none;
-            padding: 0 18px;
-            border-radius: 12px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            flex-shrink: 0;
-            transition: opacity 0.2s ease;
-        }
-
-        .checkin-add-btn:active {
-            opacity: 0.85;
         }
 
         /* 底部導覽列 */
@@ -1457,8 +1424,7 @@
         function normalizeItem(raw) {
             if (!raw) return null;
             if (Array.isArray(raw)) {
-                // 兼容試算表各欄位順序 (A:ID, B:Day, C:Payer, D:Item, E:KRW, F:TWD)
-                const possibleId = String(raw[0] || '').trim();
+                const possibleId = String(raw[0] ?? '').trim();
                 const day = String(raw[1] || raw[0] || 'D1').trim();
                 let payer = String(raw[2] || raw[1] || '媽媽').trim();
                 const item = String(raw[3] || raw[2] || '').trim();
@@ -1466,7 +1432,7 @@
                 const twd = parseFloat(String(raw[5] || raw[4] || '0').replace(/,/g, '')) || Math.round(krw * RATE);
                 if (payer === '我') payer = '媽媽';
                 if (!item || item === '測試一' || item === '項目' || item === 'item' || krw <= 0) return null;
-                const id = possibleId && possibleId.startsWith('exp_') ? possibleId : ('exp_' + day + '_' + payer + '_' + item + '_' + krw);
+                const id = possibleId || ('exp_' + day + '_' + payer + '_' + item + '_' + krw);
                 return { id, day, payer, item, krw, twd };
             }
             if (typeof raw !== 'object') return null;
@@ -1480,7 +1446,8 @@
             const twdRaw = raw.twd !== undefined ? raw.twd : raw['台幣'];
             const twd = parseFloat(String(twdRaw).replace(/,/g, '')) || Math.round(krw * RATE);
             if (!item || krw <= 0) return null;
-            const id = raw.id && String(raw.id).startsWith('exp_') ? String(raw.id) : ('exp_' + day + '_' + payer + '_' + item + '_' + krw);
+            const rawId = raw.id !== undefined && raw.id !== null ? String(raw.id).trim() : '';
+            const id = rawId || ('exp_' + day + '_' + payer + '_' + item + '_' + krw);
             return { id, day, payer, item, krw, twd };
         }
 
@@ -1511,14 +1478,11 @@
                     ? parsed
                     : (Array.isArray(parsed.data) ? parsed.data : (Array.isArray(parsed.records) ? parsed.records : (Array.isArray(parsed.expenses) ? parsed.expenses : null)));
 
-                if (rawList) {
+                if (Array.isArray(rawList)) {
                     const normalized = rawList.map(normalizeItem).filter(Boolean);
-                    // 只要雲端有資料，直接以雲端最新資料為準進行跨裝置同步
-                    if (normalized.length > 0) {
-                        expenses = normalized;
-                        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
-                        renderExpenses();
-                    }
+                    expenses = normalized;
+                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
+                    renderExpenses();
                 }
             } catch (e) {
                 renderExpenses();
@@ -1546,8 +1510,6 @@
             });
             params.append('t', Date.now());
             const targetUrl = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
-            
-            // 完美對應您 Google Apps Script 的 doPost(e) 與 JSON.parse(e.postData.contents)
             const jsonBody = JSON.stringify(payloadObj);
 
             try {
@@ -1595,7 +1557,6 @@
             showToast('雲端同步中...');
 
             try {
-                // 完全對應您的 Google Apps Script 後端邏輯
                 await syncToCloud({
                     action: 'add',
                     record: {
@@ -1614,7 +1575,7 @@
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 10000);
+                }, 4000);
             }
         }
 
@@ -1626,20 +1587,23 @@
             expenses.splice(index, 1);
             localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
             renderExpenses();
-            showToast('已移除紀錄');
+            showToast('雲端同步刪除中...');
             
             try {
                 await syncToCloud({
                     action: 'delete',
-                    id: target.id || '',
+                    id: String(target.id || ''),
                     index: index,
                     row: index + 2
                 });
-            } catch (e) {} finally {
+                showToast('已從雲端移除紀錄');
+            } catch (e) {
+                showToast('已移除紀錄');
+            } finally {
                 setTimeout(() => {
                     isWritingLock = false;
                     fetchCloudExpenses();
-                }, 10000);
+                }, 4000);
             }
         }
 
