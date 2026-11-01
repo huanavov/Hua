@@ -1431,16 +1431,16 @@
                 const krw = parseFloat(String(raw[4] || raw[3] || '0').replace(/,/g, '')) || 0;
                 const twd = parseFloat(String(raw[5] || raw[4] || '0').replace(/,/g, '')) || Math.round(krw * RATE);
                 if (payer === '我') payer = '媽媽';
-                if (!item || item === '測試一' || item === '項目' || item === 'item' || krw <= 0) return null;
+                if (!item || item === '項目' || item === 'item' || krw <= 0) return null;
                 const id = possibleId || ('exp_' + day + '_' + payer + '_' + item + '_' + krw);
                 return { id, day, payer, item, krw, twd };
             }
             if (typeof raw !== 'object') return null;
             const day = String(raw.day || raw.date || raw['日期'] || raw['天數'] || 'D1').trim();
             let payer = String(raw.payer || raw.who || raw['分帳人'] || raw['付款人'] || '媽媽').trim();
-            if (payer === '我' || payer === '測試一') payer = '媽媽';
+            if (payer === '我') payer = '媽媽';
             const item = String(raw.item || raw.desc || raw.name || raw['項目'] || '').trim();
-            if (item === '測試一' || item === '項目' || item === 'item') return null;
+            if (item === '項目' || item === 'item') return null;
             const krwRaw = raw.krw !== undefined ? raw.krw : (raw.amount !== undefined ? raw.amount : raw['金額']);
             const krw = parseFloat(String(krwRaw).replace(/,/g, '')) || 0;
             const twdRaw = raw.twd !== undefined ? raw.twd : raw['台幣'];
