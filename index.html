@@ -1699,12 +1699,26 @@
             { name: 'Yoajung', checked: false, note: '必點：優格冰淇淋 + 蜂巢蜜配料' }
         ];
 
-        const CHECKIN_STORAGE_KEY = 'busan_v2_checkin_items_local';
-        let checkinItems = JSON.parse(localStorage.getItem(CHECKIN_STORAGE_KEY) || JSON.stringify(DEFAULT_CHECKIN_DATA));
+        const CHECKIN_STORAGE_KEY = 'busan_v2_checkin_items_clean_v3';
+        let checkinItems = JSON.parse(localStorage.getItem(CHECKIN_STORAGE_KEY) || 'null');
+        if (!checkinItems || !Array.isArray(checkinItems) || checkinItems.some(i => i.name === '12345')) {
+            checkinItems = JSON.parse(JSON.stringify(DEFAULT_CHECKIN_DATA));
+            localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkinItems));
+        }
         let expandedCheckinMap = {};
 
         function saveCheckinData() {
             localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(checkinItems));
+        }
+
+        function deleteCheckinItem(idx, e) {
+            e.stopPropagation();
+            if (confirm('確定要刪除這個打卡項目嗎？')) {
+                checkinItems.splice(idx, 1);
+                saveCheckinData();
+                renderCheckin();
+                showToast('已刪除項目');
+            }
         }
 
         function renderCheckin() {
@@ -1750,7 +1764,13 @@
                 noteLabel.className = 'checkin-note-label';
                 noteLabel.textContent = '簡介／備註';
 
+                const delBtn = document.createElement('button');
+                delBtn.className = 'checkin-del-btn';
+                delBtn.textContent = '刪除此項目';
+                delBtn.onclick = (e) => deleteCheckinItem(idx, e);
+
                 noteHeader.appendChild(noteLabel);
+                noteHeader.appendChild(delBtn);
 
                 const textarea = document.createElement('textarea');
                 textarea.className = 'checkin-note-input';
