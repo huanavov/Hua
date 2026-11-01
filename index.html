@@ -606,6 +606,7 @@
         /* 記帳頁面 */
         .expense-card-item {
             background: #FAF6F0;
+            border: 1px solid #EFEAE2;
             border-radius: 12px;
             padding: 12px 14px;
             margin-bottom: 10px;
@@ -613,13 +614,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 12px;
         }
 
         .expense-left {
             display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 7px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .expense-title-row {
+            display: flex;
             align-items: center;
             gap: 8px;
-            flex: 1;
+            width: 100%;
             min-width: 0;
         }
 
@@ -639,7 +650,7 @@
         .day-chip-D6 { background: #EFEBE9; color: #5D4037; }
 
         .expense-name {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: var(--ink-color);
             white-space: nowrap;
@@ -661,34 +672,33 @@
         .payer-tag-婷 { background: #E6F4EA; color: #137333; }
 
         .expense-krw {
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 700;
             color: var(--ink-color);
+            line-height: 1.25;
         }
 
         .expense-twd {
-            font-size: 0.7rem;
+            font-size: 0.72rem;
             color: var(--ink-muted);
+            margin-top: 1px;
         }
 
-        /* 長按確認刪除按鈕（Hold to Confirm） */
+        /* 長按確認刪除按鈕（Hold to Confirm）：移至左側項目下方，不擠壓右側金額 */
         .expense-right {
             text-align: right;
-            padding-right: 76px;
             flex-shrink: 0;
         }
 
         .btn-hold-del {
-            position: absolute;
-            top: 50%;
-            right: 12px;
-            transform: translateY(-50%) scale(1);
+            position: relative;
+            transform: scale(1);
             background: #FFFFFF;
-            border: 1px solid #DFD7C8;
+            border: 1px solid #E2D9C8;
             color: var(--ink-muted);
-            font-size: 0.72rem;
-            font-weight: 600;
-            padding: 5px 10px;
+            font-size: 0.66rem;
+            font-weight: 500;
+            padding: 2px 9px;
             border-radius: 999px;
             cursor: pointer;
             overflow: hidden;
@@ -698,7 +708,6 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            min-width: 56px;
             transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         }
 
@@ -721,7 +730,7 @@
         }
 
         .btn-hold-del.holding {
-            transform: translateY(-50%) scale(0.94);
+            transform: scale(0.94);
             border-color: var(--primary-coral);
         }
 
@@ -740,22 +749,31 @@
             transition: none;
         }
 
+        /* 記帳日期與付款人雙欄對齊列 */
+        .date-payer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            align-items: start;
+            margin-bottom: 14px;
+        }
+
         /* 自訂下拉選單展開（Dropdown Reveal） */
         .custom-dropdown {
             position: relative;
             width: 100%;
-            margin-bottom: 14px;
             z-index: 30;
         }
 
         .dropdown-trigger {
             width: 100%;
-            padding: 10px 14px;
+            height: 44px;
+            padding: 0 12px;
             border: 1px solid #E5E0D5;
             border-radius: 10px;
             background: #FFFFFF;
             color: var(--ink-color);
-            font-size: 0.85rem;
+            font-size: 0.84rem;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
@@ -841,24 +859,24 @@
 
         /* 記帳人圓形按鈕（Social Icon Fill 社群圖示填滿動態效果） */
         .payer-section-label {
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             color: var(--ink-muted);
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             display: block;
         }
 
         .payer-circles-row {
             display: flex;
-            gap: 14px;
+            gap: 10px;
             align-items: center;
-            margin-bottom: 14px;
+            height: 44px;
         }
 
         .payer-circle-btn {
             position: relative;
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             border: 1.5px solid #D8D0C5;
             background: #FAF8F4;
@@ -1426,68 +1444,72 @@
                         記帳與匯率換算
                     </h2>
 
-                    <div style="background:#FAF6F0; padding:12px 14px; border-radius:12px; margin-bottom:16px;">
-                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <div style="padding: 2px 0 16px 0; border-bottom: 1px dashed #E5DFC9; margin-bottom: 14px;">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
                             <span style="font-size:0.75rem; color:var(--ink-muted); font-weight:700;">即時試算</span>
                             <span id="rateBadge" style="background:#FFFFFF; border:1px solid #E5E0D5; padding:2px 10px; border-radius:20px; font-size:0.7rem; color:var(--ink-muted);">即時匯率 0.0243</span>
                         </div>
-                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
-                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; outline:none; background:#FFF; font-size:0.85rem;">
-                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="calcTwd" placeholder="台幣 TWD" oninput="quickCalc('twd')" style="width:100%; padding:8px 10px; border:1px solid #E5E0D5; border-radius:8px; outline:none; background:#FFF; font-size:0.85rem;">
+                        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="calcKrw" placeholder="韓元 KRW" oninput="quickCalc('krw')" style="width:100%; height:42px; padding:0 12px; border:1px solid #E5E0D5; border-radius:10px; outline:none; background:#FFF; font-size:0.84rem;">
+                            <input type="number" inputmode="numeric" pattern="[0-9]*" id="calcTwd" placeholder="台幣 TWD" oninput="quickCalc('twd')" style="width:100%; height:42px; padding:0 12px; border:1px solid #E5E0D5; border-radius:10px; outline:none; background:#FFF; font-size:0.84rem;">
                         </div>
                     </div>
 
-                    <!-- 記帳日期：Dropdown Reveal 下拉選單展開動態 -->
+                    <!-- 記帳日期 與 誰付的錢：雙欄對齊排列 -->
                     <input type="hidden" id="accDay" value="D1">
-                    <div class="custom-dropdown" id="dayDropdown">
-                        <button type="button" class="dropdown-trigger" onclick="toggleDayDropdown(event)">
-                            <span id="dayDropdownLabel">Day 1 ❘ 1/13</span>
-                            <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="6 9 12 15 18 9"></polyline>
-                            </svg>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li class="dropdown-option selected" style="--i:0" onclick="selectDayOption('D1', 'Day 1 ❘ 1/13', this)"><span>Day 1 ❘ 1/13</span><span>Wed</span></li>
-                            <li class="dropdown-option" style="--i:1" onclick="selectDayOption('D2', 'Day 2 ❘ 1/14', this)"><span>Day 2 ❘ 1/14</span><span>Thu</span></li>
-                            <li class="dropdown-option" style="--i:2" onclick="selectDayOption('D3', 'Day 3 ❘ 1/15', this)"><span>Day 3 ❘ 1/15</span><span>Fri</span></li>
-                            <li class="dropdown-option" style="--i:3" onclick="selectDayOption('D4', 'Day 4 ❘ 1/16', this)"><span>Day 4 ❘ 1/16</span><span>Sat</span></li>
-                            <li class="dropdown-option" style="--i:4" onclick="selectDayOption('D5', 'Day 5 ❘ 1/17', this)"><span>Day 5 ❘ 1/17</span><span>Sun</span></li>
-                            <li class="dropdown-option" style="--i:5" onclick="selectDayOption('D6', 'Day 6 ❘ 1/18', this)"><span>Day 6 ❘ 1/18</span><span>Mon</span></li>
-                        </ul>
-                    </div>
-
-                    <!-- 記帳人：圓形按鈕 + 社群圖示填滿動態 (珍 / 倫 / 婷) -->
                     <input type="hidden" id="accPayer" value="珍">
-                    <div>
-                        <span class="payer-section-label">誰付的錢 (付款人)</span>
-                        <div class="payer-circles-row" id="payerCircles">
-                            <button type="button" class="payer-circle-btn active" onclick="selectPayer('珍', this)">
-                                <span class="fill-bg"></span>
-                                <span class="icon-stack">
-                                    <span class="payer-char char-default">珍</span>
-                                    <span class="payer-char char-inverse">珍</span>
-                                </span>
-                            </button>
-                            <button type="button" class="payer-circle-btn" onclick="selectPayer('倫', this)">
-                                <span class="fill-bg"></span>
-                                <span class="icon-stack">
-                                    <span class="payer-char char-default">倫</span>
-                                    <span class="payer-char char-inverse">倫</span>
-                                </span>
-                            </button>
-                            <button type="button" class="payer-circle-btn" onclick="selectPayer('婷', this)">
-                                <span class="fill-bg"></span>
-                                <span class="icon-stack">
-                                    <span class="payer-char char-default">婷</span>
-                                    <span class="payer-char char-inverse">婷</span>
-                                </span>
-                            </button>
+                    <div class="date-payer-grid">
+                        <div>
+                            <span class="payer-section-label">消費日期</span>
+                            <div class="custom-dropdown" id="dayDropdown">
+                                <button type="button" class="dropdown-trigger" onclick="toggleDayDropdown(event)">
+                                    <span id="dayDropdownLabel">Day 1 ❘ 1/13</span>
+                                    <svg class="dropdown-arrow" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                    </svg>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li class="dropdown-option selected" style="--i:0" onclick="selectDayOption('D1', 'Day 1 ❘ 1/13', this)"><span>Day 1 ❘ 1/13</span><span>Wed</span></li>
+                                    <li class="dropdown-option" style="--i:1" onclick="selectDayOption('D2', 'Day 2 ❘ 1/14', this)"><span>Day 2 ❘ 1/14</span><span>Thu</span></li>
+                                    <li class="dropdown-option" style="--i:2" onclick="selectDayOption('D3', 'Day 3 ❘ 1/15', this)"><span>Day 3 ❘ 1/15</span><span>Fri</span></li>
+                                    <li class="dropdown-option" style="--i:3" onclick="selectDayOption('D4', 'Day 4 ❘ 1/16', this)"><span>Day 4 ❘ 1/16</span><span>Sat</span></li>
+                                    <li class="dropdown-option" style="--i:4" onclick="selectDayOption('D5', 'Day 5 ❘ 1/17', this)"><span>Day 5 ❘ 1/17</span><span>Sun</span></li>
+                                    <li class="dropdown-option" style="--i:5" onclick="selectDayOption('D6', 'Day 6 ❘ 1/18', this)"><span>Day 6 ❘ 1/18</span><span>Mon</span></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div>
+                            <span class="payer-section-label">誰付的錢 (付款人)</span>
+                            <div class="payer-circles-row" id="payerCircles">
+                                <button type="button" class="payer-circle-btn active" onclick="selectPayer('珍', this)">
+                                    <span class="fill-bg"></span>
+                                    <span class="icon-stack">
+                                        <span class="payer-char char-default">珍</span>
+                                        <span class="payer-char char-inverse">珍</span>
+                                    </span>
+                                </button>
+                                <button type="button" class="payer-circle-btn" onclick="selectPayer('倫', this)">
+                                    <span class="fill-bg"></span>
+                                    <span class="icon-stack">
+                                        <span class="payer-char char-default">倫</span>
+                                        <span class="payer-char char-inverse">倫</span>
+                                    </span>
+                                </button>
+                                <button type="button" class="payer-circle-btn" onclick="selectPayer('婷', this)">
+                                    <span class="fill-bg"></span>
+                                    <span class="icon-stack">
+                                        <span class="payer-char char-default">婷</span>
+                                        <span class="payer-char char-inverse">婷</span>
+                                    </span>
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px; margin-bottom:14px;">
-                        <input type="text" id="accItem" placeholder="項目 (例: 豬肉湯飯)" style="width:100%; padding:10px 12px; border:1px solid #E5E0D5; border-radius:10px; font-size:0.84rem; background:#FFF; outline:none;">
-                        <input type="number" inputmode="numeric" pattern="[0-9]*" id="accKrwVal" placeholder="金額 (韓元)" style="width:100%; padding:10px 12px; border:1px solid #E5E0D5; border-radius:10px; font-size:0.84rem; background:#FFF; outline:none;">
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:14px;">
+                        <input type="text" id="accItem" placeholder="項目 (例: 豬肉湯飯)" style="width:100%; height:42px; padding:0 12px; border:1px solid #E5E0D5; border-radius:10px; font-size:0.84rem; background:#FFF; outline:none;">
+                        <input type="number" inputmode="numeric" pattern="[0-9]*" id="accKrwVal" placeholder="金額 (韓元)" style="width:100%; height:42px; padding:0 12px; border:1px solid #E5E0D5; border-radius:10px; font-size:0.84rem; background:#FFF; outline:none;">
                     </div>
 
                     <!-- 新增開銷紀錄：按鈕載入成功（Loading Button）動態 -->
@@ -2201,18 +2223,20 @@
                 div.className = 'expense-card-item';
                 div.innerHTML = `
                     <div class="expense-left">
-                        <span class="day-chip day-chip-${exp.day}">${exp.day}</span>
-                        <span class="expense-name">${exp.item}</span>
+                        <div class="expense-title-row">
+                            <span class="day-chip day-chip-${exp.day}">${exp.day}</span>
+                            <span class="expense-name">${exp.item}</span>
+                        </div>
+                        <button type="button" class="btn-hold-del" title="長按 1.2 秒刪除">
+                            <span class="hold-fill"></span>
+                            <span class="hold-label">長按刪除 ✕</span>
+                        </button>
                     </div>
                     <div class="expense-right">
                         <div class="payer-tag payer-tag-${exp.payer}">${exp.payer}</div>
                         <div class="expense-krw">₩ ${Number(krwVal).toLocaleString()}</div>
                         <div class="expense-twd">約 NT$ ${Number(twdVal).toLocaleString()}</div>
                     </div>
-                    <button type="button" class="btn-hold-del" title="長按 1.2 秒刪除">
-                        <span class="hold-fill"></span>
-                        <span class="hold-label">刪除 ✕</span>
-                    </button>
                 `;
 
                 const holdBtn = div.querySelector('.btn-hold-del');
