@@ -11,6 +11,7 @@
     <!-- GSAP & TextPlugin -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js"></script>
     <style>
         :root {
             --bg-color: #FCFAF2;
@@ -993,6 +994,111 @@
             pointer-events: none;
         }
 
+        /* 記帳天數分類：選單滑塊跟隨（Sliding Nav Highlight） */
+        .expense-filter-nav {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #FAF6F0;
+            border: 1px solid #EFEAE2;
+            border-radius: 999px;
+            padding: 4px;
+            margin-bottom: 14px;
+            user-select: none;
+            -webkit-user-select: none;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .expense-filter-nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .expense-filter-pill {
+            position: absolute;
+            top: 4px;
+            bottom: 4px;
+            left: 0;
+            width: 0;
+            background: var(--accent-warm);
+            border-radius: 999px;
+            z-index: 0;
+            pointer-events: none;
+            box-shadow: 0 2px 8px rgba(197, 155, 125, 0.28);
+            transition: transform 0.4s cubic-bezier(.2, .9, .3, 1.1), width 0.4s cubic-bezier(.2, .9, .3, 1.1);
+        }
+
+        .expense-filter-btn {
+            position: relative;
+            z-index: 1;
+            flex: 1 0 auto;
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 0.74rem;
+            font-weight: 600;
+            color: var(--ink-muted);
+            cursor: pointer;
+            text-align: center;
+            white-space: nowrap;
+            transition: color 0.25s ease;
+        }
+
+        .expense-filter-btn.pill-focus {
+            color: #FFFFFF;
+        }
+
+        /* 下拉重新整理（Pull to Refresh） */
+        .ptr-wrapper {
+            position: relative;
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+
+        .ptr-indicator {
+            position: absolute;
+            top: 4px;
+            left: 0;
+            right: 0;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .ptr-spinner-box {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 1px solid #EFEAE2;
+            box-shadow: 0 4px 12px rgba(56, 52, 49, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: scale(0.6);
+        }
+
+        .ptr-spinner-svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--primary-coral);
+            stroke-width: 2.2;
+            fill: none;
+            stroke-linecap: round;
+        }
+
+        .ptr-content {
+            position: relative;
+            z-index: 2;
+            will-change: transform;
+        }
+
         /* 美食打卡清單 */
         .checkin-card {
             background: #FAF8F4;
@@ -1531,7 +1637,33 @@
                             <span style="font-weight:600; font-size:0.88rem;">消費明細</span>
                             <span style="font-weight:700; color:var(--primary-coral); font-size:0.92rem;" id="totalKrwDisplay">總計：₩ 0</span>
                         </div>
-                        <div id="expenseList">載入中...</div>
+
+                        <!-- 記帳天數分類（選單滑塊跟隨 Sliding Nav Highlight） -->
+                        <div class="expense-filter-nav" id="expenseFilterNav">
+                            <div class="expense-filter-pill" id="expenseFilterPill"></div>
+                            <button type="button" class="expense-filter-btn active pill-focus" data-day="ALL" onclick="setExpenseDayFilter('ALL', this)">全部</button>
+                            <button type="button" class="expense-filter-btn" data-day="D1" onclick="setExpenseDayFilter('D1', this)">Day1</button>
+                            <button type="button" class="expense-filter-btn" data-day="D2" onclick="setExpenseDayFilter('D2', this)">Day2</button>
+                            <button type="button" class="expense-filter-btn" data-day="D3" onclick="setExpenseDayFilter('D3', this)">Day3</button>
+                            <button type="button" class="expense-filter-btn" data-day="D4" onclick="setExpenseDayFilter('D4', this)">Day4</button>
+                            <button type="button" class="expense-filter-btn" data-day="D5" onclick="setExpenseDayFilter('D5', this)">Day5</button>
+                            <button type="button" class="expense-filter-btn" data-day="D6" onclick="setExpenseDayFilter('D6', this)">Day6</button>
+                        </div>
+
+                        <!-- 下拉重新整理（Pull to Refresh）區域 -->
+                        <div class="ptr-wrapper" id="ptrWrapper">
+                            <div class="ptr-indicator">
+                                <div class="ptr-spinner-box" id="ptrSpinnerBox">
+                                    <svg class="ptr-spinner-svg" id="ptrSpinnerSvg" viewBox="0 0 24 24">
+                                        <path d="M21 12a9 9 0 1 1-2.64-6.36"/>
+                                        <polyline points="21 3 21 9 15 9"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ptr-content" id="ptrContent">
+                                <div id="expenseList">載入中...</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </main>
@@ -1667,6 +1799,9 @@
             if (window.gsap && window.TextPlugin) {
                 gsap.registerPlugin(TextPlugin);
             }
+            if (window.gsap && window.Observer) {
+                gsap.registerPlugin(Observer);
+            }
 
             playOnceBounce();
 
@@ -1689,7 +1824,12 @@
             }
 
             initNavIndicator();
-            window.addEventListener('resize', initNavIndicator);
+            initExpenseFilterNav();
+            initPullToRefresh();
+            window.addEventListener('resize', () => {
+                initNavIndicator();
+                updateActiveFilterPill();
+            });
 
             document.addEventListener('click', (e) => {
                 const dd = document.getElementById('dayDropdown');
@@ -1815,6 +1955,7 @@
             playOnceBounce();
 
             if (tabId === 'accounting') {
+                requestAnimationFrame(() => updateActiveFilterPill());
                 fetchCloudExpenses();
             }
             if (tabId === 'checkin') {
@@ -1985,6 +2126,167 @@
         const LOCAL_STORAGE_KEY = 'busan_v2_expenses_clean';
         let expenses = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) || '[]');
         let isWritingLock = false;
+        let currentExpenseFilter = 'ALL';
+
+        // 記帳天數分類：選單滑塊跟隨（Sliding Nav Highlight）
+        function moveFilterPillTo(targetBtn) {
+            const pill = document.getElementById('expenseFilterPill');
+            const nav = document.getElementById('expenseFilterNav');
+            if (!pill || !targetBtn || !nav) return;
+
+            pill.style.width = `${targetBtn.offsetWidth}px`;
+            pill.style.transform = `translateX(${targetBtn.offsetLeft}px)`;
+
+            nav.querySelectorAll('.expense-filter-btn').forEach(btn => {
+                if (btn === targetBtn) btn.classList.add('pill-focus');
+                else btn.classList.remove('pill-focus');
+            });
+        }
+
+        function updateActiveFilterPill() {
+            const activeBtn = document.querySelector('#expenseFilterNav .expense-filter-btn.active');
+            if (activeBtn) moveFilterPillTo(activeBtn);
+        }
+
+        function initExpenseFilterNav() {
+            const nav = document.getElementById('expenseFilterNav');
+            if (!nav) return;
+            const buttons = nav.querySelectorAll('.expense-filter-btn');
+
+            buttons.forEach(btn => {
+                btn.addEventListener('pointerenter', () => {
+                    moveFilterPillTo(btn);
+                });
+            });
+
+            nav.addEventListener('pointerleave', () => {
+                updateActiveFilterPill();
+            });
+
+            updateActiveFilterPill();
+        }
+
+        function setExpenseDayFilter(dayCode, btnEl) {
+            currentExpenseFilter = dayCode;
+            const nav = document.getElementById('expenseFilterNav');
+            if (nav) {
+                nav.querySelectorAll('.expense-filter-btn').forEach(b => b.classList.remove('active'));
+            }
+            if (btnEl) {
+                btnEl.classList.add('active');
+                moveFilterPillTo(btnEl);
+            }
+            renderExpenses();
+        }
+
+        // 下拉重新整理（Pull to Refresh）動態效果
+        function initPullToRefresh() {
+            const wrapper = document.getElementById('ptrWrapper');
+            const content = document.getElementById('ptrContent');
+            const spinnerBox = document.getElementById('ptrSpinnerBox');
+            const spinnerSvg = document.getElementById('ptrSpinnerSvg');
+            if (!wrapper || !content || !spinnerBox || !spinnerSvg || !window.gsap) return;
+
+            let pullRaw = 0;
+            let isPulling = false;
+            let isRefreshing = false;
+            const THRESHOLD = 62;
+
+            function onStart() {
+                if (isRefreshing) return;
+                const pageAcc = document.getElementById('page-accounting');
+                if (!pageAcc || !pageAcc.classList.contains('active')) return;
+                if (window.scrollY > 10) return;
+                pullRaw = 0;
+                isPulling = true;
+            }
+
+            function onMove(deltaY) {
+                if (!isPulling || isRefreshing) return;
+                if (window.scrollY > 10 && pullRaw <= 0) {
+                    isPulling = false;
+                    return;
+                }
+                pullRaw += deltaY;
+                if (pullRaw < 0) pullRaw = 0;
+
+                // 越拉阻力越大（阻尼係數與非線性衰減）
+                const dampedY = Math.min(115, Math.pow(pullRaw, 0.78) * 2.1);
+                const progress = Math.min(1, dampedY / THRESHOLD);
+
+                gsap.set(content, { y: dampedY });
+                gsap.set(spinnerBox, {
+                    opacity: progress,
+                    scale: 0.55 + 0.45 * progress,
+                    y: Math.min(10, dampedY * 0.12)
+                });
+                gsap.set(spinnerSvg, { rotation: dampedY * 3.4 });
+            }
+
+            function onRelease() {
+                if (!isPulling || isRefreshing) return;
+                isPulling = false;
+                const currentY = gsap.getProperty(content, "y") || 0;
+
+                if (currentY >= THRESHOLD) {
+                    isRefreshing = true;
+                    gsap.to(content, { y: 52, duration: 0.25, ease: "power2.out" });
+                    gsap.to(spinnerBox, { opacity: 1, scale: 1, duration: 0.2 });
+
+                    const spinTween = gsap.to(spinnerSvg, {
+                        rotation: "+=360",
+                        duration: 0.65,
+                        ease: "linear",
+                        repeat: -1
+                    });
+
+                    fetchCloudExpenses().finally(() => {
+                        setTimeout(() => {
+                            spinTween.kill();
+                            const tl = gsap.timeline({
+                                onComplete: () => {
+                                    isRefreshing = false;
+                                    pullRaw = 0;
+                                }
+                            });
+
+                            tl.to(spinnerBox, { opacity: 0, scale: 0.5, duration: 0.25, ease: "power2.in" }, 0)
+                              .to(content, { y: 0, duration: 0.5, ease: "power3.out" }, 0)
+                              .call(() => {
+                                  // 最新一筆資料短暫高亮後淡回
+                                  const items = document.querySelectorAll('#expenseList .expense-card-item');
+                                  const newestItem = items.length > 0 ? items[items.length - 1] : null;
+                                  if (newestItem) {
+                                      gsap.fromTo(newestItem,
+                                          { backgroundColor: "#F5E1DA", borderColor: "#D97A6C" },
+                                          { backgroundColor: "#FAF6F0", borderColor: "#EFEAE2", duration: 1.1, ease: "power2.out" }
+                                      );
+                                  }
+                              }, null, 0.22);
+                        }, 450);
+                    });
+                } else {
+                    pullRaw = 0;
+                    gsap.to(content, { y: 0, duration: 0.4, ease: "power3.out" });
+                    gsap.to(spinnerBox, { opacity: 0, scale: 0.5, duration: 0.25 });
+                }
+            }
+
+            if (window.Observer) {
+                Observer.create({
+                    target: wrapper,
+                    type: "touch,pointer",
+                    onPress: () => onStart(),
+                    onDrag: (self) => {
+                        if (self.deltaY > 0 || pullRaw > 0) {
+                            onMove(self.deltaY);
+                        }
+                    },
+                    onRelease: () => onRelease(),
+                    onStop: () => onRelease()
+                });
+            }
+        }
 
         function normalizeItem(raw) {
             if (!raw) return null;
@@ -2209,13 +2511,18 @@
             listEl.innerHTML = '';
             let totalKrw = 0;
 
-            if (!expenses || expenses.length === 0) {
-                listEl.innerHTML = '<div style="text-align:center; padding:20px; color:var(--ink-muted); font-size:0.8rem;">尚無記帳紀錄</div>';
+            const filteredList = (expenses || [])
+                .map((exp, realIdx) => ({ exp, realIdx }))
+                .filter(entry => currentExpenseFilter === 'ALL' || entry.exp.day === currentExpenseFilter);
+
+            if (filteredList.length === 0) {
+                const emptyText = currentExpenseFilter === 'ALL' ? '尚無記帳紀錄' : `尚無 ${currentExpenseFilter.replace('D', 'Day ')} 記帳紀錄`;
+                listEl.innerHTML = `<div style="text-align:center; padding:20px; color:var(--ink-muted); font-size:0.8rem;">${emptyText}</div>`;
                 totalEl.innerText = '總計：₩ 0';
                 return;
             }
 
-            expenses.forEach((exp, idx) => {
+            filteredList.forEach(({ exp, realIdx }) => {
                 const krwVal = parseFloat(exp.krw) || 0;
                 const twdVal = parseFloat(exp.twd) || Math.round(krwVal * RATE);
                 totalKrw += krwVal;
@@ -2260,7 +2567,7 @@
                             );
                         }
                         setTimeout(() => {
-                            deleteExpense(idx);
+                            deleteExpense(realIdx);
                         }, 320);
                     }, 1200);
                 };
