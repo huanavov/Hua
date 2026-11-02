@@ -454,6 +454,302 @@
             line-height: 1.55;
         }
 
+        /* 每日行程 Highlight 外框樣式（如圖二溫潤質感風） */
+        .etimeline-row.highlight-row {
+            margin-left: -68px;
+            padding: 14px 28px 14px 68px;
+            background: #FAF6EE;
+            border: 1.5px solid #D5C2A5;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(197, 155, 125, 0.1);
+            cursor: pointer;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+        }
+
+        .etimeline-row.highlight-row:hover {
+            background: #F7F1E5;
+            box-shadow: 0 6px 20px rgba(197, 155, 125, 0.16);
+        }
+
+        .etimeline-row.highlight-row:active {
+            transform: scale(0.985);
+        }
+
+        .etimeline-row.highlight-row .etimeline-time {
+            left: 6px;
+            top: 15px;
+            width: 40px;
+            color: #8C6D46;
+            font-weight: 700;
+        }
+
+        .etimeline-row.highlight-row .etimeline-dot {
+            left: 49.5px;
+            top: 19px;
+            width: 8px;
+            height: 8px;
+            border-radius: 1.5px;
+            background: #B69265;
+            border: none;
+            transform: rotate(45deg);
+        }
+
+        .etimeline-row.highlight-row .etimeline-content {
+            border-left: none;
+            padding-left: 8px;
+        }
+
+        .etimeline-row.highlight-row .etimeline-title {
+            color: #5A4631;
+        }
+
+        .etimeline-row.highlight-row .etimeline-category {
+            color: #9C7A52;
+            font-weight: 700;
+        }
+
+        .etimeline-row.highlight-row .etimeline-category svg {
+            stroke: #9C7A52;
+        }
+
+        .highlight-chevron {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #B69265;
+            font-size: 1.15rem;
+            font-weight: 400;
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        /* 底部抽屜（Bottom Sheet）樣式 */
+        .bottom-sheet-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .bottom-sheet-overlay.open {
+            display: flex;
+        }
+
+        .bottom-sheet-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(42, 38, 35, 0.48);
+            backdrop-filter: blur(2px);
+            opacity: 0;
+        }
+
+        .bottom-sheet-panel {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            max-height: 86vh;
+            background: #FCFAF2;
+            border-radius: 22px 22px 0 0;
+            box-shadow: 0 -8px 34px rgba(42, 38, 35, 0.16);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1;
+            will-change: transform;
+        }
+
+        .sheet-drag-zone {
+            padding: 10px 0 6px 0;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .sheet-handle {
+            width: 38px;
+            height: 4px;
+            background: #D8D0C5;
+            border-radius: 999px;
+            margin: 0 auto;
+        }
+
+        .sheet-header {
+            position: relative;
+            padding: 8px 20px 14px 20px;
+            border-left: 4px solid #7BAAC8;
+            margin-left: 0;
+            flex-shrink: 0;
+        }
+
+        .sheet-meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .sheet-meta-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sheet-cat-box {
+            border: 1px solid #7BAAC8;
+            color: #5B89A6;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            padding: 2px 10px;
+            border-radius: 3px;
+            background: rgba(123, 170, 200, 0.08);
+        }
+
+        .sheet-time-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Noto Serif TC', serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink-muted);
+        }
+
+        .sheet-close-btn {
+            background: none;
+            border: none;
+            color: var(--ink-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 4px 6px;
+            line-height: 1;
+        }
+
+        .sheet-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--ink-color);
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .sheet-scroll-body {
+            padding: 4px 20px 30px 20px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .sheet-ticket-card {
+            background: #FFFFFF;
+            border: 1px solid #EAE4D8;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 10px rgba(56, 52, 49, 0.03);
+        }
+
+        .sheet-ticket-section {
+            padding: 13px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #F2EDE4;
+        }
+
+        .sheet-ticket-label {
+            font-size: 0.65rem;
+            color: var(--ink-light);
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .sheet-ticket-val {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--ink-color);
+            font-family: 'Noto Serif TC', serif;
+        }
+
+        .sheet-ticket-footer {
+            background: #F6F2EA;
+            padding: 8px 14px;
+            text-align: center;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 1.4px;
+            color: var(--ink-muted);
+        }
+
+        .sheet-subhead {
+            font-size: 0.72rem;
+            color: var(--ink-muted);
+            letter-spacing: 1.2px;
+            font-weight: 600;
+            margin: 16px 0 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .airport-map-card {
+            background: #EBE9E4;
+            border: 1px solid #DFDBD2;
+            border-radius: 10px;
+            padding: 12px 10px;
+            margin-bottom: 18px;
+        }
+
+        .airport-map-caption {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.72rem;
+            color: #5C544C;
+            margin-bottom: 8px;
+            padding: 0 2px;
+            font-weight: 600;
+        }
+
+        .point-speak-card {
+            background: #FFFFFF;
+            border: 1px solid #EAE4D8;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ps-zh {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--ink-color);
+        }
+
+        .ps-kr {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: #5A4631;
+            font-family: 'Noto Serif TC', serif;
+            text-align: right;
+        }
+
+        .sheet-about-box {
+            position: relative;
+            padding-left: 14px;
+            border-left: 1.5px solid #D8D0C5;
+            font-size: 0.82rem;
+            color: var(--ink-muted);
+            line-height: 1.65;
+            margin-top: 6px;
+        }
+
         .metro-badge-oval {
             display: inline-flex;
             align-items: center;
@@ -1561,7 +1857,7 @@
                         </div>
                     </div>
 
-                    <!-- 記帳日期 與 誰付的錢：雙欄對齊排列 -->
+                    <!-- 記帳日期 與 付款人：雙欄對齊排列 -->
                     <input type="hidden" id="accDay" value="D1">
                     <input type="hidden" id="accPayer" value="珍">
                     <div class="date-payer-grid">
@@ -1586,7 +1882,7 @@
                         </div>
 
                         <div>
-                            <span class="payer-section-label">誰付的錢 (付款人)</span>
+                            <span class="payer-section-label">付款人</span>
                             <div class="payer-circles-row" id="payerCircles">
                                 <button type="button" class="payer-circle-btn active" onclick="selectPayer('珍', this)">
                                     <span class="fill-bg"></span>
@@ -1710,6 +2006,246 @@
         </div>
     </nav>
 
+    <!-- Day1 前往海雲臺 底部抽屜（Bottom Sheet） -->
+    <div class="bottom-sheet-overlay" id="haeundaeSheetOverlay">
+        <div class="bottom-sheet-backdrop" id="haeundaeSheetBackdrop" onclick="closeBottomSheet()"></div>
+        <div class="bottom-sheet-panel" id="haeundaeSheetPanel">
+            <div class="sheet-drag-zone" id="sheetDragZone">
+                <div class="sheet-handle"></div>
+            </div>
+            <div class="sheet-header sheet-stagger-item">
+                <div class="sheet-meta-row">
+                    <div class="sheet-meta-left">
+                        <span class="sheet-cat-box">TRANSPORT</span>
+                        <span class="sheet-time-label">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            12:15
+                        </span>
+                    </div>
+                    <button type="button" class="sheet-close-btn" onclick="closeBottomSheet()">✕</button>
+                </div>
+                <div class="sheet-title">前往海雲臺 (機場巴士)</div>
+            </div>
+
+            <div class="sheet-scroll-body">
+                <!-- 乘車摘要卡（仿圖四結構） -->
+                <div class="sheet-ticket-card sheet-stagger-item">
+                    <div class="sheet-ticket-section">
+                        <div>
+                            <div class="sheet-ticket-label">BOARDING PLATFORM</div>
+                            <div class="sheet-ticket-val">金海機場 國際線 1F · 3號月台</div>
+                        </div>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C59B7D" stroke-width="1.6"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg>
+                    </div>
+                    <div class="sheet-ticket-section">
+                        <div>
+                            <div class="sheet-ticket-label">TICKET & FARE</div>
+                            <div class="sheet-ticket-val">票價 ₩ 9,500 / 人（Gate 4 旁巴士售票處購票）</div>
+                        </div>
+                    </div>
+                    <div class="sheet-ticket-footer">GIMHAE AIRPORT LIMOUSINE BUS</div>
+                </div>
+
+                <!-- 圖三：金海機場交通月台示意圖 -->
+                <div class="sheet-subhead sheet-stagger-item">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                    乘車位置示意圖 (AIRPORT BUS MAP)
+                </div>
+                <div class="airport-map-card sheet-stagger-item">
+                    <div class="airport-map-caption">
+                        <span>金海國際機場 1F 外部乘車區</span>
+                        <span style="color:var(--primary-coral);">★ 國際線 Gate 3 外【3 機場大巴】</span>
+                    </div>
+                    <svg width="100%" viewBox="0 0 680 280" style="display:block; border-radius:6px; background:#E6E4DF;">
+                        <!-- P2 & P1 旅客停車場 -->
+                        <g transform="translate(95, 8)">
+                            <rect x="0" y="0" width="22" height="22" rx="4" fill="#FFF" stroke="#222" stroke-width="2"/>
+                            <text x="11" y="17" font-size="15" font-weight="700" text-anchor="middle" fill="#222">P</text>
+                            <text x="11" y="34" font-size="9.5" text-anchor="middle" fill="#333">P2 旅客停車場</text>
+                        </g>
+                        <g transform="translate(515, 8)">
+                            <rect x="0" y="0" width="22" height="22" rx="4" fill="#FFF" stroke="#222" stroke-width="2"/>
+                            <text x="11" y="17" font-size="15" font-weight="700" text-anchor="middle" fill="#222">P</text>
+                            <text x="11" y="34" font-size="9.5" text-anchor="middle" fill="#333">P1 旅客停車場</text>
+                        </g>
+
+                        <!-- 上方第一條車道 -->
+                        <rect x="8" y="48" width="295" height="28" rx="14" fill="#8C8C8C"/>
+                        <rect x="315" y="48" width="357" height="28" rx="14" fill="#8C8C8C"/>
+                        <!-- 輕軌圖示 -->
+                        <rect x="326" y="52" width="14" height="18" rx="2" fill="#FFF"/>
+                        <rect x="328" y="54" width="10" height="7" fill="#8C8C8C"/>
+                        <text x="346" y="66" font-size="10.5" fill="#FFF" font-weight="600">輕軌</text>
+
+                        <!-- 第一排斑馬線 & 出租車 -->
+                        <g fill="#8C8C8C">
+                            <rect x="52" y="79" width="22" height="4"/><rect x="52" y="86" width="22" height="4"/><rect x="52" y="93" width="22" height="4"/><rect x="52" y="100" width="22" height="4"/><rect x="52" y="107" width="22" height="4"/>
+                            <rect x="150" y="79" width="22" height="4"/><rect x="150" y="86" width="22" height="4"/><rect x="150" y="93" width="22" height="4"/><rect x="150" y="100" width="22" height="4"/><rect x="150" y="107" width="22" height="4"/>
+                            <rect x="242" y="79" width="22" height="4"/><rect x="242" y="86" width="22" height="4"/><rect x="242" y="93" width="22" height="4"/><rect x="242" y="100" width="22" height="4"/><rect x="242" y="107" width="22" height="4"/>
+                            <rect x="365" y="79" width="22" height="4"/><rect x="365" y="86" width="22" height="4"/><rect x="365" y="93" width="22" height="4"/><rect x="365" y="100" width="22" height="4"/><rect x="365" y="107" width="22" height="4"/>
+                            <rect x="525" y="79" width="22" height="4"/><rect x="525" y="86" width="22" height="4"/><rect x="525" y="93" width="22" height="4"/><rect x="525" y="100" width="22" height="4"/><rect x="525" y="107" width="22" height="4"/>
+                        </g>
+                        <!-- 出租車 -->
+                        <g transform="translate(194, 80)">
+                            <rect x="2" y="5" width="18" height="12" rx="3" fill="#222"/>
+                            <rect x="5" y="2" width="12" height="4" rx="1" fill="#222"/>
+                            <rect x="4" y="7" width="14" height="4" fill="#FFF"/>
+                            <text x="11" y="29" font-size="9" text-anchor="middle" fill="#222" font-weight="600">出租車</text>
+                        </g>
+
+                        <!-- 中間第二條車道 -->
+                        <rect x="8" y="115" width="295" height="28" rx="14" fill="#8C8C8C"/>
+                        <rect x="315" y="115" width="357" height="28" rx="14" fill="#8C8C8C"/>
+
+                        <!-- 第二排斑馬線 -->
+                        <g fill="#8C8C8C">
+                            <rect x="52" y="146" width="22" height="4"/><rect x="52" y="153" width="22" height="4"/><rect x="52" y="160" width="22" height="4"/><rect x="52" y="167" width="22" height="4"/><rect x="52" y="174" width="22" height="4"/>
+                            <rect x="150" y="146" width="22" height="4"/><rect x="150" y="153" width="22" height="4"/><rect x="150" y="160" width="22" height="4"/><rect x="150" y="167" width="22" height="4"/><rect x="150" y="174" width="22" height="4"/>
+                            <rect x="242" y="146" width="22" height="4"/><rect x="242" y="153" width="22" height="4"/><rect x="242" y="160" width="22" height="4"/><rect x="242" y="167" width="22" height="4"/><rect x="242" y="174" width="22" height="4"/>
+                            <rect x="365" y="146" width="22" height="4"/><rect x="365" y="153" width="22" height="4"/><rect x="365" y="160" width="22" height="4"/><rect x="365" y="167" width="22" height="4"/><rect x="365" y="174" width="22" height="4"/>
+                            <rect x="525" y="146" width="22" height="4"/><rect x="525" y="153" width="22" height="4"/><rect x="525" y="160" width="22" height="4"/><rect x="525" y="167" width="22" height="4"/><rect x="525" y="174" width="22" height="4"/>
+                        </g>
+
+                        <!-- 左側：國際線巴士月台 1~5 -->
+                        <rect x="8" y="182" width="295" height="90" fill="#D5D3CE"/>
+                        <!-- 1 機場擺渡車 -->
+                        <g transform="translate(22, 190)">
+                            <rect x="0" y="2" width="14" height="16" rx="2" fill="#222"/><rect x="2" y="4" width="10" height="6" fill="#FFF"/>
+                            <text x="23" y="17" font-size="19" font-weight="700" fill="#222">1</text>
+                            <text x="16" y="30" font-size="8.5" text-anchor="middle" fill="#333">機場擺渡車</text>
+                        </g>
+                        <!-- 2 市內公交車 -->
+                        <g transform="translate(76, 190)">
+                            <rect x="0" y="2" width="14" height="16" rx="2" fill="#222"/><rect x="2" y="4" width="10" height="6" fill="#FFF"/>
+                            <text x="23" y="17" font-size="19" font-weight="700" fill="#222">2</text>
+                            <text x="16" y="30" font-size="8.5" text-anchor="middle" fill="#333">市內公交車</text>
+                        </g>
+                        <!-- ★ 3 機場大巴 (Highlight 重點標示) -->
+                        <g transform="translate(126, 185)">
+                            <rect x="-5" y="-2" width="48" height="39" rx="6" fill="#FFF5EE" stroke="#D97A6C" stroke-width="2"/>
+                            <rect x="2" y="5" width="14" height="16" rx="2" fill="#D97A6C"/><rect x="4" y="7" width="10" height="6" fill="#FFF"/>
+                            <text x="26" y="20" font-size="19" font-weight="700" fill="#D97A6C">3</text>
+                            <text x="19" y="33" font-size="8.5" font-weight="700" text-anchor="middle" fill="#D97A6C">機場大巴</text>
+                        </g>
+                        <!-- 4 市外公交車 -->
+                        <g transform="translate(186, 190)">
+                            <rect x="0" y="2" width="14" height="16" rx="2" fill="#222"/><rect x="2" y="4" width="10" height="6" fill="#FFF"/>
+                            <text x="23" y="17" font-size="19" font-weight="700" fill="#222">4</text>
+                            <text x="16" y="30" font-size="8.5" text-anchor="middle" fill="#333">市外公交車</text>
+                        </g>
+                        <!-- 5 市外公交車 -->
+                        <g transform="translate(242, 190)">
+                            <rect x="0" y="2" width="14" height="16" rx="2" fill="#222"/><rect x="2" y="4" width="10" height="6" fill="#FFF"/>
+                            <text x="23" y="17" font-size="19" font-weight="700" fill="#222">5</text>
+                            <text x="16" y="30" font-size="8.5" text-anchor="middle" fill="#333">市外公交車</text>
+                        </g>
+
+                        <!-- 國際線航廈主體與 Gate 1~4 -->
+                        <rect x="14" y="232" width="283" height="38" fill="#C2C0BB"/>
+                        <g transform="translate(42, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#7D7B76"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" text-anchor="middle">Gate 1</text>
+                        </g>
+                        <g transform="translate(96, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#7D7B76"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" text-anchor="middle">Gate 2</text>
+                        </g>
+                        <g transform="translate(150, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#D97A6C"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" font-weight="700" text-anchor="middle">Gate 3</text>
+                        </g>
+                        <g transform="translate(206, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#7D7B76"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" text-anchor="middle">Gate 4</text>
+                        </g>
+                        <text x="150" y="253" font-size="11" fill="#555">✈</text>
+                        <text x="155" y="264" font-size="9.5" fill="#444" text-anchor="middle" font-weight="600">國際航班 1號到達區</text>
+                        <!-- 國際線 巴士售票處 -->
+                        <g transform="translate(262, 236)">
+                            <rect x="0" y="0" width="14" height="16" rx="1.5" fill="none" stroke="#222" stroke-width="1.5"/>
+                            <line x1="3" y1="5" x2="11" y2="5" stroke="#222" stroke-width="1.5"/>
+                            <text x="7" y="26" font-size="8.5" fill="#222" text-anchor="middle" font-weight="600">巴士售票處</text>
+                        </g>
+
+                        <!-- 右側：國內線巴士月台 1~4 -->
+                        <rect x="315" y="182" width="357" height="90" fill="#D5D3CE"/>
+                        <g transform="translate(528, 190)">
+                            <rect x="0" y="2" width="12" height="15" rx="2" fill="#222"/><rect x="2" y="4" width="8" height="5" fill="#FFF"/>
+                            <text x="19" y="16" font-size="17" font-weight="700" fill="#222">1</text>
+                            <text x="13" y="29" font-size="7.5" text-anchor="middle" fill="#333">機場擺渡車</text>
+                        </g>
+                        <g transform="translate(566, 190)">
+                            <rect x="0" y="2" width="12" height="15" rx="2" fill="#222"/><rect x="2" y="4" width="8" height="5" fill="#FFF"/>
+                            <text x="19" y="16" font-size="17" font-weight="700" fill="#222">2</text>
+                            <text x="13" y="29" font-size="7.5" text-anchor="middle" fill="#333">市內公交車</text>
+                        </g>
+                        <g transform="translate(604, 190)">
+                            <rect x="0" y="2" width="12" height="15" rx="2" fill="#222"/><rect x="2" y="4" width="8" height="5" fill="#FFF"/>
+                            <text x="19" y="16" font-size="17" font-weight="700" fill="#222">3</text>
+                            <text x="13" y="29" font-size="7.5" text-anchor="middle" fill="#333">機場大巴</text>
+                        </g>
+                        <g transform="translate(640, 190)">
+                            <rect x="0" y="2" width="12" height="15" rx="2" fill="#222"/><rect x="2" y="4" width="8" height="5" fill="#FFF"/>
+                            <text x="19" y="16" font-size="17" font-weight="700" fill="#222">4</text>
+                            <text x="13" y="29" font-size="7.5" text-anchor="middle" fill="#333">市外公交車</text>
+                        </g>
+
+                        <!-- 國內線航廈主體與 Gate 1~4 -->
+                        <rect x="322" y="232" width="342" height="38" fill="#C2C0BB"/>
+                        <g transform="translate(360, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#7D7B76"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" text-anchor="middle">Gate 1</text>
+                        </g>
+                        <g transform="translate(445, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#7D7B76"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" text-anchor="middle">Gate 2</text>
+                        </g>
+                        <g transform="translate(530, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#7D7B76"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" text-anchor="middle">Gate 3</text>
+                        </g>
+                        <g transform="translate(605, 224)">
+                            <rect x="0" y="0" width="38" height="14" rx="3" fill="#7D7B76"/><text x="19" y="10.5" font-size="8.5" fill="#FFF" text-anchor="middle">Gate 4</text>
+                        </g>
+                        <text x="488" y="253" font-size="11" fill="#555">✈</text>
+                        <text x="493" y="264" font-size="9.5" fill="#444" text-anchor="middle" font-weight="600">國內航班到達區</text>
+                        <g transform="translate(646, 236)">
+                            <rect x="0" y="0" width="12" height="15" rx="1.5" fill="none" stroke="#222" stroke-width="1.5"/>
+                            <text x="6" y="25" font-size="7.5" fill="#222" text-anchor="middle">巴士售票處</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- 韓文手指會話（仿圖四結構） -->
+                <div class="sheet-subhead sheet-stagger-item">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+                    손가락 회화 (POINT & SPEAK)
+                </div>
+                <div class="point-speak-card sheet-stagger-item">
+                    <span class="ps-zh">海雲臺 3張成人票</span>
+                    <span class="ps-kr">해운대 성인 3장 주세요</span>
+                </div>
+                <div class="point-speak-card sheet-stagger-item">
+                    <span class="ps-zh">在 海雲台海水浴場 下車</span>
+                    <span class="ps-kr">해운대 해수욕장에서 내려주세요</span>
+                </div>
+
+                <!-- 關於此處（仿圖四結構） -->
+                <div class="sheet-subhead sheet-stagger-item" style="margin-top:18px;">
+                    <span>ⓘ</span> 關於此處 (ABOUT)
+                </div>
+                <div class="sheet-about-box sheet-stagger-item">
+                    <div>
+                        【乘車指南】從金海機場國際線 1 樓入境大廳出來後，先至 Gate 4 旁的「巴士售票處」購買前往海雲臺的機場巴士車票（₩9,500/人），接著從 <b>Gate 3</b> 走出航廈外即可看到 <b>3號月台（機場大巴）</b> 排隊上車。
+                    </div>
+                    <div style="margin-top: 12px; padding-top: 10px; border-top: 1px dashed #E5DFC9;">
+                        <div style="font-weight: 700; color: var(--ink-color); margin-bottom: 4px;">往機張（Gijang）</div>
+                        <div style="font-size: 0.78rem; line-height: 1.6;">
+                            國際航站樓 → 國內航站樓 → 南川洞 → The Beach PRUGIO Summit → 新世界 Centum City → BEXCO → 遊艇中心 → 釜山柏悅酒店 → 韓華度假村海雲臺 → 冬柏島入口 → <b style="color: var(--primary-coral);">海雲臺海水浴場</b> → 海雲臺溫泉十字路口 → 萇山站（5號出口） → 東岩後門（Ananti Cove） → 海雲臺釜山悅榕莊
+                        </div>
+                        <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 2px; font-size: 0.78rem; color: var(--ink-color);">
+                            <div><span style="color: var(--ink-muted);">發車時間　</span><b>11:30 / 12:19 / 12:30 / 13:10</b></div>
+                            <div><span style="color: var(--ink-muted);">班次間隔　</span>約 60 分鐘</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="toast" class="toast-msg">已複製韓文地址！</div>
 
     <script>
@@ -1826,6 +2362,7 @@
             initNavIndicator();
             initExpenseFilterNav();
             initPullToRefresh();
+            initBottomSheetDrag();
             window.addEventListener('resize', () => {
                 initNavIndicator();
                 updateActiveFilterPill();
@@ -2003,7 +2540,7 @@
                 { time: '05:30', category: 'TRANSPORT', icon: SVG_ICONS.train, title: '家 ➔ 台中機場', desc: '機場接送' },
                 { time: '08:00', category: 'FLIGHT', icon: SVG_ICONS.plane, title: '出發 (JX310)', desc: '台中 ➔ 11:15 抵達 釜山' },
                 { time: '11:30', category: 'EXPERIENCE', icon: SVG_ICONS.pin, title: '辦理 SES 快速通關', desc: '2F 出境大廳 Check-in D區右方' },
-                { time: '12:15', category: 'TRANSPORT', icon: SVG_ICONS.train, title: '前往海雲臺', desc: '機場巴士 3號月台 ❘ 票價：₩9,500/人' },
+                { time: '12:15', category: 'TRANSPORT', icon: SVG_ICONS.train, title: '前往海雲臺', desc: '機場巴士 3號月台 ❘ 票價：₩9,500/人', highlight: true, sheetId: 'haeundae' },
                 { time: '13:30', category: 'FOOD', icon: SVG_ICONS.food, title: '廣安木烤肉', desc: '' },
                 { time: '15:30', category: 'SHOPPING', icon: SVG_ICONS.shop, title: 'E-MART 海雲臺店', desc: '', metro: '海雲台 → 中洞 7號出口', metroName: '釜山2號線', metroColor: 'var(--metro-line-2)' },
                 { time: '17:30', category: 'SHOPPING', icon: SVG_ICONS.shop, title: '海雲台市場', desc: '海鮮蔥餅、名品糖餅' },
@@ -2073,8 +2610,12 @@
             list.forEach(item => {
                 const catKey = item.category || 'TRANSPORT';
                 const catColor = CATEGORY_COLORS[catKey] || '#C59B7D';
+                const isHighlight = !!item.highlight;
+                const rowClass = isHighlight ? 'etimeline-row highlight-row' : 'etimeline-row';
+                const clickAttr = isHighlight ? `onclick="openBottomSheet('${item.sheetId}')"` : '';
+
                 html += `
-                    <div class="etimeline-row">
+                    <div class="${rowClass}" ${clickAttr}>
                         <div class="etimeline-time">${item.time || ''}</div>
                         <div class="etimeline-dot"></div>
                         <div class="etimeline-content" style="--cat-color: ${catColor};">
@@ -2083,6 +2624,7 @@
                             ${item.metro ? `<div style="margin-top:4px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.75rem; color:var(--ink-muted);">${item.metro}</span></div>` : ''}
                             ${item.desc ? `<div class="etimeline-desc">${item.desc}</div>` : ''}
                         </div>
+                        ${isHighlight ? `<span class="highlight-chevron">›</span>` : ''}
                     </div>
                 `;
             });
@@ -2098,6 +2640,108 @@
             container.innerHTML = html;
         }
         switchDay(1);
+
+        // 底部抽屜（Bottom Sheet）展開與關閉動態
+        let sheetTl = null;
+        function openBottomSheet(sheetId) {
+            const overlay = document.getElementById('haeundaeSheetOverlay');
+            const backdrop = document.getElementById('haeundaeSheetBackdrop');
+            const panel = document.getElementById('haeundaeSheetPanel');
+            if (!overlay || !backdrop || !panel || !window.gsap) return;
+
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+
+            const staggerItems = panel.querySelectorAll('.sheet-stagger-item');
+            if (sheetTl) sheetTl.kill();
+
+            gsap.set(backdrop, { opacity: 0 });
+            gsap.set(panel, { yPercent: 100, y: 0 });
+            gsap.set(staggerItems, { y: 8, opacity: 0 });
+
+            sheetTl = gsap.timeline();
+            sheetTl.to(backdrop, {
+                opacity: 1,
+                duration: 0.38,
+                ease: "power2.out"
+            }, 0)
+            .to(panel, {
+                yPercent: 0,
+                duration: 0.6,
+                ease: "back.out(1.1)"
+            }, 0)
+            .to(staggerItems, {
+                y: 0,
+                opacity: 1,
+                duration: 0.36,
+                stagger: 0.06,
+                ease: "power2.out"
+            }, 0.18);
+        }
+
+        function closeBottomSheet() {
+            const overlay = document.getElementById('haeundaeSheetOverlay');
+            const backdrop = document.getElementById('haeundaeSheetBackdrop');
+            const panel = document.getElementById('haeundaeSheetPanel');
+            if (!overlay || !backdrop || !panel || !window.gsap) return;
+
+            if (sheetTl) sheetTl.kill();
+            sheetTl = gsap.timeline({
+                onComplete: () => {
+                    overlay.classList.remove('open');
+                    document.body.style.overflow = '';
+                    gsap.set(panel, { clearProps: "y,yPercent" });
+                }
+            });
+
+            sheetTl.to(panel, {
+                yPercent: 100,
+                duration: 0.35,
+                ease: "power2.in"
+            }, 0)
+            .to(backdrop, {
+                opacity: 0,
+                duration: 0.3,
+                ease: "power2.in"
+            }, 0.04);
+        }
+
+        function initBottomSheetDrag() {
+            const dragZone = document.getElementById('sheetDragZone');
+            const panel = document.getElementById('haeundaeSheetPanel');
+            if (!dragZone || !panel || !window.gsap) return;
+
+            let startY = 0;
+            let currentY = 0;
+            let dragging = false;
+
+            dragZone.addEventListener('pointerdown', (e) => {
+                dragging = true;
+                startY = e.clientY;
+                currentY = 0;
+                dragZone.setPointerCapture(e.pointerId);
+            });
+
+            dragZone.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                const delta = Math.max(0, e.clientY - startY);
+                currentY = delta;
+                gsap.set(panel, { y: currentY });
+            });
+
+            const endDrag = () => {
+                if (!dragging) return;
+                dragging = false;
+                if (currentY > 75) {
+                    closeBottomSheet();
+                } else {
+                    gsap.to(panel, { y: 0, duration: 0.3, ease: "back.out(1.4)" });
+                }
+            };
+
+            dragZone.addEventListener('pointerup', endDrag);
+            dragZone.addEventListener('pointercancel', endDrag);
+        }
 
         // 記帳日期下拉選單（Dropdown Reveal）控制
         function toggleDayDropdown(e) {
