@@ -103,6 +103,7 @@
             margin: 0 0 4px 0;
             padding: 0;
             line-height: 1.4;
+            transform: translateY(1px); /* 視覺光學微調對齊 */
         }
 
         .title-group {
@@ -295,7 +296,7 @@
             color: var(--primary-coral);
         }
 
-        /* Day 6 回程意境圖（參考圖二精巧高度比例 & 圖三內部排版） */
+        /* Day 6 回程意境圖（參考圖二精巧高度比例 ＆ 圖三內部排版） */
         .day6-hero-wrap {
             margin: 4px 0 22px 0;
         }
@@ -3609,7 +3610,8 @@
                                 <div class="etimeline-dot"></div>
                                 <div class="etimeline-content" style="--cat-color: ${catColor};">
                                     <div class="etimeline-title">${item.title}</div>
-                                    <div class="etimeline-category">${item.icon || ''}<span>${catKey}</span></div>${item.metro ? `<div style="margin-top:4px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.75rem; color:var(--ink-muted);">${item.metro}</span></div>` : ''}
+                                    <div class="etimeline-category">${item.icon || ''}<span>${catKey}</span></div>
+                                    ${item.metro ? `<div style="margin-top:4px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.75rem; color:var(--ink-muted);">${item.metro}</span></div>` : ''}
                                     ${item.desc ? `<div class="etimeline-desc">${item.desc}</div>` : ''}
                                 </div>
                                 <span class="highlight-chevron">›</span>
@@ -3624,7 +3626,8 @@
                             <div class="etimeline-dot"></div>
                             <div class="etimeline-content" style="--cat-color: ${catColor};">
                                 <div class="etimeline-title">${item.title}</div>
-                                <div class="etimeline-category">${item.icon || ''}<span>${catKey}</span></div>${item.metro ? `<div style="margin-top:4px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.75rem; color:var(--ink-muted);">${item.metro}</span></div>` : ''}
+                                <div class="etimeline-category">${item.icon || ''}<span>${catKey}</span></div>
+                                ${item.metro ? `<div style="margin-top:4px;"><div class="metro-badge-oval" style="background:${item.metroColor};">${item.metroName || '地鐵'}</div> <span style="font-size:0.75rem; color:var(--ink-muted);">${item.metro}</span></div>` : ''}
                                 ${item.desc ? `<div class="etimeline-desc">${item.desc}</div>` : ''}
                             </div>
                             ${hasSheet ? `<span class="row-chevron">›</span>` : ''}
@@ -3797,7 +3800,8 @@
             const nav = document.getElementById('expenseFilterNav');
             if (!pill || !targetBtn || !nav) return;
 
-            pill.style.width = `${targetBtn.offsetWidth}px`; pill.style.transform = `translateX(${targetBtn.offsetLeft}px)`;
+            pill.style.width = `${targetBtn.offsetWidth}px`;
+            pill.style.transform = `translateX(${targetBtn.offsetLeft}px)`;
 
             nav.querySelectorAll('.expense-filter-btn').forEach(btn => {
                 if (btn === targetBtn) btn.classList.add('pill-focus');
@@ -3981,7 +3985,201 @@
                 const data = await response.json();
                 if (data && data.rates && data.rates.TWD) {
                     RATE = data.rates.TWD;
-                    document.getElementById('rateBadge').innerText = `即時匯率 ${RATE.toFixed(4)}`; } } catch (err) {} renderExpenses(); fetchCloudExpenses(); }  async function fetchCloudExpenses() { if (isWritingLock) return; try { const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=get&t=${Date.now()}`, { method: 'GET', redirect: 'follow', cache: 'no-store' }); const text = await res.text(); const parsed = JSON.parse(text); const rawList = Array.isArray(parsed) ? parsed : (Array.isArray(parsed.data) ? parsed.data : (Array.isArray(parsed.records) ? parsed.records : (Array.isArray(parsed.expenses) ? parsed.expenses : null)));  if (Array.isArray(rawList)) { const normalized = rawList.map(normalizeItem).filter(Boolean); expenses = normalized; localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses)); renderExpenses(); } } catch (e) { renderExpenses(); } }  function quickCalc(type) { const krwIn = document.getElementById('calcKrw'); const twdIn = document.getElementById('calcTwd'); if (type === 'krw') { const k = parseFloat(krwIn.value) \vert{}\vert{} 0; twdIn.value = Math.round(k * RATE); } else { const t = parseFloat(twdIn.value) \vert{}\vert{} 0; krwIn.value = Math.round(t / RATE); } }  async function syncToCloud(payloadObj) { const params = new URLSearchParams(); Object.keys(payloadObj).forEach(k => { if (typeof payloadObj[k] !== 'object') { params.append(k, payloadObj[k]); } }); params.append('t', Date.now()); const targetUrl = `${GOOGLE_SCRIPT_URL}?${params.toString()}`; const jsonBody = JSON.stringify(payloadObj);  try { await fetch(targetUrl, { method: 'POST', redirect: 'follow', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: jsonBody }); } catch (err) { try { await fetch(targetUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: jsonBody }); } catch (e2) {} } }  let isAddBtnAnimating = false; async function addExpense() { if (isAddBtnAnimating) return;  const day = document.getElementById('accDay').value; const payer = document.getElementById('accPayer').value; const item = document.getElementById('accItem').value.trim(); const krwInput = document.getElementById('accKrwVal'); const krw = parseFloat(krwInput.value);  if (!item \vert{}\vert{} isNaN(krw) \vert{}\vert{} krw <= 0) { showToast('請完整填寫項目與金額！'); return; }  isAddBtnAnimating = true; const btn = document.getElementById('addExpenseBtn'); const btnText = btn.querySelector('.btn-text'); const btnSpinner = btn.querySelector('.btn-spinner'); const btnCheck = btn.querySelector('.btn-check'); const checkPath = document.getElementById('btnCheckPath'); const fullWidth = btn.offsetWidth;  if (window.gsap && btn) { const tl = gsap.timeline(); tl.to(btn, { scale: 0.95, duration: 0.1, ease: "power1.out" }) .to(btnText, { opacity: 0, duration: 0.15 }, "<") .fromTo(btn, { width: fullWidth }, { width: 44, scale: 1, duration: 0.4, ease: "power2.inOut" }) .to(btnSpinner, { opacity: 1, duration: 0.15 }, "-=0.15") .fromTo(btnSpinner, { rotation: 0 }, { rotation: 360, duration: 0.55, ease: "linear" }, "<") .to(btnSpinner, { opacity: 0, duration: 0.12 }) .set(btnCheck, { opacity: 1 }) .fromTo(checkPath, { strokeDashoffset: 24 }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }) .fromTo(btn, { scale: 0.9 }, { scale: 1, duration: 0.35, ease: "back.out(2.5)" }, "<") .to(btnCheck, { opacity: 0, duration: 0.2, delay: 0.8 }) .to(btn, { width: fullWidth, duration: 0.38, ease: "power2.inOut", onComplete: () => { gsap.set(btn, { clearProps: "width,scale" }); }}, "-=0.05") .to(btnText, { opacity: 1, duration: 0.2, onComplete: () => { isAddBtnAnimating = false; }}, "-=0.15"); } else { isAddBtnAnimating = false; }  const uniqueId = 'exp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5); const twd = Math.round(krw * RATE); const newExp = { id: uniqueId, day, payer, item, krw, twd };  isWritingLock = true; expenses.push(newExp); localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses)); renderExpenses();  document.getElementById('accItem').value = ''; krwInput.value = ''; showToast('雲端同步中...');  try { await syncToCloud({ action: 'add', record: { id: uniqueId, day: day, payer: payer, item: item, krw: krw, twd: twd } }); showToast('雲端同步成功！'); } catch (e) { showToast('已儲存至本地'); } finally { setTimeout(() => { isWritingLock = false; fetchCloudExpenses(); }, 4000); } }  async function deleteExpense(index) { const target = expenses[index]; if (!target) return;  isWritingLock = true; expenses.splice(index, 1); localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses)); renderExpenses(); showToast('雲端同步刪除中...');  try { await syncToCloud({ action: 'delete', id: String(target.id \vert{}\vert{} ''), index: index, row: index + 2 }); showToast('已從雲端移除紀錄'); } catch (e) { showToast('已移除紀錄'); } finally { setTimeout(() => { isWritingLock = false; fetchCloudExpenses(); }, 4000); } }  function renderExpenses() { const listEl = document.getElementById('expenseList'); const totalEl = document.getElementById('totalKrwDisplay'); listEl.innerHTML = ''; let totalKrw = 0;  const filteredList = (expenses \vert{}\vert{} []) .map((exp, realIdx) => ({ exp, realIdx })) .filter(entry => currentExpenseFilter === 'ALL' \vert{}\vert{} entry.exp.day === currentExpenseFilter);  if (filteredList.length === 0) { const emptyText = currentExpenseFilter === 'ALL' ? '尚無記帳紀錄' : `尚無 ${currentExpenseFilter.replace('D', 'Day ')} 記帳紀錄`;
+                    document.getElementById('rateBadge').innerText = `即時匯率 ${RATE.toFixed(4)}`;
+                }
+            } catch (err) {}
+            renderExpenses();
+            fetchCloudExpenses();
+        }
+
+        async function fetchCloudExpenses() {
+            if (isWritingLock) return;
+            try {
+                const res = await fetch(`${GOOGLE_SCRIPT_URL}?action=get&t=${Date.now()}`, {
+                    method: 'GET',
+                    redirect: 'follow',
+                    cache: 'no-store'
+                });
+                const text = await res.text();
+                const parsed = JSON.parse(text);
+                const rawList = Array.isArray(parsed)
+                    ? parsed
+                    : (Array.isArray(parsed.data) ? parsed.data : (Array.isArray(parsed.records) ? parsed.records : (Array.isArray(parsed.expenses) ? parsed.expenses : null)));
+
+                if (Array.isArray(rawList)) {
+                    const normalized = rawList.map(normalizeItem).filter(Boolean);
+                    expenses = normalized;
+                    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
+                    renderExpenses();
+                }
+            } catch (e) {
+                renderExpenses();
+            }
+        }
+
+        function quickCalc(type) {
+            const krwIn = document.getElementById('calcKrw');
+            const twdIn = document.getElementById('calcTwd');
+            if (type === 'krw') {
+                const k = parseFloat(krwIn.value) || 0;
+                twdIn.value = Math.round(k * RATE);
+            } else {
+                const t = parseFloat(twdIn.value) || 0;
+                krwIn.value = Math.round(t / RATE);
+            }
+        }
+
+        async function syncToCloud(payloadObj) {
+            const params = new URLSearchParams();
+            Object.keys(payloadObj).forEach(k => {
+                if (typeof payloadObj[k] !== 'object') {
+                    params.append(k, payloadObj[k]);
+                }
+            });
+            params.append('t', Date.now());
+            const targetUrl = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
+            const jsonBody = JSON.stringify(payloadObj);
+
+            try {
+                await fetch(targetUrl, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: jsonBody
+                });
+            } catch (err) {
+                try {
+                    await fetch(targetUrl, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: jsonBody
+                    });
+                } catch (e2) {}
+            }
+        }
+
+        let isAddBtnAnimating = false;
+        async function addExpense() {
+            if (isAddBtnAnimating) return;
+
+            const day = document.getElementById('accDay').value;
+            const payer = document.getElementById('accPayer').value;
+            const item = document.getElementById('accItem').value.trim();
+            const krwInput = document.getElementById('accKrwVal');
+            const krw = parseFloat(krwInput.value);
+
+            if (!item || isNaN(krw) || krw <= 0) {
+                showToast('請完整填寫項目與金額！');
+                return;
+            }
+
+            isAddBtnAnimating = true;
+            const btn = document.getElementById('addExpenseBtn');
+            const btnText = btn.querySelector('.btn-text');
+            const btnSpinner = btn.querySelector('.btn-spinner');
+            const btnCheck = btn.querySelector('.btn-check');
+            const checkPath = document.getElementById('btnCheckPath');
+            const fullWidth = btn.offsetWidth;
+
+            if (window.gsap && btn) {
+                const tl = gsap.timeline();
+                tl.to(btn, { scale: 0.95, duration: 0.1, ease: "power1.out" })
+                  .to(btnText, { opacity: 0, duration: 0.15 }, "<")
+                  .fromTo(btn, { width: fullWidth }, { width: 44, scale: 1, duration: 0.4, ease: "power2.inOut" })
+                  .to(btnSpinner, { opacity: 1, duration: 0.15 }, "-=0.15")
+                  .fromTo(btnSpinner, { rotation: 0 }, { rotation: 360, duration: 0.55, ease: "linear" }, "<")
+                  .to(btnSpinner, { opacity: 0, duration: 0.12 })
+                  .set(btnCheck, { opacity: 1 })
+                  .fromTo(checkPath, { strokeDashoffset: 24 }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" })
+                  .fromTo(btn, { scale: 0.9 }, { scale: 1, duration: 0.35, ease: "back.out(2.5)" }, "<")
+                  .to(btnCheck, { opacity: 0, duration: 0.2, delay: 0.8 })
+                  .to(btn, { width: fullWidth, duration: 0.38, ease: "power2.inOut", onComplete: () => {
+                      gsap.set(btn, { clearProps: "width,scale" });
+                  }}, "-=0.05")
+                  .to(btnText, { opacity: 1, duration: 0.2, onComplete: () => {
+                      isAddBtnAnimating = false;
+                  }}, "-=0.15");
+            } else {
+                isAddBtnAnimating = false;
+            }
+
+            const uniqueId = 'exp_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+            const twd = Math.round(krw * RATE);
+            const newExp = { id: uniqueId, day, payer, item, krw, twd };
+            
+            isWritingLock = true;
+            expenses.push(newExp);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
+            renderExpenses();
+
+            document.getElementById('accItem').value = '';
+            krwInput.value = '';
+            showToast('雲端同步中...');
+
+            try {
+                await syncToCloud({
+                    action: 'add',
+                    record: {
+                        id: uniqueId,
+                        day: day,
+                        payer: payer,
+                        item: item,
+                        krw: krw,
+                        twd: twd
+                    }
+                });
+                showToast('雲端同步成功！');
+            } catch (e) {
+                showToast('已儲存至本地');
+            } finally {
+                setTimeout(() => {
+                    isWritingLock = false;
+                    fetchCloudExpenses();
+                }, 4000);
+            }
+        }
+
+        async function deleteExpense(index) {
+            const target = expenses[index];
+            if (!target) return;
+
+            isWritingLock = true;
+            expenses.splice(index, 1);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(expenses));
+            renderExpenses();
+            showToast('雲端同步刪除中...');
+            
+            try {
+                await syncToCloud({
+                    action: 'delete',
+                    id: String(target.id || ''),
+                    index: index,
+                    row: index + 2
+                });
+                showToast('已從雲端移除紀錄');
+            } catch (e) {
+                showToast('已移除紀錄');
+            } finally {
+                setTimeout(() => {
+                    isWritingLock = false;
+                    fetchCloudExpenses();
+                }, 4000);
+            }
+        }
+
+        function renderExpenses() {
+            const listEl = document.getElementById('expenseList');
+            const totalEl = document.getElementById('totalKrwDisplay');
+            listEl.innerHTML = '';
+            let totalKrw = 0;
+
+            const filteredList = (expenses || [])
+                .map((exp, realIdx) => ({ exp, realIdx }))
+                .filter(entry => currentExpenseFilter === 'ALL' || entry.exp.day === currentExpenseFilter);
+
+            if (filteredList.length === 0) {
+                const emptyText = currentExpenseFilter === 'ALL' ? '尚無記帳紀錄' : `尚無 ${currentExpenseFilter.replace('D', 'Day ')} 記帳紀錄`;
                 listEl.innerHTML = `<div style="text-align:center; padding:20px; color:var(--ink-muted); font-size:0.8rem;">${emptyText}</div>`;
                 totalEl.innerText = '總計：₩ 0';
                 return;
